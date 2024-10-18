@@ -1,0 +1,5 @@
+SOFTWARE_VERSION_TAG=latest
+SOFTWARE_PASSWORD=postgres
+ADMIN_EMAIL=test@gmail.com
+ADMIN_PASSWORD=postgres
+TEST_URL=http://172.17.0.1:8080/login

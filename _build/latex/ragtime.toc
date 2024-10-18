@@ -1,0 +1,10 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {1}Intro}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Homelab: (did not want to create separate repo)}{1}{section.1.1}%
+\contentsline {chapter}{\numberline {2}install something from docker}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}using portainer:}{3}{section.2.1}%
+\contentsline {section}{\numberline {2.2}leecher:}{3}{section.2.2}%
+\contentsline {section}{\numberline {2.3}building pdf to text:}{3}{section.2.3}%
+\contentsline {section}{\numberline {2.4}pdfconverter2}{3}{section.2.4}%
+\contentsline {chapter}{\numberline {3}storing vector + metadata}{5}{chapter.3}%
+\contentsline {chapter}{\numberline {4}A poor man’s rig}{7}{chapter.4}%
