@@ -11,3 +11,5 @@ setup docker services that :
 - embed text into pgvector (postgres)
 - add metadata
 - retrieve
+
+https://ragtime.readthedocs.io/en/latest/
