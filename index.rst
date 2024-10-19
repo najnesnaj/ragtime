@@ -10,6 +10,7 @@ Welcome to ragtime's documentation!
    :caption: Contents:
 
    intro
+   readthedocs
    docker
    pgvector
    poorman
