@@ -13,6 +13,7 @@ Welcome to ragtime's documentation!
    docker
    pgvector
    poorman
+   actions
 
 
 
