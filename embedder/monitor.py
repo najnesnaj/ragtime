@@ -1,12 +1,21 @@
 import os
 import time
 import psycopg2
+from sentence_transformers import SentenceTransformer
+import numpy as np
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
 class PagesHandler(FileSystemEventHandler):
     def __init__(self, db_params):
         self.db_params = db_params
+        self.model = SentenceTransformer('all-MiniLM-L6-v2')  # Initialize the SentenceTransformer model
+
+    def generate_embedding(self, text):
+        # Use SentenceTransformer to generate embeddings
+        embedding = self.model.encode(text)
+        return embedding
+
 
     def on_created(self, event):
         if not event.is_directory and event.src_path.endswith('.txt'):
@@ -14,31 +23,43 @@ class PagesHandler(FileSystemEventHandler):
             self.process_file(event.src_path)
 
     def process_file(self, file_path):
+        document_id = os.path.basename(file_path).replace('.txt', '')  # Use filename as document_id
+
         title = os.path.basename(file_path).replace('.txt', '')  # Use filename as title
         
         # Read the content of the text file
         with open(file_path, 'r') as f:
             content = f.read()
-        
+#TODO        
+# Split content into chunks if needed (you may implement your chunking logic)
+        chunks = [content]  # Assuming no chunking for now
+       
         # Connect to PostgreSQL and insert the data
         conn = psycopg2.connect(**self.db_params)
         cursor = conn.cursor()
+
+        for i, chunk in enumerate(chunks):
+            chunk_id = f"{document_id}_chunk_{i+1}"
+            embedding = self.generate_embedding(chunk)  # Generate the 512-dimensional vector
+
+
+         
         
-        # Assuming you have a table named 'documents' with columns 'title', 'content', and 'vector'
-        # You would need to adjust this query based on your database schema
-        insert_query = """
-            INSERT INTO documents (title, content)
-            VALUES (%s, %s);
-        """
-        
+            insert_query = """
+                INSERT INTO document_chunks (document_id, chunk_id, text, section, embedding)
+                VALUES (%s, %s, %s, %s, %s);
+              """
+          # Convert embedding to PostgreSQL's vector format (as a list or numpy array)
+            embedding_array = np.array(embedding).tolist()
         # Here you can add a function to convert your text to a vector if needed.
         # For now, we're inserting the title and content only.
-        cursor.execute(insert_query, (title, content))
+            cursor.execute(insert_query, (document_id, chunk_id, chunk, None, embedding_array))
+
         conn.commit()
         
         cursor.close()
         conn.close()
-        print(f"Inserted: {title}")
+        print(f"Inserted: {document_id}")
 
 if __name__ == "__main__":
     pages_dir = "/pages"
