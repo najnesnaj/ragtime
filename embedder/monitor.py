@@ -5,6 +5,26 @@ from sentence_transformers import SentenceTransformer
 import numpy as np
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
+from transformers import AutoTokenizer
+
+# Initialize tokenizer (adjust according to your model)
+tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
+
+# Define the max tokens per chunk
+MAX_TOKENS = 256  # Adjust based on your model's context length
+
+def chunk_text(text, max_tokens=MAX_TOKENS):
+    # Tokenize the input text
+    tokens = tokenizer.encode(text, truncation=False)
+
+    # Split into chunks based on max tokens
+    chunks = []
+    for i in range(0, len(tokens), max_tokens):
+        chunk_tokens = tokens[i:i + max_tokens]
+        chunk_text = tokenizer.decode(chunk_tokens, skip_special_tokens=True)
+        chunks.append(chunk_text)
+    
+    return chunks
 
 class PagesHandler(FileSystemEventHandler):
     def __init__(self, db_params):
@@ -32,8 +52,9 @@ class PagesHandler(FileSystemEventHandler):
             content = f.read()
 #TODO        
 # Split content into chunks if needed (you may implement your chunking logic)
-        chunks = [content]  # Assuming no chunking for now
-       
+#SentenceTransformer('all-MiniLM-L6-v2'), the context length is typically much smaller compared to models like GPT.
+   #     chunks = [content]  # Assuming no chunking for now
+        chunks = chunk_text(content)
         # Connect to PostgreSQL and insert the data
         conn = psycopg2.connect(**self.db_params)
         cursor = conn.cursor()
