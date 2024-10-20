@@ -1,0 +1,4 @@
+curl http://192.168.0.141:11434/api/generate -d '{
+  "model": "gemma2",
+  "prompt": "Why is the sky blue?"
+}'

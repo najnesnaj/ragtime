@@ -15,7 +15,7 @@ Welcome to ragtime's documentation!
    pgvector
    poorman
    actions
-
+   proxmox/index
 
 
 
