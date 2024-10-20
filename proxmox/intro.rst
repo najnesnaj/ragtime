@@ -1,6 +1,15 @@
 intro
 =====
 
+This is a personal account of venturing into the Proxmox virutualised world:
+
+- running containers
+- running local LLM
+- no GPU
+- cheap 
+
+I try to document as much as I can, to avoid solving the same problem twice. 
+
 
 homelab
 -------
