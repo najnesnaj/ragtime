@@ -82,6 +82,31 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+      # Build and push Docker image for embedder
+      - name: Build and push Docker image (embedder)
+        id: build-and-push-embedder
+        uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
+        with:
+          context: ./embedder
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: your-dockerhub-username/embedder:${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      
+      # Build and push Docker image for postgres
+      - name: Build and push Docker image (postgres)
+        id: build-and-push-postgres
+        uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
+        with:
+          context: ./postgres
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: your-dockerhub-username/postgres:${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
       # repository is public to avoid leaking data.  If you would like to publish
