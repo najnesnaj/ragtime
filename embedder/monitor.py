@@ -29,7 +29,7 @@ def chunk_text(text, max_tokens=MAX_TOKENS):
 class PagesHandler(FileSystemEventHandler):
     def __init__(self, db_params):
         self.db_params = db_params
-        self.model = SentenceTransformer('all-MiniLM-L6-v2')  # Initialize the SentenceTransformer model
+        self.model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')  # Initialize the SentenceTransformer model
 
     def generate_embedding(self, text):
         # Use SentenceTransformer to generate embeddings
