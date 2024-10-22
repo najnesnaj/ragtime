@@ -11,7 +11,7 @@ from transformers import AutoTokenizer
 tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
 
 # Define the max tokens per chunk
-MAX_TOKENS = 256  # Adjust based on your model's context length
+MAX_TOKENS = 1024  # Adjust based on your model's context length
 
 def chunk_text(text, max_tokens=MAX_TOKENS):
     # Tokenize the input text
@@ -61,7 +61,7 @@ class PagesHandler(FileSystemEventHandler):
 
         for i, chunk in enumerate(chunks):
             chunk_id = f"{document_id}_chunk_{i+1}"
-            embedding = self.generate_embedding(chunk)  # Generate the 512-dimensional vector
+            embedding = self.generate_embedding(chunk)  # Generate the 384-dimensional vector
 
 
          
