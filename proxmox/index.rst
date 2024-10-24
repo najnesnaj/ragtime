@@ -24,6 +24,9 @@ Welcome to proxmox-dox's documentation!
    blender
    ollama
    elastic
+   mounting
+   backuppve
+   raid
 
 Indices and tables
 ==================

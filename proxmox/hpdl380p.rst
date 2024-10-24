@@ -16,6 +16,28 @@ M2 disk drive
 -------------
 - M.2 NGFF SSD naar PCI-E 3.0 X16 High-Speed SSD  (ashata = 5euro)
 - need MVME (one notch) m2 card
-- it should show up in BIOS / PCI devices
+- it shows up in BIOS / PCI devices
 - on linux :#lsblk it should show up 
+
+
+Sata
+----
+
+- m2 to sata adapter case (aliexpress)
+- cable female sata to female Slimline 13pin 7 + 6 (aliexpress)
+- m2 sata disk 128G
+
+Bootconfig
+----------
+
+there is a 
+- SAS controller
+- SATA controller (cdrom)
+
+the controllor has a bootorder as well !!!!
+In order to boot from sata, the sata controller has to boot first!!!
+
+
+**this is the way to boot an expensive hp server from a simple 2,5 inch sata disk (laptop 5V) ,using the onboard slimline cd-rom connector
+ 
  
