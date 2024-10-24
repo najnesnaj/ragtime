@@ -1,6 +1,9 @@
 intro
 =====
 
+This doc does not belong here, but did not want to create multiple github repo's. 
+
+
 This is a personal account of venturing into the Proxmox virutualised world:
 
 - running containers

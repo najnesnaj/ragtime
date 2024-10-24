@@ -1,0 +1,44 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Vector Search and LLM Response</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Ask a Question</h1>
+        <form id="query-form">
+            <input type="text" id="query" name="query" placeholder="Type your question..." required>
+            <button type="submit">Search</button>
+        </form>
+        <div id="response"></div>
+    </div>
+
+    <script>
+        document.getElementById("query-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            let query = document.getElementById("query").value;
+
+            fetch('/search', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'query=' + encodeURIComponent(query)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("response").innerText = data.response;
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById("response").innerText = "Error fetching response.";
+            });
+        });
+    </script>
+</body>
+</html>
+

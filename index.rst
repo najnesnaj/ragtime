@@ -13,7 +13,6 @@ Welcome to ragtime's documentation!
    readthedocs
    docker
    pgvector
-   poorman
    actions
    proxmox/index
 
