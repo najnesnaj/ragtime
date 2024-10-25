@@ -5,11 +5,11 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # Install dependencies
-COPY app/requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+#COPY app/requirements.txt requirements.txt
 
 # Copy the application code
 COPY . /app
+RUN pip install -r requirements.txt
 
 # Copy templates and static folders
 #COPY templates /app/templates
