@@ -9,11 +9,11 @@ COPY app/requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 # Copy the application code
-COPY app /app
+COPY . /app
 
 # Copy templates and static folders
-COPY templates /app/templates
-COPY static /app/static
+#COPY templates /app/templates
+#COPY static /app/static
 
 # Expose the port Flask will run on
 EXPOSE 5000
