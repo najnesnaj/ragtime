@@ -14,8 +14,8 @@ services:
 #
   web-frontend:
     build:
-      context: ./app
-      dockerfile: Dockerfile   
+      context: .
+      dockerfile: ./app/Dockerfile   
 
     container_name: web-frontend
     environment:

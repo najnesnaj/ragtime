@@ -1,5 +1,7 @@
-Flask==2.1.2
+Flask==2.2.3
+Werkzeug==2.2.3
 psycopg2-binary
 requests==2.27.1
 sentence-transformers==2.2.2
+
 
