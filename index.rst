@@ -14,6 +14,7 @@ Welcome to ragtime's documentation!
    docker
    pgvector
    actions
+   certificate
    proxmox/index
 
 

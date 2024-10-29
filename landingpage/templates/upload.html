@@ -1,0 +1,58 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Upload PDF</title>
+
+</head>
+
+<body>
+
+    <h1>Welcome to the File Processor!</h1>
+
+    <p>Please upload a PDF file and select an option to process it:</p>
+
+    
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <label for="file">Select a PDF file:</label>
+
+        <input type="file" name="file" accept=".pdf" required>
+
+        
+
+        <h3>Processing Options</h3>
+
+        <input type="checkbox" name="process_option" value="convert">Convert the file to text<br>
+
+        <input type="checkbox" name="process_option" value="convert">Beautify<br>
+ 
+	<input type="checkbox" name="process_option" value="split"> Split the file into parts<br>
+
+        <input type="checkbox" name="process_option" value="anonymize">Anonymize<br>
+
+        <input type="checkbox" name="process_option" value="summarize_first"> Summarize the first part<br>
+
+        <input type="checkbox" name="process_option" value="summarize_second"> Summarize the second part<br>
+
+        <input type="checkbox" name="process_option" value="seek_similar"> Seek a similar file<br>
+
+        <input type="checkbox" name="process_option" value="embed"> Embed the file into a vectordatabase<br>
+        
+
+        <input type="submit" value="Upload and Process">
+
+    </form>
+
+</body>
+
+</html>
+
+

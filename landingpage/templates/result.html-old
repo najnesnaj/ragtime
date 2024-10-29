@@ -1,0 +1,35 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Processing Results</title>
+
+</head>
+
+<body>
+
+    <h1>Processing Results</h1>
+
+    <ul>
+
+        {% for result in results %}
+
+            <li>{{ result }}</li>
+
+        {% endfor %}
+
+    </ul>
+
+    <a href="{{ url_for('upload_file') }}">Upload another file</a>
+
+</body>
+
+</html>
+
+
