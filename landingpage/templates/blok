@@ -1,0 +1,8 @@
+    <div class="container mt-5">
+        <h2>Upload a PDF to Extract Text</h2>
+        <form id="uploadForm">
+            <input type="file" name="file" id="fileInput" class="form-control" accept="application/pdf" required>
+            <button type="submit" class="btn btn-primary mt-3">Upload and Extract</button>
+        </form>
+    </div>
+
