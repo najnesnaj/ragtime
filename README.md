@@ -68,7 +68,4 @@ The one in rag :
 
 copy pdf files to the container
 -------------------------------
-cp 270123.pdf /var/snap/docker/common/var-lib-docker/volumes/rag_leech_data/_data
-D
-D
-cp /home/naj/IC_270123.pdf /var/snap/docker/common/var-lib-docker/volumes/rag_leech_data/_data 
+cp 270123.pdf /var/lib/docker/volumes/rag_leech_data/_data 
