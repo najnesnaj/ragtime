@@ -12,9 +12,11 @@ Welcome to ragtime's documentation!
    intro
    readthedocs
    docker
+   elastic
    pgvector
    actions
    certificate
+   technology
    proxmox/index
 
 

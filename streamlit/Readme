@@ -1,0 +1,27 @@
+project-directory/
+├── app.py               # Your Streamlit Python application
+├── requirements.txt     # Python dependencies
+├── Dockerfile           # Docker configuration
+└── docker-compose.yml   # Docker Compose configuration
+
+
+
+
+Explanation
+
+    Convert PDF to Text: Extracts text from each page in the uploaded PDF and stores it in st.session_state so other actions can use it.
+    Correct Text: Uppercases the converted text as a placeholder correction function. This action also requires the "Convert to Text" action to be performed first.
+    Split Text: Displays the first 10 lines of the converted text as a demonstration of splitting. You can adjust num_lines as needed.
+
+Running the Application
+
+To run this Streamlit app, use the following command in your terminal:
+
+bash
+
+streamlit run app.py
+
+create a docker container
+-------------------------
+sudo docker compose up --build -d
+

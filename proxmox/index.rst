@@ -27,6 +27,7 @@ Welcome to proxmox-dox's documentation!
    mounting
    backuppve
    raid
+   melborp
 
 Indices and tables
 ==================

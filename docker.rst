@@ -113,3 +113,20 @@ Login Succeeded
 now I can download the image
 naj@naj-Latitude-5520:/usr/src/ragtime$ sudo docker pull ghcr.io/najnesnaj/embed:main
 
+
+
+elasticsearch:
+--------------
+- sudo docker run -d --name elasticsearch -p 9200:9200 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:8.15.3
+- sudo docker run --name kibana -p 5601:5601 --link elasticsearch:elasticsearch kibana:8.15.3
+
+Kibana has not been configured.
+
+Go to http://0.0.0.0:5601/?code=003763 to get started.
+
+in the elasticsearch container generate token
+(bin/elasticsearch-create-enrollment-token -s kibana)
+elasticsearch-users useradd test
+elasticsearch-users passwd test
+elasticsearch-users roles -a kibana_admin test
+
