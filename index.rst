@@ -16,7 +16,7 @@ Welcome to ragtime's documentation!
    pgvector
    actions
    certificate
-   popup
+   technology
    proxmox/index
 
 
