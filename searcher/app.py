@@ -1,8 +1,10 @@
+import os
 import streamlit as st
 import psycopg2
 import numpy as np
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
+import json  # For parsing JSON-like strings
 
 # Load the embedding model (ensure it's compatible with your 384-dimensional vectors)
 model = SentenceTransformer('all-MiniLM-L6-v2')  # Ensure this matches the 384-dimensional vector
@@ -18,28 +20,39 @@ def create_connection():
     )
 
 # Retrieve top 10 matches from the database based on similarity
+
 def get_top_matches(query_embedding):
     # Connect to the database
     conn = create_connection()
     cursor = conn.cursor()
 
-    # Query to retrieve embeddings and metadata
-    cursor.execute("SELECT id, document_id, chunk_id, meta_data1, meta_data2, text, section, embedding FROM document_chunks")
-    rows = cursor.fetchall()
+    # Convert the query embedding to a format suitable for SQL
+    #TODO niet nodig -- aanpassen
+    #query_vector_str = query_embedding  # Assuming query_embedding is a list
+    query_vector_str = f"ARRAY{query_embedding}" 
+    # Execute the similarity search SQL query
+    cursor.execute(f"""
+        SELECT id, document_id, chunk_id, text, 
+               1 - (embedding <=> {query_vector_str}::vector) AS similarity  -- Cosine similarity
+        FROM document_chunks
+        ORDER BY embedding <=> {query_vector_str}::vector
+        LIMIT 10;
+    """)
+ # Process each row in results (ensure correct unpacking)
+    results = cursor.fetchall()
+    for row in results:
+        id, document_id, chunk_id, text, similarity = row  # Adjust number of variables if needed
+    
+    # Fetch the results
 
     # Close the database connection
     cursor.close()
     conn.close()
+    
+    return results
 
-    # Calculate similarity with query embedding
-    embeddings = np.array([row[-1] for row in rows])  # Extract embeddings
-    similarities = cosine_similarity([query_embedding], embeddings)[0]
 
-    # Sort by similarity and select top 10
-    top_indices = similarities.argsort()[-10:][::-1]  # Top 10 indices with highest similarity
-    top_matches = [(rows[i], similarities[i]) for i in top_indices]
 
-    return top_matches
 
 # Streamlit app UI
 st.title("RAG Document Search")
@@ -49,19 +62,30 @@ query = st.text_input("Your Query:")
 
 if query:
     # Generate embedding for the query
-    query_embedding = model.encode(query)
-
+    #query_embedding = model.encode(query)
+    query_embedding = model.encode(query).tolist()
+    # Convert the vector to a format suitable for SQL
+    query_vector_str = str(query_embedding)
     # Retrieve and display the top 10 matches
     st.write("Top 10 Matches:")
-    matches = get_top_matches(query_embedding)
-    
-    for match, similarity in matches:
-        st.write(f"**Document ID**: {match[1]}")
-        st.write(f"**Chunk ID**: {match[2]}")
-        st.write(f"**Metadata 1**: {match[3]}")
-        st.write(f"**Metadata 2**: {match[4]}")
-        st.write(f"**Section**: {match[6]}")
-        st.write(f"**Text**: {match[5]}")
+    #matches = get_top_matches(query_embedding)
+    matches = get_top_matches(query_vector_str)
+    for match in matches:
+        document_id = match[1]
+        chunk_id = match[2]
+#        meta_data1 = match[3]
+#        meta_data2 = match[4]
+#        section = match[6]
+        text = match[3]
+        similarity = match[-1]  # Assuming similarity is the last item in the tuple
+
+        st.write(f"**Document ID**: {document_id}")
+        st.write(f"**Chunk ID**: {chunk_id}")
+#        st.write(f"**Metadata 1**: {meta_data1}")
+#        st.write(f"**Metadata 2**: {meta_data2}")
+#        st.write(f"**Section**: {section}")
+        st.write(f"**Text**: {text}")
         st.write(f"**Similarity Score**: {similarity:.4f}")
         st.write("---")
+     
 
