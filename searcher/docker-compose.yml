@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  searcher:
+    build:
+      context: .  # The directory containing Dockerfile and app code
+    container_name: searcher
+    environment:
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=172.18.0.3  # PostgreSQL host name within the network
+      - DB_PORT=5432
+    ports:
+      - "8502:8502"  # Map host port to container port for Streamlit
+    networks:
+      - postgres_default  # Connects to the same network as the PostgreSQL database
+
+networks:
+  postgres_default:
+    external: true  # Uses an existing network, assumed to be set up for PostgreSQL
+

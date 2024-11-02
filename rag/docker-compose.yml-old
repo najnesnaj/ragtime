@@ -1,0 +1,24 @@
+#version: '3' , the version attribute is no longer required in newer versions of Docker Compose.
+services:
+  pdfconverter:
+    image: pdfconverter2:latest
+    volumes:
+      - pages_data:/pages
+      - leech_data:/leech   # Keep this as it is for /leech
+   # command: your_command_here
+
+  embedder:
+    image: embedder:latest
+    environment:
+      - DB_DATABASE_NAME=postgres
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=172.20.0.5
+      - DB_PORT=5432
+    volumes:
+      - pages_data:/pages
+   # command: your_command_here
+
+volumes:
+  pages_data:
+  leech_data:
