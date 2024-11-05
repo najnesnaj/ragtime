@@ -1,31 +1,37 @@
-version: '3'
 services:
   postgres:
-    build: ./ #Dockerfile in current directory
-#    image: postgres:${SOFTWARE_VERSION_TAG}
+    #build: ./ #Dockerfile in current directory
+      #pg17 is the version of postgres
+    image: pgvector/pgvector:pg17 
     restart: always
     # command: -c ssl=on -c ssl_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem -c ssl_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ${SOFTWARE_PASSWORD}
+      POSTGRES_PASSWORD: postgres 
       PGDATA: /var/lib/postgresql/data
+        #SSL_CERT_FILE: /etc/letsencrypt/live/www.melborp.solutions/fullchain.pem
+        #SSL_KEY_FILE: /etc/letsencrypt/live/www.melborp.solutions/privkey.pem
     volumes:
       - ./data:/var/lib/postgresql/data
-      - ./init-scripts:/docker-entrypoint-initdb.d/init.sql  # Mount directory with initialization scripts
+      - ./init-scripts:/docker-entrypoint-initdb.d  # Mount directory with initialization scripts
+        #- /etc/letsencrypt:/etc/letsencrypt
     ports:
-      - '172.17.0.1:5432:5432'
+      - '0.0.0.0:5432:5432'
 
   pgadmin4:
-    image: elestio/pgadmin:${SOFTWARE_VERSION_TAG}
+    image: elestio/pgadmin:latest
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: ${ADMIN_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${ADMIN_PASSWORD}
+      PGADMIN_DEFAULT_EMAIL: test@gmail.com 
+      PGADMIN_DEFAULT_PASSWORD: postgres 
       PGADMIN_LISTEN_PORT: 8080
+        #SSL_CERT_FILE: /etc/letsencrypt/live/www.melborp.solutions/fullchain.pem
+        #SSL_KEY_FILE: /etc/letsencrypt/live/www.melborp.solutions/privkey.pem
     ports:
-      - '172.17.0.1:8888:8080'
+      - '0.0.0.0:8888:8080'
 #server port 8080 is often used by something else ...
     volumes:
       - ./servers.json:/pgadmin4/servers.json
+        #- /etc/letsencrypt:/etc/letsencrypt
 

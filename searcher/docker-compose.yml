@@ -9,7 +9,7 @@ services:
       - DB_NAME=postgres
       - DB_USER=postgres
       - DB_PASSWORD=postgres
-      - DB_HOST=172.18.0.3  # PostgreSQL host name within the network
+      - DB_HOST=172.18.0.2  # PostgreSQL host name within the network
       - DB_PORT=5432
     ports:
       - "8502:8502"  # Map host port to container port for Streamlit

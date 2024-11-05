@@ -9,6 +9,6 @@ CREATE TABLE IF NOT EXISTS document_chunks (
     meta_data2 TEXT,
     text TEXT,
     section TEXT,
-    embedding VECTOR(384)  -- changed to 384 model related ...Storing 512-dimensional vector embeddings
+    embedding VECTOR(768)  -- changed to 384 model related ...Storing 512-dimensional vector embeddings
 );
 

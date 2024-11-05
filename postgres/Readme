@@ -11,6 +11,7 @@ CREATE TABLE document_chunks (
     chunk_id TEXT,
     text TEXT,
     section TEXT,
-    embedding VECTOR(512)  -- Storing 512-dimensional vector embeddings
+     #embedding VECTOR(512)  -- Storing 512-dimensional vector embeddings
+    embedding VECTOR(768)  -- Storing 512-dimensional vector embeddings
 );
 

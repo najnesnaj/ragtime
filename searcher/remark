@@ -1,0 +1,5 @@
+while in production the container tries to download a model.
+
+Behind a proxy it might not work.
+
+Hence important that the downloaded model in included in container.

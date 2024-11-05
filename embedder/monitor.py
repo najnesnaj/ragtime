@@ -8,10 +8,12 @@ from watchdog.events import FileSystemEventHandler
 from transformers import AutoTokenizer
 
 # Initialize tokenizer (adjust according to your model)
-tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
+# tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
+tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/paraphrase-mpnet-base-v2')
 
 # Define the max tokens per chunk
-MAX_TOKENS = 256  # Adjust based on your model's context length (all-MiniLM-L6)
+# MAX_TOKENS = 256  # Adjust based on your model's context length (all-MiniLM-L6)
+MAX_TOKENS = 512  # Adjust based on your model's context length (all-MiniLM-L6)
 
 def chunk_text(text, max_tokens=MAX_TOKENS):
     # Tokenize the input text
@@ -29,7 +31,9 @@ def chunk_text(text, max_tokens=MAX_TOKENS):
 class PagesHandler(FileSystemEventHandler):
     def __init__(self, db_params):
         self.db_params = db_params
-        self.model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')  # Initialize the SentenceTransformer model
+        self.model = SentenceTransformer('sentence-transformers/paraphrase-mpnet-base-v2')
+
+
 
     def generate_embedding(self, text):
         # Use SentenceTransformer to generate embeddings

@@ -7,7 +7,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 import json  # For parsing JSON-like strings
 
 # Load the embedding model (ensure it's compatible with your 384-dimensional vectors)
-model = SentenceTransformer('all-MiniLM-L6-v2')  # Ensure this matches the 384-dimensional vector
+#model = SentenceTransformer('all-MiniLM-L6-v2')  # Ensure this matches the 384-dimensional vector
+model = SentenceTransformer('sentence-transformers/paraphrase-mpnet-base-v2')
 
 # Connect to the PostgreSQL database using environment variables
 def create_connection():
