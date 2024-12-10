@@ -1,4 +1,1 @@
 Modify your Python code to use the pre-downloaded model: When loading the model in your script, it will use the pre-downloaded version if it's available in the container. By default, Hugging Face models are cached in the ~/.cache/huggingface/transformers directory.
-
-
-adapted for local use of embedding model 

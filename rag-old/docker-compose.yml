@@ -18,7 +18,7 @@ services:
       - DB_DATABASE_NAME=postgres
       - DB_USERNAME=postgres
       - DB_PASSWORD=postgres
-      - DB_HOST=172.28.0.2
+      - DB_HOST=172.18.0.2
       - DB_PORT=5432
     volumes:
       - pages_data:/pages

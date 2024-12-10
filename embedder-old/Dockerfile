@@ -3,13 +3,13 @@ FROM python:3.9-slim
 #RUN apt-get update && apt-get install -y libpq-dev
 
 # Install required packages
-RUN pip install --no-cache-dir langchain watchdog psycopg2-binary sentence-transformers 
+RUN pip install --no-cache-dir watchdog psycopg2-binary sentence-transformers
 
 
-# Download the model during the build --- has been replaced by local model
-#RUN python -c "from transformers import AutoTokenizer, AutoModel; \
-#               AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2'); \
-#               AutoModel.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')"
+# Download the model during the build
+RUN python -c "from transformers import AutoTokenizer, AutoModel; \
+               AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2'); \
+               AutoModel.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')"
 
 
 

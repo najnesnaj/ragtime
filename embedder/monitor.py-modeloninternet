@@ -1,16 +1,14 @@
 import os
 import time
 import psycopg2
-from sentence_transformers import SentenceTransformer,models
+from sentence_transformers import SentenceTransformer
 import numpy as np
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from transformers import AutoTokenizer
-from langchain.embeddings.base import Embeddings
+
 # Initialize tokenizer (adjust according to your model)
-model_path = os.path.abspath('./models/paraphrase-multilingual-mpnet-base-v2')
-#tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
-tokenizer = AutoTokenizer.from_pretrained(model_path)
+tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
 
 # Define the max tokens per chunk
 MAX_TOKENS = 256  # Adjust based on your model's context length (all-MiniLM-L6)
@@ -28,35 +26,10 @@ def chunk_text(text, max_tokens=MAX_TOKENS):
     
     return chunks
 
-
-class CustomEmbeddings(Embeddings):
-    def __init__(self, model_path):
-        #self.model = SentenceTransformer(model_path)
-        word_embedding_model = models.Transformer(model_path)
-        pooling_model = models.Pooling(word_embedding_model.get_word_embedding_dimension())
-        #self.model = models.Transformer(model_path)
-        self.model = SentenceTransformer(modules=[word_embedding_model, pooling_model])
-
-    def embed_documents(self, texts):
-        # Encode documents in batches for better performance
-        #return self.model.encode(texts, show_progress_bar=True)
-        return self.model.encode(texts)
-
-    def embed_query(self, text):
-        # Single query encoding
-        return self.model.encode([text], show_progress_bar=False)[0]
-
-
-
 class PagesHandler(FileSystemEventHandler):
     def __init__(self, db_params):
         self.db_params = db_params
-        model_path = os.path.abspath('./models/paraphrase-multilingual-mpnet-base-v2')
-    #embeddings_model = CustomEmbeddings('./models/paraphrase-multilingual-mpnet-base-v2')
-#        embeddings_model = CustomEmbeddings(model_path)
-        self.model = CustomEmbeddings(model_path)
-
-#SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')  # Initialize the SentenceTransformer model
+        self.model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')  # Initialize the SentenceTransformer model
 
     def generate_embedding(self, text):
         # Use SentenceTransformer to generate embeddings
