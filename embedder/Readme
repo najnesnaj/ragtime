@@ -2,3 +2,8 @@ Modify your Python code to use the pre-downloaded model: When loading the model 
 
 
 adapted for local use of embedding model 
+
+
+since this is a test enviroment, in which changes to monitor.py might occur :
+- to avoid rebuilding everything the script monitor.py will be in a volume.
+- in case of changes the script should be copied to the volume and restart the container

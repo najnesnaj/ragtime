@@ -22,14 +22,16 @@ services:
       - DB_PORT=5432
     volumes:
       - pages_data:/pages
+      - ./app:/app
+    working_dir: /app
+
     networks:
       - postgres_default
-    # command: your_command_here  # Uncomment and specify if needed
+    command: python monitor.py 
 
 volumes:
   pages_data:
   leech_data:
-
 networks:
   postgres_default:
     external: true  # Assumes postgres_default is an existing network

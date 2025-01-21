@@ -15,3 +15,12 @@ CREATE TABLE document_chunks (
     embedding VECTOR(768)  -- Storing 512-dimensional vector embeddings
 );
 
+
+
+error during creation and startup container :
+---------------------------------------------
+The error indicates that PostgreSQL is unable to start because the directory pg_notify is missing in the database's data directory. 
+
+
+====> remove the data directory!!!
+and recreate the container
