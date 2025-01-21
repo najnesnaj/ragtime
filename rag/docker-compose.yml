@@ -22,7 +22,7 @@ services:
       - DB_PORT=5432
     volumes:
       - pages_data:/pages
-      - ./app:/app
+      - app_data:/app
     working_dir: /app
 
     networks:
@@ -32,6 +32,7 @@ services:
 volumes:
   pages_data:
   leech_data:
+  app_data:
 networks:
   postgres_default:
     external: true  # Assumes postgres_default is an existing network

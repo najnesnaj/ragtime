@@ -21,7 +21,7 @@ COPY models /usr/local/models
 
 # Ensure line endings are correct
 RUN apt-get update && apt-get install -y dos2unix
-RUN dos2unix /usr/local/bin/monitor.py
+#RUN dos2unix /usr/local/bin/monitor.py
 
 # Set the entry point to run the monitor script
 ENTRYPOINT ["python", "monitor.py"]
