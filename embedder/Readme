@@ -7,3 +7,24 @@ adapted for local use of embedding model
 since this is a test enviroment, in which changes to monitor.py might occur :
 - to avoid rebuilding everything the script monitor.py will be in a volume.
 - in case of changes the script should be copied to the volume and restart the container
+
+
+embedding model : 
+To prevent the model from being downloaded each time a Docker container is restarted, you can pre-download the model and bake it into the Docker image 
+
+
+the size exceeds 1G
+
+(myvenv) naj@naj-Latitude-5520:~/.cache/huggingface/hub/models--sentence-transformers--paraphrase-multilingual-mpnet-base-v2/blobs$ ls -altr
+totaal 1100008
+-rw-rw-r-- 1 naj naj        229 jan  6 10:29 f7640f94e81bb7f4f04daf1668850b38763a13d9
+-rw-rw-r-- 1 naj naj        122 jan  6 10:29 b974b349cb2d419ada11181750a733ff82f291ad
+-rw-rw-r-- 1 naj naj       4126 jan  6 10:29 cfe01c46158f6d9f679d15b398ef68034d8e5270
+-rw-rw-r-- 1 naj naj         53 jan  6 10:29 5fd10429389515d3e5cccdeda08cae5fea1ae82e
+-rw-rw-r-- 1 naj naj        723 jan  6 10:29 5dc5669e71003d8acf24e69728e5a1dc36ed11fc
+-rw-rw-r-- 1 naj naj 1112201288 jan  6 10:36 b5722100700c48b74c9c199c5f39ff9493c94d1497f719e791d4bc3861d7714a
+-rw-rw-r-- 1 naj naj        402 jan  6 10:36 d90e60f188fd2edfbc6134837ee33d96d5514751
+-rw-rw-r-- 1 naj naj    5069051 jan  6 10:36 cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865
+-rw-rw-r-- 1 naj naj    9081518 jan  6 10:36 4279db36dd166b0700071894530c745bb0a83131
+-rw-rw-r-- 1 naj naj        239 jan  6 10:36 2ea7ad0e45a9d1d1591782ba7e29a703d0758831
+-rw-rw-r-- 1 naj naj        190 jan  6 10:36 4e09f293dfe90bba49f87cfe7996271f07be2666

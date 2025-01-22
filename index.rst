@@ -17,6 +17,7 @@ Welcome to ragtime's documentation!
    actions
    certificate
    technology
+   localmodel
    proxmox/index
 
 
