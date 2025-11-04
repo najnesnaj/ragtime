@@ -16,6 +16,7 @@ Welcome to Ragflow's documentation!
    vllm-cpu
    vllm-network
    api
+   graph
 
 Indices and tables
 ==================

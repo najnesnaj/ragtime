@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.7.1)  4 NOV 2025 14:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.7.1)  4 NOV 2025 16:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -842,87 +842,94 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
 
 
-] (./ragflow.toc)
+] (./ragflow.toc [1
+
+])
 \tf@toc=\write6
 \openout6 = `ragflow.toc'.
 
- [1
-
-] [2
-
-]
+ [2]
 Chapter 1.
-<rerank.png, id=195, 1059.96pt x 467.49657pt>
-LaTeX Font Info:    Trying to load font information for T1+txtt on input line 1
-13.
+LaTeX Font Info:    Trying to load font information for TS1+qtm on input line 9
+4.
+(/usr/share/texmf/tex/latex/tex-gyre/ts1qtm.fd
+File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
+) [1
+
+
+] [2]
+Chapter 2.
+<rerank.png, id=260, 1059.96pt x 467.49657pt>
+LaTeX Font Info:    Trying to load font information for T1+txtt on input line 2
+63.
 (/usr/share/texlive/texmf-dist/tex/latex/txfonts/t1txtt.fd
 File: t1txtt.fd 2000/12/15 v3.1
 )
 File: rerank.png Graphic file (type png)
 <use rerank.png>
-Package pdftex.def Info: rerank.png  used on input line 113.
+Package pdftex.def Info: rerank.png  used on input line 263.
 (pdftex.def)             Requested size: 469.74797pt x 207.19pt.
- [1
+ [3
 
  <./rerank.png>]
-LaTeX Font Info:    Trying to load font information for TS1+qtm on input line 1
-27.
-
-(/usr/share/texmf/tex/latex/tex-gyre/ts1qtm.fd
-File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
-) [2]
-Chapter 2.
-[3
+[4]
+Chapter 3.
+[5
 
 ]
 LaTeX Font Info:    Font shape `T1/txtt/b/n' in size <10> not available
-(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 203.
- [4] [5] [6
-
-]
-Chapter 3.
-LaTeX Font Info:    Trying to load font information for TS1+txtt on input line 
-303.
-(/usr/share/texlive/texmf-dist/tex/latex/txfonts/ts1txtt.fd
-File: ts1txtt.fd 2000/12/15 v3.1
-) [7] [8] [9]
-[10
+(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 353.
+ [6] [7] [8
 
 ]
 Chapter 4.
-Package hyperref Info: bookmark level for unknown literalblock defaults to 0 on
- input line 585.
-[11] [12]
-<ragflow-vllm-def.png, id=276, 374.14781pt x 400.49625pt>
-File: ragflow-vllm-def.png Graphic file (type png)
-<use ragflow-vllm-def.png>
-Package pdftex.def Info: ragflow-vllm-def.png  used on input line 669.
-(pdftex.def)             Requested size: 469.75502pt x 502.86185pt.
- [13] [14 <./ragflow-vllm-def.png>] [15] [16
+LaTeX Font Info:    Trying to load font information for TS1+txtt on input line 
+453.
+(/usr/share/texlive/texmf-dist/tex/latex/txfonts/ts1txtt.fd
+File: ts1txtt.fd 2000/12/15 v3.1
+) [9] [10] [11]
+[12
 
 ]
 Chapter 5.
-[17] [18]
-LaTeX Font Info:    Font shape `T1/txtt/m/it' in size <10> not available
-(Font)              Font shape `T1/txtt/m/sl' tried instead on input line 936.
- [19] [20]
+Package hyperref Info: bookmark level for unknown literalblock defaults to 0 on
+ input line 735.
+[13] [14]
+<ragflow-vllm-def.png, id=338, 374.14781pt x 400.49625pt>
+File: ragflow-vllm-def.png Graphic file (type png)
+<use ragflow-vllm-def.png>
+Package pdftex.def Info: ragflow-vllm-def.png  used on input line 819.
+(pdftex.def)             Requested size: 469.75502pt x 502.86185pt.
+ [15] [16 <./ragflow-vllm-def.png>] [17] [18
+
+]
 Chapter 6.
-(./ragflow.ind) [21
+[19] [20]
+LaTeX Font Info:    Font shape `T1/txtt/m/it' in size <10> not available
+(Font)              Font shape `T1/txtt/m/sl' tried instead on input line 1086.
+
+ [21] [22]
+Chapter 7.
+[23
+
+] [24]
+Chapter 8.
+(./ragflow.ind) [25
 
 ] (./ragflow.aux)
 Package rerunfilecheck Info: File `ragflow.out' has not changed.
-(rerunfilecheck)             Checksum: B5A21DC684342C74C3BE19455808B864;7126.
+(rerunfilecheck)             Checksum: 056FB7B9318176FAD195E08E9EF45CD3;9458.
  ) 
 Here is how much of TeX's memory you used:
- 16155 strings out of 480247
- 269725 string characters out of 5896152
- 624361 words of memory out of 5000000
- 33621 multiletter control sequences out of 15000+600000
+ 16205 strings out of 480247
+ 270601 string characters out of 5896152
+ 625258 words of memory out of 5000000
+ 33647 multiletter control sequences out of 15000+600000
  518213 words of font info for 70 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
- 70i,11n,76p,506b,564s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/tex-gyre/q-ts1.enc}{/usr/share/texmf/fonts/
-enc/dvips/tex-gyre/q-ec.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/a
+ 70i,11n,76p,647b,564s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/tex-gyre/q-ec.enc}{/usr/share/texmf/fonts/e
+nc/dvips/tex-gyre/q-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 sy5.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qhvb.pfb></usr/share/texm
@@ -933,10 +940,10 @@ fonts/type1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/tx
 fonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/tcxtt
 .pfb>
-Output written on ragflow.pdf (25 pages, 294661 bytes).
+Output written on ragflow.pdf (29 pages, 309979 bytes).
 PDF statistics:
- 398 PDF objects out of 1000 (max. 8388607)
- 343 compressed objects within 4 object streams
- 85 named destinations out of 1000 (max. 500000)
- 295 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 482 PDF objects out of 1000 (max. 8388607)
+ 422 compressed objects within 5 object streams
+ 109 named destinations out of 1000 (max. 500000)
+ 375 words of extra memory for PDF output out of 10000 (max. 10000000)
 

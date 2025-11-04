@@ -1147,6 +1147,12 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
 OUTPUT ragflow.toc
+INPUT /usr/share/texmf/tex/latex/tex-gyre/ts1qtm.fd
+INPUT /usr/share/texmf/tex/latex/tex-gyre/ts1qtm.fd
+INPUT /usr/share/texmf/tex/latex/tex-gyre/ts1qtm.fd
+INPUT /usr/share/texmf/tex/latex/tex-gyre/ts1qtm.fd
+INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ts1-qtmb.tfm
+INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ts1-qtmr.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ec-qtmri.tfm
 INPUT ./rerank.png
 INPUT ./rerank.png
@@ -1162,11 +1168,6 @@ INPUT ./rerank.png
 INPUT ./rerank.png
 INPUT rerank.png
 INPUT ./rerank.png
-INPUT /usr/share/texmf/tex/latex/tex-gyre/ts1qtm.fd
-INPUT /usr/share/texmf/tex/latex/tex-gyre/ts1qtm.fd
-INPUT /usr/share/texmf/tex/latex/tex-gyre/ts1qtm.fd
-INPUT /usr/share/texmf/tex/latex/tex-gyre/ts1qtm.fd
-INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ts1-qtmr.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/t1xtt.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/t1xbtt.tfm
 INPUT /usr/share/texlive/texmf-dist/tex/latex/txfonts/ts1txtt.fd
@@ -1175,7 +1176,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/txfonts/ts1txtt.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/txfonts/ts1txtt.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/tcxtt.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ec-qtmr.tfm
-INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ts1-qtmb.tfm
 INPUT ./ragflow-vllm-def.png
 INPUT ./ragflow-vllm-def.png
 INPUT ragflow-vllm-def.png
@@ -1193,8 +1193,8 @@ INPUT ragflow.ind
 INPUT ragflow.aux
 INPUT ./ragflow.out
 INPUT ./ragflow.out
-INPUT /usr/share/texmf/fonts/enc/dvips/tex-gyre/q-ts1.enc
 INPUT /usr/share/texmf/fonts/enc/dvips/tex-gyre/q-ec.enc
+INPUT /usr/share/texmf/fonts/enc/dvips/tex-gyre/q-ts1.enc
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb
