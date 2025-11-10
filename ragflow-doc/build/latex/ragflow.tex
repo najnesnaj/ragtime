@@ -64,7 +64,7 @@
 
 
 \title{Ragflow}
-\date{Nov 04, 2025}
+\date{Nov 10, 2025}
 \release{1}
 \author{Jansen Jan}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -557,6 +557,14 @@ The container \sphinxstylestrong{cannot download the model at runtime} due to:
 \PYG{n+nv}{HF\PYGZus{}ENDPOINT}\PYG{o}{=}https://hf\PYGZhy{}mirror.com\PYG{+w}{ }huggingface\PYGZhy{}cli\PYG{+w}{ }download\PYG{+w}{ }Qwen/Qwen3\PYGZhy{}Reranker\PYGZhy{}0.6B\PYG{+w}{ }\PYGZhy{}\PYGZhy{}local\PYGZhy{}dir\PYG{+w}{ }./qwen3\PYGZhy{}reranker\PYGZhy{}0.6b
 \end{sphinxVerbatim}
 \begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Remark : for some models you need a token HF\_TOKEN=xxxxxxxx (you have to specify the model in the token definition!)
+
+\item {} 
+\sphinxAtStartPar
+Remark2 : use “sudo” if non\sphinxhyphen{}root!!!
+
 \item {} 
 \sphinxAtStartPar
 Uses \sphinxstylestrong{accessible mirror} (\sphinxcode{\sphinxupquote{hf\sphinxhyphen{}mirror.com}}).
@@ -1344,6 +1352,677 @@ This process addresses limitations of pure vector RAG, such as hallucination in 
 
 \sphinxAtStartPar
 For implementation details, refer to the official guide at \sphinxurl{https://github.com/infiniflow/ragflow/blob/main/docs/guides/dataset/construct\_knowledge\_graph.md}. To experiment, deploy RAGFlow via Docker and enable KG in your knowledge base settings.
+
+\sphinxstepscope
+
+
+\chapter{Running Llama 3.1 with llama.cpp}
+\label{\detokenize{llama-cpp:running-llama-3-1-with-llama-cpp}}\label{\detokenize{llama-cpp:llama-cpp-model-format-gguf}}\label{\detokenize{llama-cpp::doc}}
+\begin{sphinxShadowBox}
+\sphinxstyletopictitle{Table of Contents}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{llama-cpp:id1}}{\hyperref[\detokenize{llama-cpp:model-format-gguf}]{\sphinxcrossref{1. Model Format: GGUF}}}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{llama-cpp:id2}}{\hyperref[\detokenize{llama-cpp:compile-llama-cpp-for-intel-i7-cpu-only}]{\sphinxcrossref{2. Compile llama.cpp for Intel i7 (CPU\sphinxhyphen{}only)}}}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{llama-cpp:id3}}{\hyperref[\detokenize{llama-cpp:run-the-model-with-web-interface}]{\sphinxcrossref{3. Run the Model with Web Interface}}}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{llama-cpp:id4}}{\hyperref[\detokenize{llama-cpp:features}]{\sphinxcrossref{Features}}}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{llama-cpp:id5}}{\hyperref[\detokenize{llama-cpp:compile-llama-cpp-with-nvidia-gpu-support-cuda}]{\sphinxcrossref{4. Compile llama.cpp with NVIDIA GPU Support (CUDA)}}}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{llama-cpp:id6}}{\hyperref[\detokenize{llama-cpp:prerequisites}]{\sphinxcrossref{Prerequisites}}}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{llama-cpp:id7}}{\hyperref[\detokenize{llama-cpp:build-with-cuda}]{\sphinxcrossref{Build with CUDA}}}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{llama-cpp:id8}}{\hyperref[\detokenize{llama-cpp:run-with-gpu-offloading}]{\sphinxcrossref{Run with GPU offloading}}}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{llama-cpp:id9}}{\hyperref[\detokenize{llama-cpp:summary}]{\sphinxcrossref{Summary}}}
+
+\end{itemize}
+\end{sphinxShadowBox}
+
+
+\bigskip\hrule\bigskip
+
+
+
+\section{1. Model Format: GGUF}
+\label{\detokenize{llama-cpp:model-format-gguf}}\label{\detokenize{llama-cpp:llama-cpp-compile-llama-cpp-for-intel-i7-cpu-only}}
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{llama.cpp}} uses the \sphinxstylestrong{GGUF} (GPT\sphinxhyphen{}Generated Unified Format) model format.
+
+\sphinxAtStartPar
+You can download a pre\sphinxhyphen{}quantized \sphinxstylestrong{Llama 3.1 8B} model in GGUF format directly from Hugging Face:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+https://huggingface.co/QuantFactory/Meta\PYGZhy{}Llama\PYGZhy{}3\PYGZhy{}8B\PYGZhy{}GGUF
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Example file: \sphinxcode{\sphinxupquote{Meta\sphinxhyphen{}Llama\sphinxhyphen{}3\sphinxhyphen{}8B.Q4\_K\_S.gguf}} (\textasciitilde{}4.7 GB, 4\sphinxhyphen{}bit quantization, excellent quality/size tradeoff).
+
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+The \sphinxcode{\sphinxupquote{Q4\_K\_S}} variant uses \textasciitilde{}4.7 GB RAM and runs efficiently on Intel i7 CPUs.
+\end{sphinxadmonition}
+
+
+\bigskip\hrule\bigskip
+
+
+
+\section{2. Compile llama.cpp for Intel i7 (CPU\sphinxhyphen{}only)}
+\label{\detokenize{llama-cpp:compile-llama-cpp-for-intel-i7-cpu-only}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Step 1: Clone the repository}
+git\PYG{+w}{ }clone\PYG{+w}{ }https://github.com/ggerganov/llama.cpp
+\PYG{n+nb}{cd}\PYG{+w}{ }llama.cpp
+
+\PYG{c+c1}{\PYGZsh{} Step 2: Build for CPU (Intel i7, AVX2 enabled by default)}
+make\PYG{+w}{ }clean
+make\PYG{+w}{ }\PYGZhy{}j\PYG{k}{\PYGZdl{}(}nproc\PYG{k}{)}\PYG{+w}{ }\PYG{n+nv}{LLAMA\PYGZus{}CPU}\PYG{o}{=}\PYG{l+m}{1}
+
+\PYG{c+c1}{\PYGZsh{} Optional: Force AVX2 (most i7 CPUs support it)}
+make\PYG{+w}{ }clean
+make\PYG{+w}{ }\PYGZhy{}j\PYG{k}{\PYGZdl{}(}nproc\PYG{k}{)}\PYG{+w}{ }\PYG{n+nv}{LLAMA\PYGZus{}CPU}\PYG{o}{=}\PYG{l+m}{1}\PYG{+w}{ }\PYG{n+nv}{LLAMA\PYGZus{}AVX2}\PYG{o}{=}\PYG{l+m}{1}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+The binaries will be in the root directory:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{./llama\sphinxhyphen{}cli}} \(\rightarrow\) interactive CLI
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{./server}}   \(\rightarrow\) web server (OpenAI\sphinxhyphen{}compatible API + full web UI)
+
+\end{itemize}
+
+\begin{sphinxadmonition}{warning}{Warning:}
+\sphinxAtStartPar
+\sphinxstylestrong{Do not use vLLM} on older Xeon v2 CPUs — they \sphinxstylestrong{lack AVX\sphinxhyphen{}512}, which vLLM requires.
+\sphinxstylestrong{llama.cpp is a better choice} — it runs efficiently with just AVX2 or even SSE.
+\end{sphinxadmonition}
+
+
+\bigskip\hrule\bigskip
+
+
+
+\section{3. Run the Model with Web Interface}
+\label{\detokenize{llama-cpp:run-the-model-with-web-interface}}\label{\detokenize{llama-cpp:llama-cpp-run-the-model-with-web-interface}}
+\sphinxAtStartPar
+Place the downloaded GGUF file in a \sphinxcode{\sphinxupquote{models/}} folder:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+mkdir\PYG{+w}{ }\PYGZhy{}p\PYG{+w}{ }models
+\PYG{c+c1}{\PYGZsh{} Copy or symlink the model}
+ln\PYG{+w}{ }\PYGZhy{}s\PYG{+w}{ }/path/to/Meta\PYGZhy{}Llama\PYGZhy{}3\PYGZhy{}8B.Q4\PYGZus{}K\PYGZus{}S.gguf\PYG{+w}{ }models/
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Start the server on port \sphinxstylestrong{8087} using \sphinxstylestrong{12 threads}:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+./server\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{  }\PYGZhy{}\PYGZhy{}model\PYG{+w}{ }models/Meta\PYGZhy{}Llama\PYGZhy{}3\PYGZhy{}8B.Q4\PYGZus{}K\PYGZus{}S.gguf\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{  }\PYGZhy{}\PYGZhy{}port\PYG{+w}{ }\PYG{l+m}{8087}\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{  }\PYGZhy{}\PYGZhy{}threads\PYG{+w}{ }\PYG{l+m}{12}\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{  }\PYGZhy{}\PYGZhy{}host\PYG{+w}{ }\PYG{l+m}{0}.0.0.0
+\end{sphinxVerbatim}
+
+
+\subsection{Features}
+\label{\detokenize{llama-cpp:features}}\label{\detokenize{llama-cpp:llama-cpp-features}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Full web UI} at: \sphinxurl{http://localhost:8087}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{OpenAI\sphinxhyphen{}compatible API} at: \sphinxurl{http://localhost:8087/v1}
+
+\item {} 
+\sphinxAtStartPar
+List models:
+
+\end{itemize}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+curl\PYG{+w}{ }http://localhost:8087/v1/models
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Response}:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n+nt}{\PYGZdq{}object\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}list\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{  }\PYG{n+nt}{\PYGZdq{}data\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}id\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}models/Meta\PYGZhy{}Llama\PYGZhy{}3\PYGZhy{}8B.Q4\PYGZus{}K\PYGZus{}S.gguf\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}object\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}model\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}created\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{1762783003}\PYG{p}{,}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}owned\PYGZus{}by\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}llamacpp\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{      }\PYG{n+nt}{\PYGZdq{}meta\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n+nt}{\PYGZdq{}vocab\PYGZus{}type\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{,}
+\PYG{+w}{        }\PYG{n+nt}{\PYGZdq{}n\PYGZus{}vocab\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{128256}\PYG{p}{,}
+\PYG{+w}{        }\PYG{n+nt}{\PYGZdq{}n\PYGZus{}ctx\PYGZus{}train\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{8192}\PYG{p}{,}
+\PYG{+w}{        }\PYG{n+nt}{\PYGZdq{}n\PYGZus{}embd\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{4096}\PYG{p}{,}
+\PYG{+w}{        }\PYG{n+nt}{\PYGZdq{}n\PYGZus{}params\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{8030261248}\PYG{p}{,}
+\PYG{+w}{        }\PYG{n+nt}{\PYGZdq{}size\PYGZdq{}}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{4684832768}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{]}
+\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+
+\bigskip\hrule\bigskip
+
+
+
+\section{4. Compile llama.cpp with NVIDIA GPU Support (CUDA)}
+\label{\detokenize{llama-cpp:compile-llama-cpp-with-nvidia-gpu-support-cuda}}\label{\detokenize{llama-cpp:llama-cpp-compile-llama-cpp-with-nvidia-gpu-support-cuda}}
+\sphinxAtStartPar
+If you have an \sphinxstylestrong{NVIDIA GPU} (e.g., RTX 3060, 4070, A100, etc.), enable \sphinxstylestrong{CUDA acceleration}:
+
+
+\subsection{Prerequisites}
+\label{\detokenize{llama-cpp:prerequisites}}\label{\detokenize{llama-cpp:llama-cpp-prerequisites}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+NVIDIA driver (\textbackslash{}geq\{\} 525)
+
+\item {} 
+\sphinxAtStartPar
+CUDA Toolkit (\textbackslash{}geq\{\} 11.8, preferably 12.x)
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{nvcc}} in \sphinxcode{\sphinxupquote{\$PATH}}
+
+\end{itemize}
+
+
+\subsection{Build with CUDA}
+\label{\detokenize{llama-cpp:build-with-cuda}}\label{\detokenize{llama-cpp:llama-cpp-build-with-cuda}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Clean previous build}
+make\PYG{+w}{ }clean
+
+\PYG{c+c1}{\PYGZsh{} Build with full CUDA support}
+make\PYG{+w}{ }\PYGZhy{}j\PYG{k}{\PYGZdl{}(}nproc\PYG{k}{)}\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{  }\PYG{n+nv}{LLAMA\PYGZus{}CUDA}\PYG{o}{=}\PYG{l+m}{1}\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{  }\PYG{n+nv}{LLAMA\PYGZus{}CUDA\PYGZus{}DMMV}\PYG{o}{=}\PYG{l+m}{1}\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{  }\PYG{n+nv}{LLAMA\PYGZus{}CUDA\PYGZus{}F16}\PYG{o}{=}\PYG{l+m}{1}
+
+\PYG{c+c1}{\PYGZsh{} Optional: Specify compute capability (e.g., for RTX 40xx)}
+\PYG{c+c1}{\PYGZsh{} make LLAMA\PYGZus{}CUDA=1 CUDA\PYGZus{}ARCH=\PYGZdq{}\PYGZhy{}gencode arch=compute\PYGZus{}89,code=sm\PYGZus{}89\PYGZdq{}}
+\end{sphinxVerbatim}
+
+
+\subsection{Run with GPU offloading}
+\label{\detokenize{llama-cpp:run-with-gpu-offloading}}\label{\detokenize{llama-cpp:llama-cpp-run-with-gpu-offloading}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+./server\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{  }\PYGZhy{}\PYGZhy{}model\PYG{+w}{ }models/Meta\PYGZhy{}Llama\PYGZhy{}3\PYGZhy{}8B.Q4\PYGZus{}K\PYGZus{}S.gguf\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{  }\PYGZhy{}\PYGZhy{}port\PYG{+w}{ }\PYG{l+m}{8087}\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{  }\PYGZhy{}\PYGZhy{}threads\PYG{+w}{ }\PYG{l+m}{8}\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{  }\PYGZhy{}\PYGZhy{}n\PYGZhy{}gpu\PYGZhy{}layers\PYG{+w}{ }\PYG{l+m}{999}\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{} }\PYG{+w}{  }\PYG{c+c1}{\PYGZsh{} offload ALL layers to GPU}
+\PYG{+w}{  }\PYGZhy{}\PYGZhy{}host\PYG{+w}{ }\PYG{l+m}{0}.0.0.0
+\end{sphinxVerbatim}
+
+\begin{sphinxadmonition}{tip}{Tip:}
+\sphinxAtStartPar
+Use \sphinxcode{\sphinxupquote{nvidia\sphinxhyphen{}smi}} to monitor VRAM usage.
+For 8B Q4 (\textasciitilde{}4.7 GB), even a \sphinxstylestrong{6 GB GPU} can run it fully offloaded.
+\end{sphinxadmonition}
+
+
+\bigskip\hrule\bigskip
+
+
+
+\section{Summary}
+\label{\detokenize{llama-cpp:summary}}\label{\detokenize{llama-cpp:llama-cpp-summary}}
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{TT}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Feature
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Command / Note
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+Model Format
+&
+\sphinxAtStartPar
+\sphinxstylestrong{GGUF}
+\\
+\sphinxhline
+\sphinxAtStartPar
+Download
+&
+\sphinxAtStartPar
+\sphinxhref{https://huggingface.co/QuantFactory/...GGUF}{https://huggingface.co/QuantFactory/…GGUF}
+\\
+\sphinxhline
+\sphinxAtStartPar
+CPU Build (i7)
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{make LLAMA\_CPU=1}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+GPU Build (CUDA)
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{make LLAMA\_CUDA=1}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+Run Server
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{./server \sphinxhyphen{}\sphinxhyphen{}model ... \sphinxhyphen{}\sphinxhyphen{}port 8087}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+Web UI
+&
+\sphinxAtStartPar
+\sphinxurl{http://localhost:8087}
+\\
+\sphinxhline
+\sphinxAtStartPar
+API
+&
+\sphinxAtStartPar
+\sphinxurl{http://localhost:8087/v1}
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+\sphinxAtStartPar
+\sphinxstylestrong{llama.cpp = lightweight, CPU/GPU flexible, no AVX\sphinxhyphen{}512 needed \(\rightarrow\) ideal replacement for vLLM on older hardware.}
+
+\sphinxAtStartPar
+—
+
+\sphinxstepscope
+
+\sphinxAtStartPar
+{\color{red}\bfseries{}\textasciigrave{}\textasciigrave{}}{\color{red}\bfseries{}\textasciigrave{}}rst
+.. \_deployment\sphinxhyphen{}considerations:
+
+
+\chapter{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}
+\label{\detokenize{hybrid:deploying-llms-in-hybrid-cloud-why-llama-cpp-wins-for-us}}\label{\detokenize{hybrid::doc}}
+\begin{sphinxShadowBox}
+\sphinxstyletopictitle{Table of Contents}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{hybrid:id5}}{\hyperref[\detokenize{hybrid:current-setup-ollama-in-testing}]{\sphinxcrossref{1. Current Setup: Ollama in Testing}}}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{hybrid:id6}}{\hyperref[\detokenize{hybrid:production-requirements-hybrid-cloud-multi-user-access}]{\sphinxcrossref{2. Production Requirements: Hybrid Cloud \& Multi\sphinxhyphen{}User Access}}}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{hybrid:id7}}{\hyperref[\detokenize{hybrid:evaluation-vllm-vs-llama-cpp}]{\sphinxcrossref{3. Evaluation: vLLM vs llama.cpp}}}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{hybrid:id8}}{\hyperref[\detokenize{hybrid:why-llama-cpp-is-our-production-choice}]{\sphinxcrossref{4. Why llama.cpp Is Our Production Choice}}}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{hybrid:id9}}{\hyperref[\detokenize{hybrid:example-production-ready-server}]{\sphinxcrossref{Example: Production\sphinxhyphen{}Ready Server}}}
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{hybrid:id10}}{\hyperref[\detokenize{hybrid:migration-path-from-ollama-llama-cpp}]{\sphinxcrossref{5. Migration Path: From Ollama \(\rightarrow\) llama.cpp}}}
+
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{hybrid:id11}}{\hyperref[\detokenize{hybrid:summary}]{\sphinxcrossref{Summary}}}
+
+\end{itemize}
+\end{sphinxShadowBox}
+
+
+\bigskip\hrule\bigskip
+
+
+
+\section{1. Current Setup: Ollama in Testing}
+\label{\detokenize{hybrid:current-setup-ollama-in-testing}}
+\sphinxAtStartPar
+We have been using \sphinxstylestrong{Ollama} in a \sphinxstylestrong{test environment} with excellent results:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Easy to use} — \sphinxtitleref{ollama run llama3.1} just works
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Docker support} is first\sphinxhyphen{}class:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{FROM}\PYG{+w}{ }\PYG{l+s}{ollama/ollama}
+\PYG{k}{COPY}\PYG{+w}{ }Modelfile\PYG{+w}{ }/root/.ollama/
+\PYG{k}{RUN}\PYG{+w}{ }ollama\PYG{+w}{ }create\PYG{+w}{ }my\PYGZhy{}llama3.1\PYG{+w}{ }\PYGZhy{}f\PYG{+w}{ }Modelfile
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+Models are pulled, versioned, and cached automatically
+
+\item {} 
+\sphinxAtStartPar
+Web UI and OpenAI\sphinxhyphen{}compatible API available out of the box
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Verdict}: Perfect for \sphinxstylestrong{prototyping}, \sphinxstylestrong{local dev}, and \sphinxstylestrong{small\sphinxhyphen{}scale testing}.
+
+
+\bigskip\hrule\bigskip
+
+
+
+\section{2. Production Requirements: Hybrid Cloud \& Multi\sphinxhyphen{}User Access}
+\label{\detokenize{hybrid:production-requirements-hybrid-cloud-multi-user-access}}
+\sphinxAtStartPar
+When moving to \sphinxstylestrong{production in a hybrid cloud}, new constraints emerge:
+
+\sphinxAtStartPar
+We need a \sphinxstylestrong{lightweight, portable, hardware\sphinxhyphen{}agnostic} inference engine.
+
+
+\bigskip\hrule\bigskip
+
+
+
+\section{3. Evaluation: vLLM vs llama.cpp}
+\label{\detokenize{hybrid:evaluation-vllm-vs-llama-cpp}}
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabular}[t]{\X{30}{100}\X{35}{100}\X{35}{100}}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Criteria
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+vLLM
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+llama.cpp
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxstylestrong{Hardware Requirements}
+&
+\sphinxAtStartPar
+Requires \sphinxstylestrong{AVX\sphinxhyphen{}512} (fails on Xeon v2, older i7)
+&
+\sphinxAtStartPar
+Runs on \sphinxstylestrong{SSE2+}, AVX2 optional
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{GPU Support}
+&
+\sphinxAtStartPar
+Excellent (PagedAttention, high throughput)
+&
+\sphinxAtStartPar
+CUDA, Metal, Vulkan — full offloading
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{CPU Performance}
+&
+\sphinxAtStartPar
+Poor without AVX\sphinxhyphen{}512
+&
+\sphinxAtStartPar
+\sphinxstylestrong{Best\sphinxhyphen{}in\sphinxhyphen{}class} quantized inference
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{Binary Size}
+&
+\sphinxAtStartPar
+\textasciitilde{}200 MB + Python deps
+&
+\sphinxAtStartPar
+\sphinxstylestrong{\textless{} 10 MB} (statically linked)
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{Deployment}
+&
+\sphinxAtStartPar
+Python server, complex deps
+&
+\sphinxAtStartPar
+Single binary, \sphinxtitleref{scp} and run
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{Multi\sphinxhyphen{}user / API}
+&
+\sphinxAtStartPar
+Built\sphinxhyphen{}in OpenAI API
+&
+\sphinxAtStartPar
+\sphinxtitleref{server} binary with full OpenAI compat + web UI
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{Quantization Support}
+&
+\sphinxAtStartPar
+FP16/BF16 only
+&
+\sphinxAtStartPar
+Q4\_K, Q5\_K, Q8\_0, etc. — \sphinxstylestrong{4\textendash{}8 GB models fit in RAM}
+\\
+\sphinxbottomrule
+\end{tabular}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Key Finding}:
+
+\sphinxAtStartPar
+\textgreater{} \sphinxstylestrong{We cannot use vLLM} on our legacy Xeon v2 fleet due to missing \sphinxstylestrong{AVX\sphinxhyphen{}512}.
+\textgreater{} \sphinxstylestrong{llama.cpp runs efficiently} on the \sphinxstylestrong{same hardware} with \sphinxstylestrong{Q4\_K\_M} models.
+
+
+\bigskip\hrule\bigskip
+
+
+
+\section{4. Why llama.cpp Is Our Production Choice}
+\label{\detokenize{hybrid:why-llama-cpp-is-our-production-choice}}
+\begin{sphinxadmonition}{note}{Decision}
+
+\sphinxAtStartPar
+\sphinxstylestrong{llama.cpp} is selected for \sphinxstylestrong{hybrid cloud LLM deployment} because:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Runs everywhere}: Old CPUs, new GPUs, laptops, edge
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Single static binary}: No Python, no CUDA runtime hell
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{GGUF format}: Share models with Ollama, local files, S3
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Built\sphinxhyphen{}in server}: OpenAI API + full web UI
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Thread \& context control}: \sphinxtitleref{\textendash{}threads}, \sphinxtitleref{\textendash{}ctx\sphinxhyphen{}size}, \sphinxtitleref{\textendash{}n\sphinxhyphen{}gpu\sphinxhyphen{}layers}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Kubernetes\sphinxhyphen{}ready}: Tiny image, fast startup
+
+\end{itemize}
+\end{sphinxadmonition}
+
+
+\subsection{Example: Production\sphinxhyphen{}Ready Server}
+\label{\detokenize{hybrid:example-production-ready-server}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+./llama.cpp/server\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{  }\PYGZhy{}\PYGZhy{}model\PYG{+w}{ }/models/llama3.1\PYGZhy{}8b\PYGZhy{}instruct.Q4\PYGZus{}K\PYGZus{}M.gguf\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{  }\PYGZhy{}\PYGZhy{}port\PYG{+w}{ }\PYG{l+m}{8080}\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{  }\PYGZhy{}\PYGZhy{}host\PYG{+w}{ }\PYG{l+m}{0}.0.0.0\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{  }\PYGZhy{}\PYGZhy{}threads\PYG{+w}{ }\PYG{l+m}{16}\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{  }\PYGZhy{}\PYGZhy{}ctx\PYGZhy{}size\PYG{+w}{ }\PYG{l+m}{8192}\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{  }\PYGZhy{}\PYGZhy{}n\PYGZhy{}gpu\PYGZhy{}layers\PYG{+w}{ }\PYG{l+m}{0}\PYG{+w}{    }\PYG{c+c1}{\PYGZsh{} CPU\PYGZhy{}only on older nodes}
+\PYG{+w}{  }\PYGZhy{}\PYGZhy{}log\PYGZhy{}disable
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Deploy via Docker:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{FROM}\PYG{+w}{ }\PYG{l+s}{alpine:latest}
+\PYG{k}{COPY}\PYG{+w}{ }llama.cpp/server\PYG{+w}{ }/usr/bin/
+\PYG{k}{COPY}\PYG{+w}{ }models/*.gguf\PYG{+w}{ }/models/
+\PYG{k}{EXPOSE}\PYG{+w}{ }\PYG{l+s}{8080}
+\PYG{k}{CMD}\PYG{+w}{ }\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}server\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}\PYGZhy{}model\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}/models/llama3.1\PYGZhy{}8b\PYGZhy{}instruct.Q4\PYGZus{}K\PYGZus{}M.gguf\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}\PYGZhy{}port\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}8080\PYGZdq{}}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+
+\bigskip\hrule\bigskip
+
+
+
+\section{5. Migration Path: From Ollama \(\rightarrow\) llama.cpp}
+\label{\detokenize{hybrid:migration-path-from-ollama-llama-cpp}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} 1. Reuse Ollama\PYGZsq{}s GGUF}
+cp\PYG{+w}{ }\PYGZti{}/.ollama/models/blobs/sha256\PYGZhy{}*\PYG{+w}{ }/production/models/
+
+\PYG{c+c1}{\PYGZsh{} 2. Deploy llama.cpp server}
+kubectl\PYG{+w}{ }apply\PYG{+w}{ }\PYGZhy{}f\PYG{+w}{ }llama\PYGZhy{}cpp\PYGZhy{}deployment.yaml
+
+\PYG{c+c1}{\PYGZsh{} 3. Point clients to new endpoint}
+\PYG{n+nb}{export}\PYG{+w}{ }\PYG{n+nv}{OPENAI\PYGZus{}API\PYGZus{}BASE}\PYG{o}{=}http://llama\PYGZhy{}cpp\PYGZhy{}prod:8080/v1
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Zero model reconversion. Zero downtime.}
+
+
+\bigskip\hrule\bigskip
+
+
+
+\section{Summary}
+\label{\detokenize{hybrid:summary}}
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{TT}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Use Case
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Recommended Tool
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+Local dev / prototyping
+&
+\sphinxAtStartPar
+\sphinxstylestrong{Ollama}
+\\
+\sphinxhline
+\sphinxAtStartPar
+Hybrid cloud, old hardware, scale
+&
+\sphinxAtStartPar
+\sphinxstylestrong{llama.cpp}
+\\
+\sphinxhline
+\sphinxAtStartPar
+High\sphinxhyphen{}throughput GPU cluster
+&
+\sphinxAtStartPar
+vLLM (if AVX\sphinxhyphen{}512 available)
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+\sphinxAtStartPar
+\textgreater{} \sphinxstylestrong{llama.cpp = the Swiss Army knife of LLM inference.}
+
+\sphinxAtStartPar
+—
 
 
 \chapter{Indices and tables}

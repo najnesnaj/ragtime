@@ -99,6 +99,8 @@ The container **cannot download the model at runtime** due to:
 
    HF_ENDPOINT=https://hf-mirror.com huggingface-cli download Qwen/Qwen3-Reranker-0.6B --local-dir ./qwen3-reranker-0.6b
 
+- Remark : for some models you need a token HF_TOKEN=xxxxxxxx (you have to specify the model in the token definition!)
+- Remark2 : use "sudo" if non-root!!! 
 - Uses **accessible mirror** (``hf-mirror.com``).
 - Saves model locally for volume mounting.
 

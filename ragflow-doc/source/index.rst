@@ -17,6 +17,8 @@ Welcome to Ragflow's documentation!
    vllm-network
    api
    graph
+   llama-cpp
+   hybrid
 
 Indices and tables
 ==================

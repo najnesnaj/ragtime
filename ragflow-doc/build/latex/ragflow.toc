@@ -41,4 +41,22 @@
 \contentsline {section}{\numberline {7.2}Construction Process}{23}{section.7.2}%
 \contentsline {section}{\numberline {7.3}Query and Retrieval Process}{24}{section.7.3}%
 \contentsline {section}{\numberline {7.4}Key Features and Limitations}{24}{section.7.4}%
-\contentsline {chapter}{\numberline {8}Indices and tables}{25}{chapter.8}%
+\contentsline {chapter}{\numberline {8}Running Llama 3.1 with llama.cpp}{25}{chapter.8}%
+\contentsline {section}{\numberline {8.1}1. Model Format: GGUF}{25}{section.8.1}%
+\contentsline {section}{\numberline {8.2}2. Compile llama.cpp for Intel i7 (CPU\sphinxhyphen {}only)}{26}{section.8.2}%
+\contentsline {section}{\numberline {8.3}3. Run the Model with Web Interface}{26}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}Features}{26}{subsection.8.3.1}%
+\contentsline {section}{\numberline {8.4}4. Compile llama.cpp with NVIDIA GPU Support (CUDA)}{27}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1}Prerequisites}{27}{subsection.8.4.1}%
+\contentsline {subsection}{\numberline {8.4.2}Build with CUDA}{27}{subsection.8.4.2}%
+\contentsline {subsection}{\numberline {8.4.3}Run with GPU offloading}{28}{subsection.8.4.3}%
+\contentsline {section}{\numberline {8.5}Summary}{28}{section.8.5}%
+\contentsline {chapter}{\numberline {9}Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{29}{chapter.9}%
+\contentsline {section}{\numberline {9.1}1. Current Setup: Ollama in Testing}{29}{section.9.1}%
+\contentsline {section}{\numberline {9.2}2. Production Requirements: Hybrid Cloud \& Multi\sphinxhyphen {}User Access}{30}{section.9.2}%
+\contentsline {section}{\numberline {9.3}3. Evaluation: vLLM vs llama.cpp}{30}{section.9.3}%
+\contentsline {section}{\numberline {9.4}4. Why llama.cpp Is Our Production Choice}{30}{section.9.4}%
+\contentsline {subsection}{\numberline {9.4.1}Example: Production\sphinxhyphen {}Ready Server}{31}{subsection.9.4.1}%
+\contentsline {section}{\numberline {9.5}5. Migration Path: From Ollama \(\rightarrow \) llama.cpp}{31}{section.9.5}%
+\contentsline {section}{\numberline {9.6}Summary}{31}{section.9.6}%
+\contentsline {chapter}{\numberline {10}Indices and tables}{33}{chapter.10}%

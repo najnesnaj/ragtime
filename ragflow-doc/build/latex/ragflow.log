@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.7.1)  4 NOV 2025 16:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.7.1)  10 NOV 2025 15:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -859,7 +859,7 @@ File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
 
 ] [2]
 Chapter 2.
-<rerank.png, id=260, 1059.96pt x 467.49657pt>
+<rerank.png, id=347, 1059.96pt x 467.49657pt>
 LaTeX Font Info:    Trying to load font information for T1+txtt on input line 2
 63.
 (/usr/share/texlive/texmf-dist/tex/latex/txfonts/t1txtt.fd
@@ -893,12 +893,12 @@ File: ts1txtt.fd 2000/12/15 v3.1
 ]
 Chapter 5.
 Package hyperref Info: bookmark level for unknown literalblock defaults to 0 on
- input line 735.
+ input line 743.
 [13] [14]
-<ragflow-vllm-def.png, id=338, 374.14781pt x 400.49625pt>
+<ragflow-vllm-def.png, id=423, 374.14781pt x 400.49625pt>
 File: ragflow-vllm-def.png Graphic file (type png)
 <use ragflow-vllm-def.png>
-Package pdftex.def Info: ragflow-vllm-def.png  used on input line 819.
+Package pdftex.def Info: ragflow-vllm-def.png  used on input line 827.
 (pdftex.def)             Requested size: 469.75502pt x 502.86185pt.
  [15] [16 <./ragflow-vllm-def.png>] [17] [18
 
@@ -906,7 +906,7 @@ Package pdftex.def Info: ragflow-vllm-def.png  used on input line 819.
 Chapter 6.
 [19] [20]
 LaTeX Font Info:    Font shape `T1/txtt/m/it' in size <10> not available
-(Font)              Font shape `T1/txtt/m/sl' tried instead on input line 1086.
+(Font)              Font shape `T1/txtt/m/sl' tried instead on input line 1094.
 
  [21] [22]
 Chapter 7.
@@ -914,36 +914,63 @@ Chapter 7.
 
 ] [24]
 Chapter 8.
-(./ragflow.ind) [25
+[25
 
-] (./ragflow.aux)
+] [26] [27] [28]
+Chapter 9.
+[29
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 1821--1823
+[]|\T1/qtm/m/n/10 Ex-cel-lent (Page-dAt-ten-tion, high
+ []
+
+[30]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1958.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\rightarrow' on input line 1958.
+
+LaTeX Font Info:    Font shape `TS1/txtt/m/it' in size <10> not available
+(Font)              Font shape `TS1/txtt/m/sl' tried instead on input line 1961
+.
+[31] [32
+
+]
+Chapter 10.
+(./ragflow.ind) [33] (./ragflow.aux)
 Package rerunfilecheck Info: File `ragflow.out' has not changed.
-(rerunfilecheck)             Checksum: 056FB7B9318176FAD195E08E9EF45CD3;9458.
+(rerunfilecheck)             Checksum: 6C84C6B75C65F91CEF49E92AA28EE74E;13457.
  ) 
 Here is how much of TeX's memory you used:
- 16205 strings out of 480247
- 270601 string characters out of 5896152
- 625258 words of memory out of 5000000
- 33647 multiletter control sequences out of 15000+600000
- 518213 words of font info for 70 fonts, out of 8000000 for 9000
+ 16346 strings out of 480247
+ 273111 string characters out of 5896152
+ 628086 words of memory out of 5000000
+ 33736 multiletter control sequences out of 15000+600000
+ 528598 words of font info for 82 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
  70i,11n,76p,647b,564s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/tex-gyre/q-ec.enc}{/usr/share/texmf/fonts/e
-nc/dvips/tex-gyre/q-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-sy5.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qhvb.pfb></usr/share/texm
-f/fonts/type1/public/tex-gyre/qhvbi.pfb></usr/share/texmf/fonts/type1/public/te
-x-gyre/qtmb.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmr.pfb></usr/sh
-are/texmf/fonts/type1/public/tex-gyre/qtmri.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/tx
-fonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/tcxtt
-.pfb>
-Output written on ragflow.pdf (29 pages, 309979 bytes).
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf/
+fonts/enc/dvips/tex-gyre/q-ec.enc}{/usr/share/texmf/fonts/enc/dvips/tex-gyre/q-
+ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/
+texmf/fonts/type1/public/tex-gyre/qhvb.pfb></usr/share/texmf/fonts/type1/public
+/tex-gyre/qhvbi.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qhvr.pfb></us
+r/share/texmf/fonts/type1/public/tex-gyre/qtmb.pfb></usr/share/texmf/fonts/type
+1/public/tex-gyre/qtmr.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmri.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/txfonts/tcxtt.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/urw/times/utmr8a.pfb>
+Output written on ragflow.pdf (37 pages, 361830 bytes).
 PDF statistics:
- 482 PDF objects out of 1000 (max. 8388607)
- 422 compressed objects within 5 object streams
- 109 named destinations out of 1000 (max. 500000)
- 375 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 662 PDF objects out of 1000 (max. 8388607)
+ 587 compressed objects within 6 object streams
+ 151 named destinations out of 1000 (max. 500000)
+ 519 words of extra memory for PDF output out of 10000 (max. 10000000)
 
