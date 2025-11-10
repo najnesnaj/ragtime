@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.7.1)  10 NOV 2025 15:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.7.1)  10 NOV 2025 15:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -844,7 +844,13 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 ] (./ragflow.toc [1
 
-])
+]
+LaTeX Font Info:    Trying to load font information for T1+txtt on input line 5
+5.
+
+(/usr/share/texlive/texmf-dist/tex/latex/txfonts/t1txtt.fd
+File: t1txtt.fd 2000/12/15 v3.1
+))
 \tf@toc=\write6
 \openout6 = `ragflow.toc'.
 
@@ -859,20 +865,14 @@ File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
 
 ] [2]
 Chapter 2.
-<rerank.png, id=347, 1059.96pt x 467.49657pt>
-LaTeX Font Info:    Trying to load font information for T1+txtt on input line 2
-63.
-(/usr/share/texlive/texmf-dist/tex/latex/txfonts/t1txtt.fd
-File: t1txtt.fd 2000/12/15 v3.1
-)
+<rerank.png, id=368, 1059.96pt x 467.49657pt>
 File: rerank.png Graphic file (type png)
 <use rerank.png>
 Package pdftex.def Info: rerank.png  used on input line 263.
 (pdftex.def)             Requested size: 469.74797pt x 207.19pt.
- [3
+[3
 
- <./rerank.png>]
-[4]
+ <./rerank.png>] [4]
 Chapter 3.
 [5
 
@@ -895,7 +895,7 @@ Chapter 5.
 Package hyperref Info: bookmark level for unknown literalblock defaults to 0 on
  input line 743.
 [13] [14]
-<ragflow-vllm-def.png, id=423, 374.14781pt x 400.49625pt>
+<ragflow-vllm-def.png, id=443, 374.14781pt x 400.49625pt>
 File: ragflow-vllm-def.png Graphic file (type png)
 <use ragflow-vllm-def.png>
 Package pdftex.def Info: ragflow-vllm-def.png  used on input line 827.
@@ -918,39 +918,46 @@ Chapter 8.
 
 ] [26] [27] [28]
 Chapter 9.
+LaTeX Font Info:    Font shape `T1/txtt/b/n' in size <14.4> not available
+(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 1697.
+
 [29
 
+] [30]
+Chapter 10.
+[31
+
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 1821--1823
+Underfull \hbox (badness 10000) in paragraph at lines 1954--1956
 []|\T1/qtm/m/n/10 Ex-cel-lent (Page-dAt-ten-tion, high
  []
 
-[30]
+[32]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1958.
+(hyperref)                removing `math shift' on input line 2091.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\rightarrow' on input line 1958.
+(hyperref)                removing `\rightarrow' on input line 2091.
 
 LaTeX Font Info:    Font shape `TS1/txtt/m/it' in size <10> not available
-(Font)              Font shape `TS1/txtt/m/sl' tried instead on input line 1961
+(Font)              Font shape `TS1/txtt/m/sl' tried instead on input line 2094
 .
-[31] [32
+[33] [34
 
 ]
-Chapter 10.
-(./ragflow.ind) [33] (./ragflow.aux)
+Chapter 11.
+(./ragflow.ind) [35] (./ragflow.aux)
 Package rerunfilecheck Info: File `ragflow.out' has not changed.
-(rerunfilecheck)             Checksum: 6C84C6B75C65F91CEF49E92AA28EE74E;13457.
+(rerunfilecheck)             Checksum: 23B6E9F320BFA911B52B9E81B949F382;14223.
  ) 
 Here is how much of TeX's memory you used:
- 16346 strings out of 480247
- 273111 string characters out of 5896152
- 628086 words of memory out of 5000000
- 33736 multiletter control sequences out of 15000+600000
- 528598 words of font info for 82 fonts, out of 8000000 for 9000
+ 16367 strings out of 480247
+ 273619 string characters out of 5896152
+ 628479 words of memory out of 5000000
+ 33749 multiletter control sequences out of 15000+600000
+ 531785 words of font info for 84 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
  70i,11n,76p,647b,564s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf/
@@ -967,10 +974,10 @@ share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/public/txfonts/tcxtt.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/urw/times/utmr8a.pfb>
-Output written on ragflow.pdf (37 pages, 361830 bytes).
+Output written on ragflow.pdf (39 pages, 367594 bytes).
 PDF statistics:
- 662 PDF objects out of 1000 (max. 8388607)
- 587 compressed objects within 6 object streams
- 151 named destinations out of 1000 (max. 500000)
- 519 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 692 PDF objects out of 1000 (max. 8388607)
+ 614 compressed objects within 7 object streams
+ 157 named destinations out of 1000 (max. 500000)
+ 551 words of extra memory for PDF output out of 10000 (max. 10000000)
 

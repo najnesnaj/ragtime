@@ -1687,6 +1687,139 @@ API
 
 \sphinxstepscope
 
+
+\chapter{Running Multiple Models on llama.cpp Using Docker}
+\label{\detokenize{multiple-models-llamacpp:running-multiple-models-on-llama-cpp-using-docker}}\label{\detokenize{multiple-models-llamacpp:running-multiple-models-llama-cpp-docker}}\label{\detokenize{multiple-models-llamacpp::doc}}
+\sphinxAtStartPar
+This guide demonstrates how to run multiple language models simultaneously using \sphinxcode{\sphinxupquote{llama.cpp}} in Docker via \sphinxcode{\sphinxupquote{docker\sphinxhyphen{}compose}}. The example below defines two services: a lightweight reranker model (Qwen3 0.6B) and a general\sphinxhyphen{}purpose chat model (Llama 3.1).
+
+
+\section{Example \sphinxstyleliteralintitle{\sphinxupquote{docker\sphinxhyphen{}compose.yml}}}
+\label{\detokenize{multiple-models-llamacpp:example-docker-compose-yml}}
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{n+nt}{services}\PYG{p}{:}
+\PYG{+w}{  }\PYG{n+nt}{qwen\PYGZhy{}reranker}\PYG{p}{:}
+\PYG{+w}{    }\PYG{n+nt}{image}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{ghcr.io/ggerganov/llama.cpp:server\PYGZhy{}cpu}
+\PYG{+w}{    }\PYG{n+nt}{ports}\PYG{p}{:}
+\PYG{+w}{      }\PYG{p+pIndicator}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{8123:8080}\PYG{l+s}{\PYGZdq{}}
+\PYG{+w}{    }\PYG{n+nt}{volumes}\PYG{p}{:}
+\PYG{+w}{      }\PYG{p+pIndicator}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{/home/naj/qwen3\PYGZhy{}reranker\PYGZhy{}0.6b:/models/qwen3\PYGZhy{}reranker\PYGZhy{}0.6b:ro}
+\PYG{+w}{    }\PYG{n+nt}{environment}\PYG{p}{:}
+\PYG{+w}{      }\PYG{p+pIndicator}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{MODEL=/models/qwen3\PYGZhy{}reranker\PYGZhy{}0.6b}
+\PYG{+w}{    }\PYG{n+nt}{command}\PYG{p}{:}\PYG{+w}{ }\PYG{p+pIndicator}{\PYGZgt{}}
+\PYG{+w}{      }\PYG{n+no}{\PYGZhy{}\PYGZhy{}model /models/qwen3\PYGZhy{}reranker\PYGZhy{}0.6b/model.gguf}
+\PYG{+w}{      }\PYG{n+no}{\PYGZhy{}\PYGZhy{}port 8080}
+\PYG{+w}{      }\PYG{n+no}{\PYGZhy{}\PYGZhy{}host 0.0.0.0}
+\PYG{+w}{      }\PYG{n+no}{\PYGZhy{}\PYGZhy{}n\PYGZhy{}gpu\PYGZhy{}layers 0}
+\PYG{+w}{      }\PYG{n+no}{\PYGZhy{}\PYGZhy{}ctx\PYGZhy{}size 8192}
+\PYG{+w}{      }\PYG{n+no}{\PYGZhy{}\PYGZhy{}threads 6}
+\PYG{+w}{      }\PYG{n+no}{\PYGZhy{}\PYGZhy{}temp 0.0}
+\PYG{+w}{      }\PYG{n+no}{\PYGZhy{}\PYGZhy{}rpc}
+\PYG{+w}{    }\PYG{n+nt}{deploy}\PYG{p}{:}
+\PYG{+w}{      }\PYG{n+nt}{resources}\PYG{p}{:}
+\PYG{+w}{        }\PYG{n+nt}{limits}\PYG{p}{:}
+\PYG{+w}{          }\PYG{n+nt}{cpus}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{6}\PYG{l+s}{\PYGZsq{}}
+\PYG{+w}{          }\PYG{n+nt}{memory}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{10G}
+\PYG{+w}{    }\PYG{n+nt}{shm\PYGZus{}size}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{4g}
+\PYG{+w}{    }\PYG{n+nt}{restart}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{unless\PYGZhy{}stopped}
+
+\PYG{+w}{  }\PYG{n+nt}{llama3.1\PYGZhy{}chat}\PYG{p}{:}
+\PYG{+w}{    }\PYG{n+nt}{image}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{ghcr.io/ggerganov/llama.cpp:server\PYGZhy{}cpu}
+\PYG{+w}{    }\PYG{n+nt}{ports}\PYG{p}{:}
+\PYG{+w}{      }\PYG{p+pIndicator}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{8124:8080}\PYG{l+s}{\PYGZdq{}}
+\PYG{+w}{    }\PYG{n+nt}{volumes}\PYG{p}{:}
+\PYG{+w}{      }\PYG{p+pIndicator}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{/home/naj/llama3.1:/models/llama3.1:ro}
+\PYG{+w}{    }\PYG{n+nt}{environment}\PYG{p}{:}
+\PYG{+w}{      }\PYG{p+pIndicator}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{MODEL=/models/llama3.1}
+\PYG{+w}{    }\PYG{n+nt}{command}\PYG{p}{:}\PYG{+w}{ }\PYG{p+pIndicator}{\PYGZgt{}}
+\PYG{+w}{      }\PYG{n+no}{\PYGZhy{}\PYGZhy{}model /models/llama3.1/model.gguf}
+\PYG{+w}{      }\PYG{n+no}{\PYGZhy{}\PYGZhy{}port 8080}
+\PYG{+w}{      }\PYG{n+no}{\PYGZhy{}\PYGZhy{}host 0.0.0.0}
+\PYG{+w}{      }\PYG{n+no}{\PYGZhy{}\PYGZhy{}n\PYGZhy{}gpu\PYGZhy{}layers 0}
+\PYG{+w}{      }\PYG{n+no}{\PYGZhy{}\PYGZhy{}ctx\PYGZhy{}size 8192}
+\PYG{+w}{      }\PYG{n+no}{\PYGZhy{}\PYGZhy{}threads 10}
+\PYG{+w}{      }\PYG{n+no}{\PYGZhy{}\PYGZhy{}temp 0.7}
+\PYG{+w}{      }\PYG{n+no}{\PYGZhy{}\PYGZhy{}rpc}
+\PYG{+w}{    }\PYG{n+nt}{deploy}\PYG{p}{:}
+\PYG{+w}{      }\PYG{n+nt}{resources}\PYG{p}{:}
+\PYG{+w}{        }\PYG{n+nt}{limits}\PYG{p}{:}
+\PYG{+w}{          }\PYG{n+nt}{cpus}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{10}\PYG{l+s}{\PYGZsq{}}
+\PYG{+w}{          }\PYG{n+nt}{memory}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{20G}
+\PYG{+w}{    }\PYG{n+nt}{shm\PYGZus{}size}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{8g}
+\PYG{+w}{    }\PYG{n+nt}{restart}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{unless\PYGZhy{}stopped}
+\end{sphinxVerbatim}
+
+
+\section{Key Configuration Notes}
+\label{\detokenize{multiple-models-llamacpp:key-configuration-notes}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Images}: Both services use the official CPU\sphinxhyphen{}optimized \sphinxcode{\sphinxupquote{llama.cpp}} server image.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Ports}:
+\sphinxhyphen{} Reranker exposed on \sphinxcode{\sphinxupquote{8123}} \(\rightarrow\) internal \sphinxcode{\sphinxupquote{8080}}
+\sphinxhyphen{} Chat model exposed on \sphinxcode{\sphinxupquote{8124}} \(\rightarrow\) internal \sphinxcode{\sphinxupquote{8080}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Volumes}: Model directories are mounted read\sphinxhyphen{}only (\sphinxcode{\sphinxupquote{:ro}}) from the host.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Environment}: \sphinxcode{\sphinxupquote{MODEL}} variable simplifies path references in commands.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Command Flags}:
+\sphinxhyphen{} \sphinxcode{\sphinxupquote{\sphinxhyphen{}\sphinxhyphen{}n\sphinxhyphen{}gpu\sphinxhyphen{}layers 0}}: Forces CPU\sphinxhyphen{}only inference.
+\sphinxhyphen{} \sphinxcode{\sphinxupquote{\sphinxhyphen{}\sphinxhyphen{}ctx\sphinxhyphen{}size 8192}}: Sets context length.
+\sphinxhyphen{} \sphinxcode{\sphinxupquote{\sphinxhyphen{}\sphinxhyphen{}temp}}: Controls randomness (0.0 for deterministic reranking, 0.7 for chat).
+\sphinxhyphen{} \sphinxcode{\sphinxupquote{\sphinxhyphen{}\sphinxhyphen{}rpc}}: Enables RPC interface for external control.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Resource Limits}: CPU and memory capped via \sphinxcode{\sphinxupquote{deploy.resources.limits}}.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Shared Memory (shm\_size)}: Increased to support larger contexts and batching.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Restart Policy}: \sphinxcode{\sphinxupquote{unless\sphinxhyphen{}stopped}} ensures containers restart on failure or reboot.
+
+\end{itemize}
+
+
+\section{Usage}
+\label{\detokenize{multiple-models-llamacpp:usage}}
+\sphinxAtStartPar
+Start the services:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+docker\PYG{+w}{ }compose\PYG{+w}{ }up\PYG{+w}{ }\PYGZhy{}d
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Access the models:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Reranker: \sphinxcode{\sphinxupquote{http://localhost:8123}}
+
+\item {} 
+\sphinxAtStartPar
+Chat:     \sphinxcode{\sphinxupquote{http://localhost:8124}}
+
+\end{itemize}
+
+\sphinxAtStartPar
+Send requests using the OpenAI\sphinxhyphen{}compatible API or \sphinxcode{\sphinxupquote{llama.cpp}} client tools.
+
+\sphinxstepscope
+
 \sphinxAtStartPar
 {\color{red}\bfseries{}\textasciigrave{}\textasciigrave{}}{\color{red}\bfseries{}\textasciigrave{}}rst
 .. \_deployment\sphinxhyphen{}considerations:

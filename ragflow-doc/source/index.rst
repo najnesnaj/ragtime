@@ -18,6 +18,7 @@ Welcome to Ragflow's documentation!
    api
    graph
    llama-cpp
+   multiple-models-llamacpp
    hybrid
 
 Indices and tables

@@ -1146,6 +1146,11 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
+INPUT /usr/share/texlive/texmf-dist/tex/latex/txfonts/t1txtt.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/txfonts/t1txtt.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/txfonts/t1txtt.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/txfonts/t1txtt.fd
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/t1xtt.tfm
 OUTPUT ragflow.toc
 INPUT /usr/share/texmf/tex/latex/tex-gyre/ts1qtm.fd
 INPUT /usr/share/texmf/tex/latex/tex-gyre/ts1qtm.fd
@@ -1159,11 +1164,6 @@ INPUT ./rerank.png
 INPUT rerank.png
 INPUT ./rerank.png
 INPUT ./rerank.png
-INPUT /usr/share/texlive/texmf-dist/tex/latex/txfonts/t1txtt.fd
-INPUT /usr/share/texlive/texmf-dist/tex/latex/txfonts/t1txtt.fd
-INPUT /usr/share/texlive/texmf-dist/tex/latex/txfonts/t1txtt.fd
-INPUT /usr/share/texlive/texmf-dist/tex/latex/txfonts/t1txtt.fd
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/t1xtt.tfm
 INPUT ./rerank.png
 INPUT ./rerank.png
 INPUT rerank.png
@@ -1188,6 +1188,8 @@ INPUT ./ragflow-vllm-def.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/t1xttsl.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ec-qtmr.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ec-qhvr.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/t1xbtt.tfm
+INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ec-qtmr.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
