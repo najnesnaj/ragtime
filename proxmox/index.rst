@@ -28,6 +28,7 @@ Welcome to proxmox-dox's documentation!
    backuppve
    raid
    melborp
+   NVIDIA
 
 Indices and tables
 ==================

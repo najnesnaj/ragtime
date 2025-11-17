@@ -1,0 +1,204 @@
+
+Actions
+
+      
+
+print_info: f_max_alibi_bias = 0.0e+00
+
+print_info: f_logit_scale    = 0.0e+00
+
+print_info: f_attn_scale     = 0.0e+00
+
+print_info: n_ff             = 9728
+
+print_info: n_expert         = 0
+
+print_info: n_expert_used    = 0
+
+print_info: causal attn      = 1
+
+print_info: pooling type     = 0
+
+print_info: rope type        = 2
+
+print_info: rope scaling     = linear
+
+print_info: freq_base_train  = 1000000.0
+
+print_info: freq_scale_train = 1
+
+print_info: n_ctx_orig_yarn  = 40960
+
+print_info: rope_finetuned   = unknown
+
+print_info: ssm_d_conv       = 0
+
+print_info: ssm_d_inner      = 0
+
+print_info: ssm_d_state      = 0
+
+print_info: ssm_dt_rank      = 0
+
+print_info: ssm_dt_b_c_rms   = 0
+
+print_info: model type       = 4B
+
+print_info: model params     = 4.02 B
+
+print_info: general.name     = Qwen3-Reranker-4B
+
+print_info: vocab type       = BPE
+
+print_info: n_vocab          = 151669
+
+print_info: n_merges         = 151387
+
+print_info: BOS token        = 151643 '<|endoftext|>'
+
+print_info: EOS token        = 151645 '<|im_end|>'
+
+print_info: EOT token        = 151645 '<|im_end|>'
+
+print_info: PAD token        = 151643 '<|endoftext|>'
+
+print_info: LF token         = 198 'Ċ'
+
+print_info: FIM PRE token    = 151659 '<|fim_prefix|>'
+
+print_info: FIM SUF token    = 151661 '<|fim_suffix|>'
+
+print_info: FIM MID token    = 151660 '<|fim_middle|>'
+
+print_info: FIM PAD token    = 151662 '<|fim_pad|>'
+
+print_info: FIM REP token    = 151663 '<|repo_name|>'
+
+print_info: FIM SEP token    = 151664 '<|file_sep|>'
+
+print_info: EOG token        = 151643 '<|endoftext|>'
+
+print_info: EOG token        = 151645 '<|im_end|>'
+
+print_info: EOG token        = 151662 '<|fim_pad|>'
+
+print_info: EOG token        = 151663 '<|repo_name|>'
+
+print_info: EOG token        = 151664 '<|file_sep|>'
+
+print_info: max token length = 256
+
+load_tensors: loading model tensors, this can take a while... (mmap = true)
+
+load_tensors: offloading 36 repeating layers to GPU
+
+load_tensors: offloading output layer to GPU
+
+load_tensors: offloaded 37/37 layers to GPU
+
+load_tensors:        CUDA0 model buffer size =  2357.49 MiB
+
+load_tensors:   CPU_Mapped model buffer size =   303.75 MiB
+
+...............................................................................
+
+llama_context: constructing llama_context
+
+llama_context: n_seq_max     = 1
+
+llama_context: n_ctx         = 4096
+
+llama_context: n_ctx_per_seq = 4096
+
+llama_context: n_batch       = 2048
+
+llama_context: n_ubatch      = 512
+
+llama_context: causal_attn   = 1
+
+llama_context: flash_attn    = 0
+
+llama_context: freq_base     = 1000000.0
+
+llama_context: freq_scale    = 1
+
+llama_context: n_ctx_per_seq (4096) < n_ctx_train (40960) -- the full capacity of the model will not be utilized
+
+llama_context:  CUDA_Host  output buffer size =     0.58 MiB
+
+llama_kv_cache_unified: kv_size = 4096, type_k = 'f16', type_v = 'f16', n_layer = 36, can_shift = 1, padding = 32
+
+llama_kv_cache_unified:      CUDA0 KV buffer size =   576.00 MiB
+
+llama_kv_cache_unified: KV self size  =  576.00 MiB, K (f16):  288.00 MiB, V (f16):  288.00 MiB
+
+llama_context:      CUDA0 compute buffer size =   301.23 MiB
+
+llama_context:  CUDA_Host compute buffer size =    13.01 MiB
+
+llama_context: graph nodes  = 1374
+
+llama_context: graph splits = 2
+
+common_init_from_params: setting dry_penalty_last_n to ctx_size = 4096
+
+common_init_from_params: warming up the model with an empty run - please wait ... (--no-warmup to disable)
+
+common_chat_templates_init: failed to parse chat template (defaulting to chatml): Expected value expression at row 18, column 30:
+
+{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length - 1) %}
+
+{%- for message in messages[::-1] %}
+
+                             ^
+
+    {%- set index = (messages|length - 1) - loop.index0 %}
+
+ 
+
+srv          init: initializing slots, n_slots = 1
+
+slot         init: id  0 | task -1 | new slot n_ctx_slot = 4096
+
+main: model loaded
+
+main: chat template, chat_template: {%- for message in messages -%}
+
+  {{- '<|im_start|>' + message.role + '
+
+' + message.content + '<|im_end|>
+
+' -}}
+
+{%- endfor -%}
+
+{%- if add_generation_prompt -%}
+
+  {{- '<|im_start|>assistant
+
+' -}}
+
+{%- endif -%}, example_format: '<|im_start|>system
+
+You are a helpful assistant<|im_end|>
+
+<|im_start|>user
+
+Hello<|im_end|>
+
+<|im_start|>assistant
+
+Hi there<|im_end|>
+
+<|im_start|>user
+
+How are you?<|im_end|>
+
+<|im_start|>assistant
+
+'
+
+main: server is listening on http://0.0.0.0:8080 - starting the main loop
+
+srv  update_slots: all slots are idle
+
+srv  log_server_r: request: GET /health 127.0.0.1 200

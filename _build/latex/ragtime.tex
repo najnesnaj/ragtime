@@ -10,6 +10,9 @@
 %% let collapsible pdf bookmarks panel have high depth per default
 \PassOptionsToPackage{bookmarksdepth=5}{hyperref}
 
+\PassOptionsToPackage{booktabs}{sphinx}
+\PassOptionsToPackage{colorrows}{sphinx}
+
 \PassOptionsToPackage{warn}{textcomp}
 \usepackage[utf8]{inputenc}
 \ifdefined\DeclareUnicodeCharacter
@@ -61,13 +64,18 @@
 
 
 \title{ragtime}
-\date{Oct 18, 2024}
+\date{Dec 27, 2024}
 \release{1}
 \author{jan jansen}
 \newcommand{\sphinxlogo}{\vbox{}}
 \renewcommand{\releasename}{Release}
 \makeindex
 \begin{document}
+
+\ifdefined\shorthandoff
+  \ifnum\catcode`\=\string=\active\shorthandoff{=}\fi
+  \ifnum\catcode`\"=\active\shorthandoff{"}\fi
+\fi
 
 \pagestyle{empty}
 \sphinxmaketitle
@@ -76,6 +84,8 @@
 \pagestyle{normal}
 \phantomsection\label{\detokenize{index::doc}}
 
+
+\sphinxstepscope
 
 
 \chapter{Intro}
@@ -120,9 +130,53 @@ todo:
 \sphinxhyphen{} remove RAID1 and use disks as such: space over security
 \sphinxhyphen{} insert NVIDIA P4 single slot
 
+\sphinxstepscope
+
+
+\chapter{readthedocs}
+\label{\detokenize{readthedocs:readthedocs}}\label{\detokenize{readthedocs::doc}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+use restructured text
+
+\end{itemize}
+
+
+\section{sphinx}
+\label{\detokenize{readthedocs:sphinx}}
+\sphinxAtStartPar
+pip install sphinx
+sphinx\sphinxhyphen{}quickstart
+
+
+\section{integration github}
+\label{\detokenize{readthedocs:integration-github}}
+\sphinxAtStartPar
+\sphinxurl{https://readthedocs.org/dashboard/}
+
+\sphinxAtStartPar
+\sphinxstyleemphasis{include .readthedocs.yml in github repository}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+version:\PYG{+w}{ }\PYG{l+m}{2}
+
+build:
+\PYG{+w}{   }os:\PYG{+w}{ }ubuntu\PYGZhy{}22.04
+\PYG{+w}{   }tools:
+\PYG{+w}{      }python:\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}3.12\PYGZdq{}}
+
+sphinx:
+\PYG{+w}{   }configuration:\PYG{+w}{ }conf.py
+\end{sphinxVerbatim}
+
+\sphinxstepscope
+
 
 \chapter{install something from docker}
-\label{\detokenize{docker:install-something-from-docker}}\label{\detokenize{docker::doc}}\begin{quote}
+\label{\detokenize{docker:install-something-from-docker}}\label{\detokenize{docker::doc}}
+\sphinxAtStartPar
+\sphinxstyleemphasis{the docker build that comes with the apt\sphinxhyphen{}install from ubuntu does not always cut the cake}
+\begin{quote}
 
 \sphinxAtStartPar
 \sphinxurl{https://docs.docker.com/engine/install/ubuntu/}
@@ -139,24 +193,194 @@ sudo docker run \sphinxhyphen{}d \sphinxhyphen{}p 8000:8000 \sphinxhyphen{}p 944
 \end{quote}
 
 
+\section{using github to build containers:}
+\label{\detokenize{docker:using-github-to-build-containers}}
+\sphinxAtStartPar
+see github actions (and actions.rst in the doc)
+
+
+\section{Project Dockerfiles:}
+\label{\detokenize{docker:project-dockerfiles}}
+\sphinxAtStartPar
+the project dockerfiles are within their own directory:
+\sphinxhyphen{} leecher
+\sphinxhyphen{} embedder
+\sphinxhyphen{} postgres
+
+
 \section{leecher:}
 \label{\detokenize{docker:leecher}}
 \sphinxAtStartPar
-custommade : pdf copy to directory leech
+this container waits for an incoming file in the dockervolume : and then converts pdf to txt
 
 
-\section{building pdf to text:}
-\label{\detokenize{docker:building-pdf-to-text}}
+\section{embedder:}
+\label{\detokenize{docker:embedder}}
 \sphinxAtStartPar
-docker build \sphinxhyphen{}t pdf\sphinxhyphen{}text\sphinxhyphen{}converter .
-docker run \sphinxhyphen{}v \$(pwd)/leech:/app/leech \sphinxhyphen{}v \$(pwd)/pages:/app/pages pdf\sphinxhyphen{}text\sphinxhyphen{}converter
+this container chops the txt\sphinxhyphen{}file and inserts into a postgres database
 
 
-\section{pdfconverter2}
-\label{\detokenize{docker:pdfconverter2}}
+\section{postgres:}
+\label{\detokenize{docker:postgres}}
 \sphinxAtStartPar
-docker build \sphinxhyphen{}t pdf\sphinxhyphen{}watcher .
-docker run \sphinxhyphen{}v (\$pwd)/leech:/leech \sphinxhyphen{}v (\$pwd)/pages:/pages pdf\sphinxhyphen{}watcher
+this a combination of management and a vectordatabase
+(contains the script to create the ‘document\_chunks’ table
+
+
+\section{Containers}
+\label{\detokenize{docker:containers}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+the Dockerfiles help to build docker images
+
+\item {} 
+\sphinxAtStartPar
+the docker compose file help to build containers
+
+\end{itemize}
+
+
+\section{compose}
+\label{\detokenize{docker:compose}}
+\sphinxAtStartPar
+there are docker\sphinxhyphen{}compose.yml files in :
+\sphinxhyphen{} postgres
+\sphinxhyphen{} rag
+
+\sphinxAtStartPar
+The one in postgres :
+\sphinxhyphen{} creates 2 containers  (database + management)
+\sphinxhyphen{} inits the postgres database as a vectordatabase and creates a table
+
+\sphinxAtStartPar
+The one in rag :
+\sphinxhyphen{} creates a volume where you can copy pdf files
+\sphinxhyphen{} creates a volume where converted text files are stored
+\sphinxhyphen{} defines environment variables to access the database (to be changed on your environment!)
+\sphinxstyleemphasis{docker compose up \sphinxhyphen{}d}
+
+
+\section{how to copy pdf files to the container?}
+\label{\detokenize{docker:how-to-copy-pdf-files-to-the-container}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+the dockervolumes are created using the docker\sphinxhyphen{}compose files
+
+\item {} 
+\sphinxAtStartPar
+dockervolumes link a directory in docker to a directory on the filesystem
+
+\end{itemize}
+
+\sphinxAtStartPar
+cp 270123.pdf /var/snap/docker/common/var\sphinxhyphen{}lib\sphinxhyphen{}docker/volumes/rag\_leech\_data/\_data
+
+
+\section{using github actions to build docker containers}
+\label{\detokenize{docker:using-github-actions-to-build-docker-containers}}
+\sphinxAtStartPar
+each time there is is a push toward the github repository, automatically a build of the docker images gets triggered.
+
+\sphinxAtStartPar
+I use multiple Dockerfiles, thus multiple Docker images, and I couldn’t not figure out the easy\sphinxhyphen{}way how to build them with a single script.
+
+\sphinxAtStartPar
+So … multiple scripts, which each build a single image.
+
+\sphinxAtStartPar
+By default the image gets a name like this repo:main.
+This can be modified!
+
+
+\chapter{TRICK : multiple containers with github}
+\label{\detokenize{docker:trick-multiple-containers-with-github}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+copy docker\sphinxhyphen{}publish.yml to docker\sphinxhyphen{}publish2.yml
+
+\item {} 
+\sphinxAtStartPar
+change IMAGE\_NAME: ‘najnesnaj/embed’
+
+\end{itemize}
+
+\sphinxAtStartPar
+(./embedder is de directory in the repo that contains the Dockerfile)
+\begin{description}
+\sphinxlineitem{and change :}\begin{description}
+\sphinxlineitem{\# Build and push Docker image for embedder}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+name: Build and push Docker image (embedder)
+id: build\sphinxhyphen{}and\sphinxhyphen{}push\sphinxhyphen{}embedder
+uses: \sphinxhref{mailto:docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09}{docker/build\sphinxhyphen{}push\sphinxhyphen{}action@0565240e2d4ab88bba5387d719585280857ece09} \# v5.0.0
+with:
+\begin{quote}
+
+\sphinxAtStartPar
+context: ./embedder
+\end{quote}
+
+\end{itemize}
+
+\end{description}
+
+\end{description}
+
+\sphinxAtStartPar
+first login to github
+
+\sphinxAtStartPar
+echo “ghp\_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxzK” | docker login ghcr.io \sphinxhyphen{}u najnesnaj \textendash{}password\sphinxhyphen{}stdin
+
+\sphinxAtStartPar
+Login Succeeded
+
+\sphinxAtStartPar
+now I can download the image
+\sphinxhref{mailto:naj@naj-Latitude-5520}{naj@naj\sphinxhyphen{}Latitude\sphinxhyphen{}5520}:/usr/src/ragtime\$ sudo docker pull ghcr.io/najnesnaj/embed:main
+
+
+\section{elasticsearch:}
+\label{\detokenize{docker:elasticsearch}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+sudo docker run \sphinxhyphen{}d \textendash{}name elasticsearch \sphinxhyphen{}p 9200:9200 \sphinxhyphen{}e “discovery.type=single\sphinxhyphen{}node” docker.elastic.co/elasticsearch/elasticsearch:8.15.3
+
+\item {} 
+\sphinxAtStartPar
+sudo docker run \textendash{}name kibana \sphinxhyphen{}p 5601:5601 \textendash{}link elasticsearch:elasticsearch kibana:8.15.3
+
+\end{itemize}
+
+\sphinxAtStartPar
+Kibana has not been configured.
+
+\sphinxAtStartPar
+Go to \sphinxurl{http://0.0.0.0:5601/?code=003763} to get started.
+
+\sphinxAtStartPar
+in the elasticsearch container generate token
+(bin/elasticsearch\sphinxhyphen{}create\sphinxhyphen{}enrollment\sphinxhyphen{}token \sphinxhyphen{}s kibana)
+elasticsearch\sphinxhyphen{}users useradd test
+elasticsearch\sphinxhyphen{}users passwd test
+elasticsearch\sphinxhyphen{}users roles \sphinxhyphen{}a kibana\_admin test
+
+\sphinxstepscope
+
+
+\chapter{Elasticsearch}
+\label{\detokenize{elastic:elasticsearch}}\label{\detokenize{elastic::doc}}
+\sphinxAtStartPar
+for installation see: docker
+
+\sphinxAtStartPar
+\sphinxurl{https://www.elastic.co/guide/en/elasticsearch/reference/current/semantic-search-elser.html}
+
+\sphinxAtStartPar
+\sphinxurl{https://www.elastic.co/search-labs/tutorials/examples}
+
+\sphinxstepscope
 
 
 \chapter{storing vector + metadata}
@@ -185,18 +409,969 @@ Insert vectors and metadata: Insert each chunk’s vector along with its metadat
 \sphinxAtStartPar
 sql
 
+\sphinxstepscope
 
-\chapter{A poor man’s rig}
-\label{\detokenize{poorman:a-poor-man-s-rig}}\label{\detokenize{poorman::doc}}
+
+\chapter{Github Actions}
+\label{\detokenize{actions:github-actions}}\label{\detokenize{actions::doc}}
+
+\section{build docker images in github}
+\label{\detokenize{actions:build-docker-images-in-github}}
 \sphinxAtStartPar
-I theory it should be possible to use cheap hardware.
+//github.com/najnesnaj/ragtime/actions/new
 
 \sphinxAtStartPar
-I have an old server (proliant gen8), but it has 256GB of RAM.
-I theory I can store a big LLM on RAMDISK and use this trick:
+Continuous integration
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Publish Docker Container
+
+\item {} 
+\sphinxAtStartPar
+Build, test and push Docker image to GitHub Packages.
+
+\end{itemize}
+
+
+\section{docker publish}
+\label{\detokenize{actions:docker-publish}}
+\sphinxAtStartPar
+in \sphinxurl{https://github.com/najnesnaj/ragtime/tree/main/.github/workflows},
+docker\sphinxhyphen{}publish.yml is added
+
+
+\section{adapt docker\sphinxhyphen{}publish.yml}
+\label{\detokenize{actions:adapt-docker-publish-yml}}
+\sphinxAtStartPar
+Dockerfile definitions in this repository are to be found in subdirectories
+the docker\sphinxhyphen{}publish script has to be made aware
+
+
+\section{where to find the published containers?}
+\label{\detokenize{actions:where-to-find-the-published-containers}}
+\sphinxAtStartPar
+\sphinxurl{https://github.com/najnesnaj/ragtime/pkgs/container/ragtime}
+
+\sphinxstepscope
 
 \sphinxAtStartPar
-\sphinxurl{https://huggingface.co/blog/lyogavin/run-llama-405b-on-4gb-vram}
+version: ‘3’
+
+\sphinxAtStartPar
+services:
+\begin{quote}
+
+\sphinxAtStartPar
+nginx:
+\begin{quote}
+
+\sphinxAtStartPar
+image: nginx:latest
+
+\sphinxAtStartPar
+container\_name: nginx\_proxy
+
+\sphinxAtStartPar
+ports:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+“9443:9443”
+
+\end{itemize}
+
+\sphinxAtStartPar
+volumes:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+./nginx.conf:/etc/nginx/nginx.conf
+
+\item {} 
+\sphinxAtStartPar
+/etc/letsencrypt:/etc/letsencrypt  \# Mount certs
+
+\end{itemize}
+
+\sphinxAtStartPar
+networks:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+proxy
+
+\end{itemize}
+\end{quote}
+
+\sphinxAtStartPar
+certbot:
+\begin{quote}
+
+\sphinxAtStartPar
+image: certbot/certbot
+
+\sphinxAtStartPar
+container\_name: certbot
+
+\sphinxAtStartPar
+command: certonly \textendash{}webroot \textendash{}webroot\sphinxhyphen{}path=/var/www/certbot \sphinxhyphen{}d www.melborp.solutions
+
+\sphinxAtStartPar
+volumes:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+/etc/letsencrypt:/etc/letsencrypt  \# Persist certs
+
+\item {} 
+\sphinxAtStartPar
+/var/www/certbot:/var/www/certbot
+
+\end{itemize}
+
+\sphinxAtStartPar
+networks:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+proxy
+
+\end{itemize}
+\end{quote}
+
+\sphinxAtStartPar
+app:
+\begin{quote}
+
+\sphinxAtStartPar
+image: your\_app\_image
+
+\sphinxAtStartPar
+container\_name: your\_app
+
+\sphinxAtStartPar
+expose:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+“8080”  \# Internal port
+
+\end{itemize}
+
+\sphinxAtStartPar
+networks:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+proxy
+
+\end{itemize}
+\end{quote}
+\end{quote}
+
+\sphinxAtStartPar
+networks:
+\begin{quote}
+
+\sphinxAtStartPar
+proxy:
+\begin{quote}
+
+\sphinxAtStartPar
+external: true
+\end{quote}
+\end{quote}
+
+\sphinxstepscope
+
+
+\chapter{python technology}
+\label{\detokenize{technology:python-technology}}\label{\detokenize{technology::doc}}
+\sphinxAtStartPar
+A simple application was created with the help of chatgpt.
+
+
+\chapter{application:}
+\label{\detokenize{technology:application}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+upload pdf
+
+\item {} 
+\sphinxAtStartPar
+convert pdf
+
+\item {} 
+\sphinxAtStartPar
+correct text
+
+\item {} 
+\sphinxAtStartPar
+split text
+
+\end{itemize}
+
+
+\chapter{technology}
+\label{\detokenize{technology:technology}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Flask  : created html templates, which got javascript to handle text, for me: too complex
+
+\item {} 
+\sphinxAtStartPar
+FastAPI : similar to Flask
+
+\item {} 
+\sphinxAtStartPar
+streamlit : not bothered by html, small python application
+
+\item {} 
+\end{itemize}
+
+\sphinxstepscope
+
+
+\chapter{Welcome to proxmox\sphinxhyphen{}dox’s documentation!}
+\label{\detokenize{proxmox/index:welcome-to-proxmox-dox-s-documentation}}\label{\detokenize{proxmox/index::doc}}
+\sphinxstepscope
+
+
+\section{intro}
+\label{\detokenize{proxmox/intro:intro}}\label{\detokenize{proxmox/intro::doc}}
+\sphinxAtStartPar
+This doc does not belong here, but did not want to create multiple github repo’s.
+
+\sphinxAtStartPar
+This is a personal account of venturing into the Proxmox virutualised world:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+running containers
+
+\item {} 
+\sphinxAtStartPar
+running local LLM
+
+\item {} 
+\sphinxAtStartPar
+no GPU
+
+\item {} 
+\sphinxAtStartPar
+cheap
+
+\end{itemize}
+
+\sphinxAtStartPar
+I try to document as much as I can, to avoid solving the same problem twice.
+
+
+\subsection{homelab}
+\label{\detokenize{proxmox/intro:homelab}}
+\sphinxAtStartPar
+I bought hp dl380p g8 (generation8) with 16 cores and 32 threads and 256 GIGA bytes of RAM!! for the price of a raspberry pi.
+
+\sphinxAtStartPar
+I plan it on using during winter, so its heat is not lost. During rendering or running a LLM it generates 400 Watt. (or consumes for 400 watt expensive electricity)
+
+\sphinxAtStartPar
+It could use a GPU, but I hate to spend more money, and it would need a special riser to give way to PCIe x16 double slot.
+
+\sphinxAtStartPar
+results sofar :
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+LLM runs at 5 tokens / second (llavafile)
+
+\item {} 
+\sphinxAtStartPar
+blender takes half an hour for rendering (CYCLES) a single picture
+
+\item {} 
+\sphinxAtStartPar
+using it as a  ramdisk give 1,5G/s readspead!
+
+\end{itemize}
+
+
+\subsection{software}
+\label{\detokenize{proxmox/intro:software}}
+\sphinxAtStartPar
+I choose proxmox as a virtualisation platform, it runs linux containers (LXC), which are kind of cool since they are created quickly, launched quickly. Some problems arise since there are still shared resources with the host… hence the use of the included templates
+
+\sphinxstepscope
+
+
+\section{Upgrading homelab HP DL 380p}
+\label{\detokenize{proxmox/hpdl380p:upgrading-homelab-hp-dl-380p}}\label{\detokenize{proxmox/hpdl380p::doc}}
+
+\subsection{latest BIOS}
+\label{\detokenize{proxmox/hpdl380p:latest-bios}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+download latest firmware (BIOS) for linux in RPM format
+
+\item {} 
+\sphinxAtStartPar
+firmware\sphinxhyphen{}system\sphinxhyphen{}p70\sphinxhyphen{}2019.05.24\sphinxhyphen{}1.1
+
+\item {} 
+\sphinxAtStartPar
+on ubuntu (unpack with Ark)
+
+\item {} 
+\sphinxAtStartPar
+look for CPQP7013.6B8 (4MB in size)
+
+\item {} 
+\sphinxAtStartPar
+use ilo to upload firmware (update)
+
+\end{itemize}
+
+
+\subsection{M2 disk drive}
+\label{\detokenize{proxmox/hpdl380p:m2-disk-drive}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+M.2 NGFF SSD naar PCI\sphinxhyphen{}E 3.0 X16 High\sphinxhyphen{}Speed SSD  (ashata = 5euro)
+
+\item {} 
+\sphinxAtStartPar
+need MVME (one notch) m2 card
+
+\item {} 
+\sphinxAtStartPar
+it shows up in BIOS / PCI devices
+
+\item {} 
+\sphinxAtStartPar
+on linux :\#lsblk it should show up
+
+\end{itemize}
+
+
+\subsection{Sata}
+\label{\detokenize{proxmox/hpdl380p:sata}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+m2 to sata adapter case (aliexpress)
+
+\item {} 
+\sphinxAtStartPar
+cable female sata to female Slimline 13pin 7 + 6 (aliexpress)
+
+\item {} 
+\sphinxAtStartPar
+m2 sata disk 128G
+
+\end{itemize}
+
+
+\subsection{Bootconfig}
+\label{\detokenize{proxmox/hpdl380p:bootconfig}}
+\sphinxAtStartPar
+there is a
+\sphinxhyphen{} SAS controller
+\sphinxhyphen{} SATA controller (cdrom)
+
+\sphinxAtStartPar
+the controllor has a bootorder as well !!!!
+In order to boot from sata, the sata controller has to boot first!!!
+
+\sphinxAtStartPar
+{\color{red}\bfseries{}**}this is the way to boot an expensive hp server from a simple 2,5 inch sata disk (laptop 5V) ,using the onboard slimline cd\sphinxhyphen{}rom connector
+
+\sphinxstepscope
+
+
+\section{Where can I find more Templates?}
+\label{\detokenize{proxmox/templates:where-can-i-find-more-templates}}\label{\detokenize{proxmox/templates::doc}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Use:
+
+\end{itemize}
+
+\sphinxAtStartPar
+pveam update
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+to update the container template database, then:
+
+\end{itemize}
+
+\sphinxAtStartPar
+pveam available
+
+\sphinxstepscope
+
+
+\section{reading data from USB stick}
+\label{\detokenize{proxmox/usb:reading-data-from-usb-stick}}\label{\detokenize{proxmox/usb::doc}}
+\sphinxAtStartPar
+the USB stick is readable from the proxmox host:
+
+\sphinxAtStartPar
+(do a dmesg to get the device: in this case /dev/sdb1)
+mount /dev/sdb1 /usbdrive
+
+
+\subsection{create a mp on CT (container02)}
+\label{\detokenize{proxmox/usb:create-a-mp-on-ct-container02}}
+\sphinxAtStartPar
+/dev/mapper/pve\sphinxhyphen{}vm\textendash{}102\textendash{}disk\textendash{}1  51290592        28  48652740   1\% /container02mp
+
+
+\subsection{transfer to CT (name = container02)}
+\label{\detokenize{proxmox/usb:transfer-to-ct-name-container02}}
+\sphinxAtStartPar
+on the host
+mkdir /drive\_container02
+mount /dev/mapper/pve\sphinxhyphen{}vm\textendash{}102\textendash{}disk\textendash{}1 /drive\_container02/
+
+\sphinxstepscope
+
+
+\section{ramdisk}
+\label{\detokenize{proxmox/ramdisk:ramdisk}}\label{\detokenize{proxmox/ramdisk::doc}}
+\sphinxAtStartPar
+My dl380p gen8 has 256Gb of RAM
+
+
+\subsection{Can I use RAM as a disk?}
+\label{\detokenize{proxmox/ramdisk:can-i-use-ram-as-a-disk}}
+\sphinxAtStartPar
+mkdir /tmp/ramdisk
+chmod 777 /tmp/ramdisk
+mount \sphinxhyphen{}t tmpfs \sphinxhyphen{}o size=1024m myramdisk /tmp/ramdisk
+
+\sphinxAtStartPar
+or to get something extra…
+
+\sphinxAtStartPar
+sudo mount \sphinxhyphen{}t tmpfs \sphinxhyphen{}o size=10G myramdisk /tmp/ramdisk
+
+
+\subsection{speedtest}
+\label{\detokenize{proxmox/ramdisk:speedtest}}
+\sphinxAtStartPar
+For Write:
+dd if=/dev/zero of=/dev/shm/ram bs=1048576 count=4096 oflag=nocache conv=fsync
+4096+0 records in
+4096+0 records out
+4294967296 bytes (4.3 GB, 4.0 GiB) copied, 2.79948 s, 1.5 GB/s
+
+\sphinxAtStartPar
+or:
+dd if=/dev/zero of=/tmp/ramdisk/blok bs=1048576 count=1024 oflag=nocache conv=fsync
+1024+0 records in
+1024+0 records out
+1073741824 bytes (1.1 GB, 1.0 GiB) copied, 0.560324 s, 1.9 GB/s
+
+\sphinxAtStartPar
+For Read:
+
+\sphinxAtStartPar
+dd if=/tmp/ramdisk/blok of=/dev/null bs=1048576 iflag=nocache,sync conv=nocreat
+
+\sphinxAtStartPar
+dd if=/tmp/ramdisk/blok of=/dev/null bs=1048576 iflag=nocache,sync conv=nocreat
+1024+0 records in
+1024+0 records out
+1073741824 bytes (1.1 GB, 1.0 GiB) copied, 0.240446 s, 4.5 GB/s
+
+
+\bigskip\hrule\bigskip
+
+
+\sphinxAtStartPar
+modprobe zram
+echo 80G | tee /sys/block/zram0/disksize    (80G ramdisk)
+mkfs.ext4 /dev/zram0  (make a filesystem)
+mkdir /RAM   (create a mountingpoint)
+mount /dev/zram0 /RAM
+
+\sphinxAtStartPar
+now you can use the /RAM directory (which will be gone after poweroff)
+
+\sphinxstepscope
+
+
+\section{sharing a directory for LXC}
+\label{\detokenize{proxmox/share:sharing-a-directory-for-lxc}}\label{\detokenize{proxmox/share::doc}}
+\sphinxAtStartPar
+on the host (pve node) create a shared directory (jan): (created on M2 storage)
+chown \sphinxhyphen{}R nobody:nogroup jan
+chmod 777 jan
+
+\sphinxAtStartPar
+\sphinxhref{mailto:root@pve}{root@pve}:/etc/pve/lxc\#
+
+
+\subsection{modify the lxc}
+\label{\detokenize{proxmox/share:modify-the-lxc}}
+\sphinxAtStartPar
+create a directory /mnt/shared (which will be the mounting point)
+
+
+\subsection{on PVE modify the lxc config}
+\label{\detokenize{proxmox/share:on-pve-modify-the-lxc-config}}
+\sphinxAtStartPar
+add this:
+(mp0: /mnt/pve/M2P2/jan,mp=/mnt/shared)
+
+\sphinxAtStartPar
+arch: amd64
+cores: 4
+features: nesting=1
+hostname: decode
+memory: 5120
+net0: name=eth0,bridge=vmbr0,firewall=1,hwaddr=BC:24:11:82:79:94,ip=dhcp,type=veth
+ostype: ubuntu
+rootfs: local\sphinxhyphen{}lvm:vm\sphinxhyphen{}101\sphinxhyphen{}disk\sphinxhyphen{}0,size=20G
+swap: 512
+unprivileged: 1
+mp0: /mnt/pve/M2P2/jan,mp=/mnt/shared
+
+\sphinxstepscope
+
+
+\section{moving a LXC container}
+\label{\detokenize{proxmox/moving:moving-a-lxc-container}}\label{\detokenize{proxmox/moving::doc}}
+\sphinxAtStartPar
+I had a container on a logical volume SCSI and I wanted to move it to logical volume M2
+
+\sphinxAtStartPar
+Cloning?
+
+\sphinxAtStartPar
+The container shared a directory, and cloning and displacing would mess this up.
+
+\sphinxAtStartPar
+Solution:
+backup \& restore from backup on other volume
+
+\sphinxstepscope
+
+
+\section{nfs network between linux containers}
+\label{\detokenize{proxmox/nfs_netwerk:nfs-network-between-linux-containers}}\label{\detokenize{proxmox/nfs_netwerk::doc}}
+
+\subsection{set up a bridge}
+\label{\detokenize{proxmox/nfs_netwerk:set-up-a-bridge}}
+\sphinxAtStartPar
+A Linux bridge interface (commonly called vmbrX) is needed to connect guests to the underlying physical network. It can be thought of as a virtual switch which the guests and physical interfaces are connected to.
+
+
+\subsection{define an extra network interface in range 10.0.0.X}
+\label{\detokenize{proxmox/nfs_netwerk:define-an-extra-network-interface-in-range-10-0-0-x}}
+\sphinxstepscope
+
+
+\section{NFS Host and Client Setup in Proxmox}
+\label{\detokenize{proxmox/nfs_proxmox_setup:nfs-host-and-client-setup-in-proxmox}}\label{\detokenize{proxmox/nfs_proxmox_setup::doc}}
+\sphinxAtStartPar
+This guide will explain how to set up an NFS (Network File Sharing) server and add it as a remote storage in Proxmox.
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Install NFS Server}
+
+\sphinxAtStartPar
+First, log in to the LXC container or the machine where the NFS server will be hosted. Then update the package list and install NFS:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+apt\PYGZhy{}get\PYG{+w}{ }update
+apt\PYGZhy{}get\PYG{+w}{ }install\PYG{+w}{ }sudo\PYG{+w}{ }\PYGZhy{}y
+sudo\PYG{+w}{ }apt\PYG{+w}{ }install\PYG{+w}{ }nfs\PYGZhy{}kernel\PYGZhy{}server
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Once installed, create a shared folder:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+sudo\PYG{+w}{ }mkdir\PYG{+w}{ }/home/sharedfolder
+sudo\PYG{+w}{ }chmod\PYG{+w}{ }\PYG{l+m}{777}\PYG{+w}{ }/home/sharedfolder
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Next, edit the \sphinxcode{\sphinxupquote{/etc/exports}} file to configure the shared directory for export:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+sudo\PYG{+w}{ }nano\PYG{+w}{ }/etc/exports
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Add the following line (adjust the IP address and folder accordingly):
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+/home/sharedfolder\PYG{+w}{ }\PYG{l+m}{192}.168.1.0/24\PYG{o}{(}rw,sync,no\PYGZus{}subtree\PYGZus{}check\PYG{o}{)}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Save the file and restart the NFS server:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+sudo\PYG{+w}{ }exportfs\PYG{+w}{ }\PYGZhy{}ra
+sudo\PYG{+w}{ }systemctl\PYG{+w}{ }restart\PYG{+w}{ }nfs\PYGZhy{}kernel\PYGZhy{}server
+\end{sphinxVerbatim}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Configure NFS Storage in Proxmox}
+
+\sphinxAtStartPar
+Now log into your Proxmox host (the machine that will receive the NFS storage) and navigate to:
+
+\sphinxAtStartPar
+\sphinxstyleemphasis{Datacenter \textgreater{} Storage \textgreater{} Add \textgreater{} NFS}
+
+\noindent\sphinxincludegraphics{{firefox_7FrqsKGmm4}.png}
+
+\sphinxAtStartPar
+Here, enter the NFS server’s IP address and select the shared directory.
+
+\noindent\sphinxincludegraphics{{firefox_85gotgwjhw}.png}
+
+\sphinxAtStartPar
+Choose the desired contents for the storage (ISO images, containers, backups, etc.) and click \sphinxstyleemphasis{Add}.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Set Permissions on LXC Container (If Applicable)}
+
+\sphinxAtStartPar
+If the NFS share will be used in an LXC container, ensure that permissions for NFS usage are set correctly:
+
+\noindent\sphinxincludegraphics{{firefox_1mRMoEMAtl}.png}
+
+\sphinxAtStartPar
+Check the \sphinxstyleemphasis{NFS} box under \sphinxstyleemphasis{Options} for the LXC container.
+
+\end{enumerate}
+
+\sphinxAtStartPar
+That’s it! You have successfully set up an NFS server and added it to Proxmox as remote storage.
+
+\sphinxstepscope
+
+
+\section{nfs client}
+\label{\detokenize{proxmox/nfs_client:nfs-client}}\label{\detokenize{proxmox/nfs_client::doc}}
+\sphinxAtStartPar
+apt install nfs\sphinxhyphen{}common
+
+\sphinxAtStartPar
+mount \sphinxhyphen{}t nfs 10.0.0.104:/share /mnt/nfson104
+
+
+\subsection{under node pve}
+\label{\detokenize{proxmox/nfs_client:under-node-pve}}
+\sphinxAtStartPar
+watch out for features
+
+\sphinxAtStartPar
+rch: amd64
+cores: 32
+\sphinxstyleemphasis{features: mount=nfs,nesting=1}
+hostname: llama
+memory: 64000
+net0: name=eth0,bridge=vmbr0,firewall=1,hwaddr=BC:24:11:58:0C:3A,ip=dhcp,type=veth
+net1: name=eth5,bridge=vmbr1,firewall=1,hwaddr=BC:24:11:3A:F0:4A,ip=10.0.0.100/24,type=veth
+ostype: ubuntu
+rootfs: local\sphinxhyphen{}lvm:vm\sphinxhyphen{}100\sphinxhyphen{}disk\sphinxhyphen{}0,size=40G
+swap: 512
+
+\sphinxstepscope
+
+
+\section{Portainer}
+\label{\detokenize{proxmox/portainer:portainer}}\label{\detokenize{proxmox/portainer::doc}}
+
+\subsection{using a script}
+\label{\detokenize{proxmox/portainer:using-a-script}}
+\sphinxAtStartPar
+use a template for the linux container
+
+\sphinxAtStartPar
+a script from :
+\sphinxurl{https://raw.githubusercontent.com/tteck/Proxmox/refs/heads/main/install/docker-install.sh}
+
+\sphinxAtStartPar
+systemctl start docker
+systemctl status docker
+
+\sphinxAtStartPar
+\sphinxurl{https://192.168.0.182:9443} (your IP)
+
+
+\subsection{by hand}
+\label{\detokenize{proxmox/portainer:by-hand}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+create CT ubuntu22 with template
+
+\item {} 
+\sphinxAtStartPar
+apt update
+
+\item {} 
+\sphinxAtStartPar
+sudo apt install docker.io \sphinxhyphen{}y
+
+\item {} 
+\sphinxAtStartPar
+sudo systemctl status docker
+
+\item {} 
+\sphinxAtStartPar
+sudo usermod \sphinxhyphen{}aG docker \$USER (add current logged on user to docker group)
+
+\item {} 
+\sphinxAtStartPar
+docker pull portainer/portainer\sphinxhyphen{}ce:latest
+
+\item {} 
+\sphinxAtStartPar
+docker run \sphinxhyphen{}d \sphinxhyphen{}p 9000:9000 \textendash{}restart always \sphinxhyphen{}v /var/run/docker.sock:/var/run/docker.sock portainer/portainer\sphinxhyphen{}ce:latest
+
+\end{itemize}
+
+
+\subsection{exporting \& importing}
+\label{\detokenize{proxmox/portainer:exporting-importing}}
+\sphinxAtStartPar
+this seems to work between systems:
+
+\sphinxAtStartPar
+(origin) sudo docker save ollama/ollama:latest  \textgreater{} my\sphinxhyphen{}ollama.tar
+(target) sudo docker load \textless{} my\sphinxhyphen{}ollama.tar
+
+\sphinxstepscope
+
+
+\section{server for blender}
+\label{\detokenize{proxmox/blender:server-for-blender}}\label{\detokenize{proxmox/blender::doc}}
+\sphinxAtStartPar
+Although the hp dl380 was 5 times faster than my i7 laptop, it is still slow, takes half an hour to render a picture.
+
+\sphinxAtStartPar
+One can adjust setting within blender to speed up things a bit, but still …
+
+
+\subsection{howto render?}
+\label{\detokenize{proxmox/blender:howto-render}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+download blender 4.2
+
+\end{itemize}
+
+\sphinxAtStartPar
+cd blender\sphinxhyphen{}4.2.0\sphinxhyphen{}linux\sphinxhyphen{}x64/
+
+\sphinxAtStartPar
+./blender \sphinxhyphen{}b /home/naj/misvormde\sphinxhyphen{}donut1.blend \sphinxhyphen{}E CYCLES \sphinxhyphen{}f 1
+
+
+\subsection{faster / less good}
+\label{\detokenize{proxmox/blender:faster-less-good}}
+\sphinxAtStartPar
+./blender \sphinxhyphen{}b /home/naj/misvormde\sphinxhyphen{}donut1.blend \sphinxhyphen{}E BLENDER\_EEVEE\_NEXT \sphinxhyphen{}f 1
+
+
+\subsection{at the movies}
+\label{\detokenize{proxmox/blender:at-the-movies}}
+\sphinxAtStartPar
+./blender \sphinxhyphen{}b /home/naj/misvormde\sphinxhyphen{}donut1.blend \sphinxhyphen{}E BLENDER\_EEVEE\_NEXT \sphinxhyphen{}s 10 \sphinxhyphen{}e 500 \sphinxhyphen{}t 2 \sphinxhyphen{}a
+./blender \sphinxhyphen{}b /home/naj/misvormde\sphinxhyphen{}donut1.blend \sphinxhyphen{}E BLENDER\_EEVEE\_NEXT \sphinxhyphen{}s 1 \sphinxhyphen{}e 100 \sphinxhyphen{}t 2 \sphinxhyphen{}a
+
+\sphinxstepscope
+
+
+\section{ollama install and use}
+\label{\detokenize{proxmox/ollama:ollama-install-and-use}}\label{\detokenize{proxmox/ollama::doc}}
+\sphinxAtStartPar
+curl \sphinxhyphen{}fsSL \sphinxurl{https://ollama.com/install.sh} | sh
+
+
+\subsection{using a container}
+\label{\detokenize{proxmox/ollama:using-a-container}}
+\sphinxAtStartPar
+ollama\sphinxhyphen{}model\sphinxhyphen{}gemma2 was mounted using a volume and the image exported
+
+\sphinxAtStartPar
+sudo docker import ollama.tar ollama:latest
+
+\sphinxstepscope
+
+
+\section{configure elasticview}
+\label{\detokenize{proxmox/elastic:configure-elasticview}}\label{\detokenize{proxmox/elastic::doc}}
+
+\subsection{elasticsearch password}
+\label{\detokenize{proxmox/elastic:elasticsearch-password}}
+\sphinxAtStartPar
+connect with term to container:
+bin/elasticsearch\sphinxhyphen{}reset\sphinxhyphen{}password \sphinxhyphen{}u elastic
+bin/elasticsearch\sphinxhyphen{}reset\sphinxhyphen{}password \sphinxhyphen{}u elastic \sphinxhyphen{}i (this allows for setting it yourself)
+
+
+\subsection{testing elasticview connection}
+\label{\detokenize{proxmox/elastic:testing-elasticview-connection}}
+\sphinxAtStartPar
+curl \sphinxhyphen{}X GET \sphinxhyphen{}k \sphinxhyphen{}u elastic:ebktuBhBHtE7N+JeBbIV “https://192.168.0.121:9200/\_cluster/health/?pretty”
+\begin{description}
+\sphinxlineitem{\{}
+\sphinxAtStartPar
+“cluster\_name” : “docker\sphinxhyphen{}cluster”,
+“status” : “green”,
+“timed\_out” : false,
+“number\_of\_nodes” : 1,
+“number\_of\_data\_nodes” : 1,
+“active\_primary\_shards” : 1,
+“active\_shards” : 1,
+“relocating\_shards” : 0,
+“initializing\_shards” : 0,
+“unassigned\_shards” : 0,
+“delayed\_unassigned\_shards” : 0,
+“number\_of\_pending\_tasks” : 0,
+“number\_of\_in\_flight\_fetch” : 0,
+“task\_max\_waiting\_in\_queue\_millis” : 0,
+“active\_shards\_percent\_as\_number” : 100.0
+
+\end{description}
+
+\sphinxAtStartPar
+\}
+
+
+\subsection{getting website certificate}
+\label{\detokenize{proxmox/elastic:getting-website-certificate}}
+\sphinxAtStartPar
+connect to \sphinxurl{http://192.168.0.121}
+
+\sphinxAtStartPar
+firefox/settings/privicy\&security/certificates to add exception
+
+\sphinxstepscope
+
+
+\section{mounting}
+\label{\detokenize{proxmox/mounting:mounting}}\label{\detokenize{proxmox/mounting::doc}}
+\sphinxAtStartPar
+mkdir /SCSIdata for the data on the scsidisk /dev/sdb
+mkdir /M2data for the data on the M2 disk /dev/nvme0n1p2
+
+\sphinxAtStartPar
+\# mount /dev/sdb /SCSIdata
+
+\sphinxAtStartPar
+\# mount /dev/nvme0n1p2 /M2data
+
+
+\section{edit  /etc/fstab}
+\label{\detokenize{proxmox/mounting:edit-etc-fstab}}
+\sphinxAtStartPar
+/dev/nvme0n1p2  /M2data  ext4  defaults  0  2
+/dev/sdb  /SCSIdata  ext4  defaults  0  2
+
+\sphinxstepscope
+
+
+\section{Backup pve}
+\label{\detokenize{proxmox/backuppve:backup-pve}}\label{\detokenize{proxmox/backuppve::doc}}
+\sphinxAtStartPar
+Proxmox node now start from a sata m2 in the CDrom slot
+
+\sphinxAtStartPar
+A tar copy is made to M2data from /etc directory
+
+\sphinxAtStartPar
+In case of crash : reinstall proxmox on sata disk en copy backup.tar to /etc
+
+\sphinxstepscope
+
+
+\section{RAID}
+\label{\detokenize{proxmox/raid:raid}}\label{\detokenize{proxmox/raid::doc}}
+\sphinxAtStartPar
+previously 2 600GB SAS disks were in RAID1 in the same volumegroup.
+
+\sphinxAtStartPar
+I have no spare disk, nor do I want to spend money on old tech.
+
+\sphinxAtStartPar
+Reconfigure : each disk is within own volume group, no more RAID, more (free) space.
+Tool would not let me otherwise.
+
+
+\subsection{No more raid :}
+\label{\detokenize{proxmox/raid:no-more-raid}}
+\sphinxAtStartPar
+machine on one disk are backupped to other disk, and vice versa
+one disk remains VG (volume group) within proxmox : used for LXC en VM images, backup
+other disk contains ext4 filesystem and is a directory
+
+\sphinxstepscope
+
+
+\section{melborp server}
+\label{\detokenize{proxmox/melborp:melborp-server}}\label{\detokenize{proxmox/melborp::doc}}
+
+\subsection{solution for problem running pgadmin container and nginx}
+\label{\detokenize{proxmox/melborp:solution-for-problem-running-pgadmin-container-and-nginx}}
+\sphinxAtStartPar
+Configure Nginx: Create a new configuration file for your domain in /etc/nginx/sites\sphinxhyphen{}available/melborp.solutions:
+
+\sphinxAtStartPar
+nginx
+\begin{description}
+\sphinxlineitem{server \{}
+\sphinxAtStartPar
+listen 80;
+server\_name www.melborp.solutions;
+\begin{description}
+\sphinxlineitem{location / \{}
+\sphinxAtStartPar
+proxy\_pass \sphinxurl{http://localhost:8888};  \# Forward traffic to the pgAdmin container
+proxy\_set\_header Host \$host;
+proxy\_set\_header X\sphinxhyphen{}Real\sphinxhyphen{}IP \$remote\_addr;
+proxy\_set\_header X\sphinxhyphen{}Forwarded\sphinxhyphen{}For \$proxy\_add\_x\_forwarded\_for;
+proxy\_set\_header X\sphinxhyphen{}Forwarded\sphinxhyphen{}Proto \$scheme;
+
+\end{description}
+
+\sphinxAtStartPar
+\}
+
+\end{description}
+
+\sphinxAtStartPar
+\}
+
+
+\chapter{Indices and tables}
+\label{\detokenize{proxmox/index:indices-and-tables}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{genindex}}}
+
+\item {} 
+\sphinxAtStartPar
+\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{modindex}}}
+
+\item {} 
+\sphinxAtStartPar
+\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{search}}}
+
+\end{itemize}
 
 
 

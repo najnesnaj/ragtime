@@ -169,6 +169,12 @@ Best Practices
 
 ---
 
+See also:
+---------
+
+https://github.com/infiniflow/ragflow/blob/main/example/http/dataset_example.sh
+
+
 Summary
 -------
 

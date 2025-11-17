@@ -1,10 +1,77 @@
 \babel@toc {english}{}\relax 
 \contentsline {chapter}{\numberline {1}Intro}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Homelab: (did not want to create separate repo)}{1}{section.1.1}%
-\contentsline {chapter}{\numberline {2}install something from docker}{3}{chapter.2}%
-\contentsline {section}{\numberline {2.1}using portainer:}{3}{section.2.1}%
-\contentsline {section}{\numberline {2.2}leecher:}{3}{section.2.2}%
-\contentsline {section}{\numberline {2.3}building pdf to text:}{3}{section.2.3}%
-\contentsline {section}{\numberline {2.4}pdfconverter2}{3}{section.2.4}%
-\contentsline {chapter}{\numberline {3}storing vector + metadata}{5}{chapter.3}%
-\contentsline {chapter}{\numberline {4}A poor man’s rig}{7}{chapter.4}%
+\contentsline {chapter}{\numberline {2}readthedocs}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}sphinx}{3}{section.2.1}%
+\contentsline {section}{\numberline {2.2}integration github}{3}{section.2.2}%
+\contentsline {chapter}{\numberline {3}install something from docker}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}using portainer:}{5}{section.3.1}%
+\contentsline {section}{\numberline {3.2}using github to build containers:}{5}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Project Dockerfiles:}{5}{section.3.3}%
+\contentsline {section}{\numberline {3.4}leecher:}{5}{section.3.4}%
+\contentsline {section}{\numberline {3.5}embedder:}{5}{section.3.5}%
+\contentsline {section}{\numberline {3.6}postgres:}{5}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Containers}{5}{section.3.7}%
+\contentsline {section}{\numberline {3.8}compose}{6}{section.3.8}%
+\contentsline {section}{\numberline {3.9}how to copy pdf files to the container?}{6}{section.3.9}%
+\contentsline {section}{\numberline {3.10}using github actions to build docker containers}{6}{section.3.10}%
+\contentsline {chapter}{\numberline {4}TRICK : multiple containers with github}{7}{chapter.4}%
+\contentsline {section}{\numberline {4.1}elasticsearch:}{7}{section.4.1}%
+\contentsline {chapter}{\numberline {5}Elasticsearch}{9}{chapter.5}%
+\contentsline {chapter}{\numberline {6}storing vector + metadata}{11}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Github Actions}{13}{chapter.7}%
+\contentsline {section}{\numberline {7.1}build docker images in github}{13}{section.7.1}%
+\contentsline {section}{\numberline {7.2}docker publish}{13}{section.7.2}%
+\contentsline {section}{\numberline {7.3}adapt docker\sphinxhyphen {}publish.yml}{13}{section.7.3}%
+\contentsline {section}{\numberline {7.4}where to find the published containers?}{13}{section.7.4}%
+\contentsline {chapter}{\numberline {8}python technology}{15}{chapter.8}%
+\contentsline {chapter}{\numberline {9}application:}{17}{chapter.9}%
+\contentsline {chapter}{\numberline {10}technology}{19}{chapter.10}%
+\contentsline {chapter}{\numberline {11}Welcome to proxmox\sphinxhyphen {}dox’s documentation!}{21}{chapter.11}%
+\contentsline {section}{\numberline {11.1}intro}{21}{section.11.1}%
+\contentsline {subsection}{\numberline {11.1.1}homelab}{21}{subsection.11.1.1}%
+\contentsline {subsection}{\numberline {11.1.2}software}{21}{subsection.11.1.2}%
+\contentsline {section}{\numberline {11.2}Upgrading homelab HP DL 380p}{21}{section.11.2}%
+\contentsline {subsection}{\numberline {11.2.1}latest BIOS}{21}{subsection.11.2.1}%
+\contentsline {subsection}{\numberline {11.2.2}M2 disk drive}{22}{subsection.11.2.2}%
+\contentsline {subsection}{\numberline {11.2.3}Sata}{22}{subsection.11.2.3}%
+\contentsline {subsection}{\numberline {11.2.4}Bootconfig}{22}{subsection.11.2.4}%
+\contentsline {section}{\numberline {11.3}Where can I find more Templates?}{22}{section.11.3}%
+\contentsline {section}{\numberline {11.4}reading data from USB stick}{22}{section.11.4}%
+\contentsline {subsection}{\numberline {11.4.1}create a mp on CT (container02)}{22}{subsection.11.4.1}%
+\contentsline {subsection}{\numberline {11.4.2}transfer to CT (name = container02)}{22}{subsection.11.4.2}%
+\contentsline {section}{\numberline {11.5}ramdisk}{23}{section.11.5}%
+\contentsline {subsection}{\numberline {11.5.1}Can I use RAM as a disk?}{23}{subsection.11.5.1}%
+\contentsline {subsection}{\numberline {11.5.2}speedtest}{23}{subsection.11.5.2}%
+\contentsline {section}{\numberline {11.6}sharing a directory for LXC}{23}{section.11.6}%
+\contentsline {subsection}{\numberline {11.6.1}modify the lxc}{23}{subsection.11.6.1}%
+\contentsline {subsection}{\numberline {11.6.2}on PVE modify the lxc config}{23}{subsection.11.6.2}%
+\contentsline {section}{\numberline {11.7}moving a LXC container}{23}{section.11.7}%
+\contentsline {section}{\numberline {11.8}nfs network between linux containers}{24}{section.11.8}%
+\contentsline {subsection}{\numberline {11.8.1}set up a bridge}{24}{subsection.11.8.1}%
+\contentsline {subsection}{\numberline {11.8.2}define an extra network interface in range 10.0.0.X}{24}{subsection.11.8.2}%
+\contentsline {section}{\numberline {11.9}NFS Host and Client Setup in Proxmox}{24}{section.11.9}%
+\contentsline {section}{\numberline {11.10}nfs client}{26}{section.11.10}%
+\contentsline {subsection}{\numberline {11.10.1}under node pve}{26}{subsection.11.10.1}%
+\contentsline {section}{\numberline {11.11}Portainer}{26}{section.11.11}%
+\contentsline {subsection}{\numberline {11.11.1}using a script}{26}{subsection.11.11.1}%
+\contentsline {subsection}{\numberline {11.11.2}by hand}{27}{subsection.11.11.2}%
+\contentsline {subsection}{\numberline {11.11.3}exporting \& importing}{27}{subsection.11.11.3}%
+\contentsline {section}{\numberline {11.12}server for blender}{27}{section.11.12}%
+\contentsline {subsection}{\numberline {11.12.1}howto render?}{27}{subsection.11.12.1}%
+\contentsline {subsection}{\numberline {11.12.2}faster / less good}{27}{subsection.11.12.2}%
+\contentsline {subsection}{\numberline {11.12.3}at the movies}{27}{subsection.11.12.3}%
+\contentsline {section}{\numberline {11.13}ollama install and use}{27}{section.11.13}%
+\contentsline {subsection}{\numberline {11.13.1}using a container}{27}{subsection.11.13.1}%
+\contentsline {section}{\numberline {11.14}configure elasticview}{28}{section.11.14}%
+\contentsline {subsection}{\numberline {11.14.1}elasticsearch password}{28}{subsection.11.14.1}%
+\contentsline {subsection}{\numberline {11.14.2}testing elasticview connection}{28}{subsection.11.14.2}%
+\contentsline {subsection}{\numberline {11.14.3}getting website certificate}{28}{subsection.11.14.3}%
+\contentsline {section}{\numberline {11.15}mounting}{28}{section.11.15}%
+\contentsline {section}{\numberline {11.16}edit /etc/fstab}{28}{section.11.16}%
+\contentsline {section}{\numberline {11.17}Backup pve}{28}{section.11.17}%
+\contentsline {section}{\numberline {11.18}RAID}{28}{section.11.18}%
+\contentsline {subsection}{\numberline {11.18.1}No more raid :}{29}{subsection.11.18.1}%
+\contentsline {section}{\numberline {11.19}melborp server}{29}{section.11.19}%
+\contentsline {subsection}{\numberline {11.19.1}solution for problem running pgadmin container and nginx}{29}{subsection.11.19.1}%
+\contentsline {chapter}{\numberline {12}Indices and tables}{31}{chapter.12}%

@@ -20,6 +20,7 @@ Welcome to Ragflow's documentation!
    llama-cpp
    multiple-models-llamacpp
    hybrid
+   gvisor
 
 Indices and tables
 ==================
