@@ -34,190 +34,247 @@
 \newlabel{about:a-project-in-active-development}{{1.3}{2}{A Project in Active Development}{section.1.3}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {1.4}Conclusion}{2}{section.1.4}\protected@file@percent }
 \newlabel{about:conclusion}{{1.4}{2}{Conclusion}{section.1.4}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {2}Why Infiniflow RAGFlow Uses a Reranker, an Embedding Model, and a Chat Model}{3}{chapter.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}RAGFlow System Architecture}{3}{chapter.2}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{rerank:why-infiniflow-ragflow-uses-a-reranker-an-embedding-model-and-a-chat-model}{{2}{3}{Why Infiniflow RAGFlow Uses a Reranker, an Embedding Model, and a Chat Model}{chapter.2}{}}
-\newlabel{rerank:ragflow-models}{{2}{3}{Why Infiniflow RAGFlow Uses a Reranker, an Embedding Model, and a Chat Model}{chapter.2}{}}
-\newlabel{rerank::doc}{{2}{3}{Why Infiniflow RAGFlow Uses a Reranker, an Embedding Model, and a Chat Model}{chapter.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \sphinxstylestrong {Figure 1}: The reranker evaluates query\sphinxhyphen {}chunk pairs to produce fine\sphinxhyphen {}grained relevance scores.}}{3}{figure.2.1}\protected@file@percent }
-\newlabel{rerank:id1}{{1}{3}{\sphinxstylestrong {Figure 1}: The reranker evaluates query\sphinxhyphen {}chunk pairs to produce fine\sphinxhyphen {}grained relevance scores}{figure.2.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.1}Synergy of the Three Models}{4}{section.2.1}\protected@file@percent }
-\newlabel{rerank:synergy-of-the-three-models}{{2.1}{4}{Synergy of the Three Models}{section.2.1}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Why vLLM is Used to Serve the Reranker Model}{5}{chapter.3}\protected@file@percent }
+\newlabel{architecture:ragflow-system-architecture}{{2}{3}{RAGFlow System Architecture}{chapter.2}{}}
+\newlabel{architecture::doc}{{2}{3}{RAGFlow System Architecture}{chapter.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Overview}{3}{section.2.1}\protected@file@percent }
+\newlabel{architecture:overview}{{2.1}{3}{Overview}{section.2.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Core Infrastructure Containers}{3}{section.2.2}\protected@file@percent }
+\newlabel{architecture:core-infrastructure-containers}{{2.2}{3}{Core Infrastructure Containers}{section.2.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}RAGFlow Application Containers}{3}{section.2.3}\protected@file@percent }
+\newlabel{architecture:ragflow-application-containers}{{2.3}{3}{RAGFlow Application Containers}{section.2.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}High\sphinxhyphen {}Level Architecture Diagram}{4}{section.2.4}\protected@file@percent }
+\newlabel{architecture:high-level-architecture-diagram}{{2.4}{4}{High\sphinxhyphen {}Level Architecture Diagram}{section.2.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces RAGFlow complete system architecture (as of v0.19+, 2025)}}{4}{figure.2.1}\protected@file@percent }
+\newlabel{architecture:id1}{{1}{4}{RAGFlow complete system architecture (as of v0.19+, 2025)}{figure.2.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.5}Data \& Execution Flow}{4}{section.2.5}\protected@file@percent }
+\newlabel{architecture:data-execution-flow}{{2.5}{4}{Data \& Execution Flow}{section.2.5}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Why Infiniflow RAGFlow Uses a Reranker, an Embedding Model, and a Chat Model}{5}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{vllm:why-vllm-is-used-to-serve-the-reranker-model}{{3}{5}{Why vLLM is Used to Serve the Reranker Model}{chapter.3}{}}
-\newlabel{vllm:vllm-reranker}{{3}{5}{Why vLLM is Used to Serve the Reranker Model}{chapter.3}{}}
-\newlabel{vllm::doc}{{3}{5}{Why vLLM is Used to Serve the Reranker Model}{chapter.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Key Reasons for Using vLLM to Serve the Reranker}{5}{section.3.1}\protected@file@percent }
-\newlabel{vllm:key-reasons-for-using-vllm-to-serve-the-reranker}{{3.1}{5}{Key Reasons for Using vLLM to Serve the Reranker}{section.3.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Serving the Reranker Locally with vLLM}{6}{section.3.2}\protected@file@percent }
-\newlabel{vllm:serving-the-reranker-locally-with-vllm}{{3.2}{6}{Serving the Reranker Locally with vLLM}{section.3.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}RAGFlow Integration}{7}{section.3.3}\protected@file@percent }
-\newlabel{vllm:ragflow-integration}{{3.3}{7}{RAGFlow Integration}{section.3.3}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Serving vLLM Reranker Using Docker (CPU\sphinxhyphen {}Only)}{9}{chapter.4}\protected@file@percent }
+\newlabel{rerank:why-infiniflow-ragflow-uses-a-reranker-an-embedding-model-and-a-chat-model}{{3}{5}{Why Infiniflow RAGFlow Uses a Reranker, an Embedding Model, and a Chat Model}{chapter.3}{}}
+\newlabel{rerank:ragflow-models}{{3}{5}{Why Infiniflow RAGFlow Uses a Reranker, an Embedding Model, and a Chat Model}{chapter.3}{}}
+\newlabel{rerank::doc}{{3}{5}{Why Infiniflow RAGFlow Uses a Reranker, an Embedding Model, and a Chat Model}{chapter.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \sphinxstylestrong {Figure 1}: The reranker evaluates query\sphinxhyphen {}chunk pairs to produce fine\sphinxhyphen {}grained relevance scores.}}{5}{figure.3.1}\protected@file@percent }
+\newlabel{rerank:id1}{{1}{5}{\sphinxstylestrong {Figure 1}: The reranker evaluates query\sphinxhyphen {}chunk pairs to produce fine\sphinxhyphen {}grained relevance scores}{figure.3.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Synergy of the Three Models}{6}{section.3.1}\protected@file@percent }
+\newlabel{rerank:synergy-of-the-three-models}{{3.1}{6}{Synergy of the Three Models}{section.3.1}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Why vLLM is Used to Serve the Reranker Model}{7}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{vllm-cpu:serving-vllm-reranker-using-docker-cpu-only}{{4}{9}{Serving vLLM Reranker Using Docker (CPU\sphinxhyphen {}Only)}{chapter.4}{}}
-\newlabel{vllm-cpu:vllm-docker}{{4}{9}{Serving vLLM Reranker Using Docker (CPU\sphinxhyphen {}Only)}{chapter.4}{}}
-\newlabel{vllm-cpu::doc}{{4}{9}{Serving vLLM Reranker Using Docker (CPU\sphinxhyphen {}Only)}{chapter.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Docker Compose Configuration (CPU Mode)}{9}{section.4.1}\protected@file@percent }
-\newlabel{vllm-cpu:docker-compose-configuration-cpu-mode}{{4.1}{9}{Docker Compose Configuration (CPU Mode)}{section.4.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Key Components Explained}{10}{section.4.2}\protected@file@percent }
-\newlabel{vllm-cpu:key-components-explained}{{4.2}{10}{Key Components Explained}{section.4.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}Why the Model Must Be Pre\sphinxhyphen {}Downloaded Locally}{10}{section.4.3}\protected@file@percent }
-\newlabel{vllm-cpu:why-the-model-must-be-pre-downloaded-locally}{{4.3}{10}{Why the Model Must Be Pre\sphinxhyphen {}Downloaded Locally}{section.4.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}Why CPU\sphinxhyphen {}Only (No GPU)?}{11}{section.4.4}\protected@file@percent }
-\newlabel{vllm-cpu:why-cpu-only-no-gpu}{{4.4}{11}{Why CPU\sphinxhyphen {}Only (No GPU)?}{section.4.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.5}Start the Service}{11}{section.4.5}\protected@file@percent }
-\newlabel{vllm-cpu:start-the-service}{{4.5}{11}{Start the Service}{section.4.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.6}Verify Availability}{11}{section.4.6}\protected@file@percent }
-\newlabel{vllm-cpu:verify-availability}{{4.6}{11}{Verify Availability}{section.4.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.7}Integration with RAGFlow}{11}{section.4.7}\protected@file@percent }
-\newlabel{vllm-cpu:integration-with-ragflow}{{4.7}{11}{Integration with RAGFlow}{section.4.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.8}Benefits of This CPU + Docker Setup}{11}{section.4.8}\protected@file@percent }
-\newlabel{vllm-cpu:benefits-of-this-cpu-docker-setup}{{4.8}{11}{Benefits of This CPU + Docker Setup}{section.4.8}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Integrating vLLM with RAGFlow via Docker Network}{13}{chapter.5}\protected@file@percent }
+\newlabel{vllm:why-vllm-is-used-to-serve-the-reranker-model}{{4}{7}{Why vLLM is Used to Serve the Reranker Model}{chapter.4}{}}
+\newlabel{vllm:vllm-reranker}{{4}{7}{Why vLLM is Used to Serve the Reranker Model}{chapter.4}{}}
+\newlabel{vllm::doc}{{4}{7}{Why vLLM is Used to Serve the Reranker Model}{chapter.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Key Reasons for Using vLLM to Serve the Reranker}{7}{section.4.1}\protected@file@percent }
+\newlabel{vllm:key-reasons-for-using-vllm-to-serve-the-reranker}{{4.1}{7}{Key Reasons for Using vLLM to Serve the Reranker}{section.4.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Serving the Reranker Locally with vLLM}{8}{section.4.2}\protected@file@percent }
+\newlabel{vllm:serving-the-reranker-locally-with-vllm}{{4.2}{8}{Serving the Reranker Locally with vLLM}{section.4.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}RAGFlow Integration}{9}{section.4.3}\protected@file@percent }
+\newlabel{vllm:ragflow-integration}{{4.3}{9}{RAGFlow Integration}{section.4.3}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Serving vLLM Reranker Using Docker (CPU\sphinxhyphen {}Only)}{11}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{vllm-network:integrating-vllm-with-ragflow-via-docker-network}{{5}{13}{Integrating vLLM with RAGFlow via Docker Network}{chapter.5}{}}
-\newlabel{vllm-network:ragflow-vllm-network}{{5}{13}{Integrating vLLM with RAGFlow via Docker Network}{chapter.5}{}}
-\newlabel{vllm-network::doc}{{5}{13}{Integrating vLLM with RAGFlow via Docker Network}{chapter.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Why Network Configuration is Required}{13}{section.5.1}\protected@file@percent }
-\newlabel{vllm-network:why-network-configuration-is-required}{{5.1}{13}{Why Network Configuration is Required}{section.5.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Step\sphinxhyphen {}by\sphinxhyphen {}Step: Configure Docker Network}{13}{section.5.2}\protected@file@percent }
-\newlabel{vllm-network:step-by-step-configure-docker-network}{{5.2}{13}{Step\sphinxhyphen {}by\sphinxhyphen {}Step: Configure Docker Network}{section.5.2}{}}
-\@writefile{lol}{\contentsline {literalblock}{\numberline {1}{\ignorespaces docker\sphinxhyphen {}compose.yaml (vLLM)}}{13}{literalblock.5.1}\protected@file@percent }
-\newlabel{vllm-network:id1}{{1}{13}{\sphinxLiteralBlockLabel docker\sphinxhyphen {}compose.yaml (vLLM)}{literalblock.5.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Architecture Diagram}{15}{section.5.3}\protected@file@percent }
-\newlabel{vllm-network:architecture-diagram}{{5.3}{15}{Architecture Diagram}{section.5.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.4}Verification}{15}{section.5.4}\protected@file@percent }
-\newlabel{vllm-network:verification}{{5.4}{15}{Verification}{section.5.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.5}Benefits of This Setup}{15}{section.5.5}\protected@file@percent }
-\newlabel{vllm-network:benefits-of-this-setup}{{5.5}{15}{Benefits of This Setup}{section.5.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.6}Troubleshooting Tips}{15}{section.5.6}\protected@file@percent }
-\newlabel{vllm-network:troubleshooting-tips}{{5.6}{15}{Troubleshooting Tips}{section.5.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \sphinxstylestrong {Figure 1}: RAGFlow containers communicate with vLLM reranker via internal Docker network \sphinxtitleref {docker\sphinxhyphen {}ragflow}. External access (optional) via port \sphinxtitleref {8123}.}}{16}{figure.5.1}\protected@file@percent }
-\newlabel{vllm-network:id2}{{1}{16}{\sphinxstylestrong {Figure 1}: RAGFlow containers communicate with vLLM reranker via internal Docker network \sphinxtitleref {docker\sphinxhyphen {}ragflow}. External access (optional) via port \sphinxtitleref {8123}}{figure.5.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.7}Summary}{17}{section.5.7}\protected@file@percent }
-\newlabel{vllm-network:summary}{{5.7}{17}{Summary}{section.5.7}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Batch Processing and Metadata Management in Infiniflow RAGFlow}{19}{chapter.6}\protected@file@percent }
+\newlabel{vllm-cpu:serving-vllm-reranker-using-docker-cpu-only}{{5}{11}{Serving vLLM Reranker Using Docker (CPU\sphinxhyphen {}Only)}{chapter.5}{}}
+\newlabel{vllm-cpu:vllm-docker}{{5}{11}{Serving vLLM Reranker Using Docker (CPU\sphinxhyphen {}Only)}{chapter.5}{}}
+\newlabel{vllm-cpu::doc}{{5}{11}{Serving vLLM Reranker Using Docker (CPU\sphinxhyphen {}Only)}{chapter.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Docker Compose Configuration (CPU Mode)}{11}{section.5.1}\protected@file@percent }
+\newlabel{vllm-cpu:docker-compose-configuration-cpu-mode}{{5.1}{11}{Docker Compose Configuration (CPU Mode)}{section.5.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Key Components Explained}{12}{section.5.2}\protected@file@percent }
+\newlabel{vllm-cpu:key-components-explained}{{5.2}{12}{Key Components Explained}{section.5.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Why the Model Must Be Pre\sphinxhyphen {}Downloaded Locally}{12}{section.5.3}\protected@file@percent }
+\newlabel{vllm-cpu:why-the-model-must-be-pre-downloaded-locally}{{5.3}{12}{Why the Model Must Be Pre\sphinxhyphen {}Downloaded Locally}{section.5.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}Why CPU\sphinxhyphen {}Only (No GPU)?}{13}{section.5.4}\protected@file@percent }
+\newlabel{vllm-cpu:why-cpu-only-no-gpu}{{5.4}{13}{Why CPU\sphinxhyphen {}Only (No GPU)?}{section.5.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.5}Start the Service}{13}{section.5.5}\protected@file@percent }
+\newlabel{vllm-cpu:start-the-service}{{5.5}{13}{Start the Service}{section.5.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.6}Verify Availability}{13}{section.5.6}\protected@file@percent }
+\newlabel{vllm-cpu:verify-availability}{{5.6}{13}{Verify Availability}{section.5.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.7}Integration with RAGFlow}{13}{section.5.7}\protected@file@percent }
+\newlabel{vllm-cpu:integration-with-ragflow}{{5.7}{13}{Integration with RAGFlow}{section.5.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.8}Benefits of This CPU + Docker Setup}{13}{section.5.8}\protected@file@percent }
+\newlabel{vllm-cpu:benefits-of-this-cpu-docker-setup}{{5.8}{13}{Benefits of This CPU + Docker Setup}{section.5.8}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Integrating vLLM with RAGFlow via Docker Network}{15}{chapter.6}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{api:batch-processing-and-metadata-management-in-infiniflow-ragflow}{{6}{19}{Batch Processing and Metadata Management in Infiniflow RAGFlow}{chapter.6}{}}
-\newlabel{api:ragflow-batch-api}{{6}{19}{Batch Processing and Metadata Management in Infiniflow RAGFlow}{chapter.6}{}}
-\newlabel{api::doc}{{6}{19}{Batch Processing and Metadata Management in Infiniflow RAGFlow}{chapter.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}API Base URL}{19}{section.6.1}\protected@file@percent }
-\newlabel{api:api-base-url}{{6.1}{19}{API Base URL}{section.6.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}Authentication}{19}{section.6.2}\protected@file@percent }
-\newlabel{api:authentication}{{6.2}{19}{Authentication}{section.6.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.3}Step 1: Retrieve Dataset and Document IDs}{20}{section.6.3}\protected@file@percent }
-\newlabel{api:step-1-retrieve-dataset-and-document-ids}{{6.3}{20}{Step 1: Retrieve Dataset and Document IDs}{section.6.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.4}Step 2: Add Metadata to a Document (via PUT)}{20}{section.6.4}\protected@file@percent }
-\newlabel{api:step-2-add-metadata-to-a-document-via-put}{{6.4}{20}{Step 2: Add Metadata to a Document (via PUT)}{section.6.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.5}Use Case: Batch Metadata Enrichment}{21}{section.6.5}\protected@file@percent }
-\newlabel{api:use-case-batch-metadata-enrichment}{{6.5}{21}{Use Case: Batch Metadata Enrichment}{section.6.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.6}Other Batch\sphinxhyphen {}Capable Endpoints}{22}{section.6.6}\protected@file@percent }
-\newlabel{api:other-batch-capable-endpoints}{{6.6}{22}{Other Batch\sphinxhyphen {}Capable Endpoints}{section.6.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.7}Best Practices}{22}{section.6.7}\protected@file@percent }
-\newlabel{api:best-practices}{{6.7}{22}{Best Practices}{section.6.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.8}Summary}{22}{section.6.8}\protected@file@percent }
-\newlabel{api:summary}{{6.8}{22}{Summary}{section.6.8}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {7}How the Knowledge Graph in Infiniflow/RAGFlow Works}{23}{chapter.7}\protected@file@percent }
+\newlabel{vllm-network:integrating-vllm-with-ragflow-via-docker-network}{{6}{15}{Integrating vLLM with RAGFlow via Docker Network}{chapter.6}{}}
+\newlabel{vllm-network:ragflow-vllm-network}{{6}{15}{Integrating vLLM with RAGFlow via Docker Network}{chapter.6}{}}
+\newlabel{vllm-network::doc}{{6}{15}{Integrating vLLM with RAGFlow via Docker Network}{chapter.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Why Network Configuration is Required}{15}{section.6.1}\protected@file@percent }
+\newlabel{vllm-network:why-network-configuration-is-required}{{6.1}{15}{Why Network Configuration is Required}{section.6.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Step\sphinxhyphen {}by\sphinxhyphen {}Step: Configure Docker Network}{15}{section.6.2}\protected@file@percent }
+\newlabel{vllm-network:step-by-step-configure-docker-network}{{6.2}{15}{Step\sphinxhyphen {}by\sphinxhyphen {}Step: Configure Docker Network}{section.6.2}{}}
+\@writefile{lol}{\contentsline {literalblock}{\numberline {1}{\ignorespaces docker\sphinxhyphen {}compose.yaml (vLLM)}}{15}{literalblock.6.1}\protected@file@percent }
+\newlabel{vllm-network:id1}{{1}{15}{\sphinxLiteralBlockLabel docker\sphinxhyphen {}compose.yaml (vLLM)}{literalblock.6.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.3}Architecture Diagram}{17}{section.6.3}\protected@file@percent }
+\newlabel{vllm-network:architecture-diagram}{{6.3}{17}{Architecture Diagram}{section.6.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.4}Verification}{17}{section.6.4}\protected@file@percent }
+\newlabel{vllm-network:verification}{{6.4}{17}{Verification}{section.6.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.5}Benefits of This Setup}{17}{section.6.5}\protected@file@percent }
+\newlabel{vllm-network:benefits-of-this-setup}{{6.5}{17}{Benefits of This Setup}{section.6.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.6}Troubleshooting Tips}{17}{section.6.6}\protected@file@percent }
+\newlabel{vllm-network:troubleshooting-tips}{{6.6}{17}{Troubleshooting Tips}{section.6.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \sphinxstylestrong {Figure 1}: RAGFlow containers communicate with vLLM reranker via internal Docker network \sphinxtitleref {docker\sphinxhyphen {}ragflow}. External access (optional) via port \sphinxtitleref {8123}.}}{18}{figure.6.1}\protected@file@percent }
+\newlabel{vllm-network:id2}{{1}{18}{\sphinxstylestrong {Figure 1}: RAGFlow containers communicate with vLLM reranker via internal Docker network \sphinxtitleref {docker\sphinxhyphen {}ragflow}. External access (optional) via port \sphinxtitleref {8123}}{figure.6.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.7}Summary}{19}{section.6.7}\protected@file@percent }
+\newlabel{vllm-network:summary}{{6.7}{19}{Summary}{section.6.7}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Batch Processing and Metadata Management in Infiniflow RAGFlow}{21}{chapter.7}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{graph:how-the-knowledge-graph-in-infiniflow-ragflow-works}{{7}{23}{How the Knowledge Graph in Infiniflow/RAGFlow Works}{chapter.7}{}}
-\newlabel{graph::doc}{{7}{23}{How the Knowledge Graph in Infiniflow/RAGFlow Works}{chapter.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.1}Overview}{23}{section.7.1}\protected@file@percent }
-\newlabel{graph:overview}{{7.1}{23}{Overview}{section.7.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.2}Construction Process}{23}{section.7.2}\protected@file@percent }
-\newlabel{graph:construction-process}{{7.2}{23}{Construction Process}{section.7.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.3}Query and Retrieval Process}{24}{section.7.3}\protected@file@percent }
-\newlabel{graph:query-and-retrieval-process}{{7.3}{24}{Query and Retrieval Process}{section.7.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.4}Key Features and Limitations}{24}{section.7.4}\protected@file@percent }
-\newlabel{graph:key-features-and-limitations}{{7.4}{24}{Key Features and Limitations}{section.7.4}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {8}Running Llama 3.1 with llama.cpp}{25}{chapter.8}\protected@file@percent }
+\newlabel{api:batch-processing-and-metadata-management-in-infiniflow-ragflow}{{7}{21}{Batch Processing and Metadata Management in Infiniflow RAGFlow}{chapter.7}{}}
+\newlabel{api:ragflow-batch-api}{{7}{21}{Batch Processing and Metadata Management in Infiniflow RAGFlow}{chapter.7}{}}
+\newlabel{api::doc}{{7}{21}{Batch Processing and Metadata Management in Infiniflow RAGFlow}{chapter.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.1}API Base URL}{21}{section.7.1}\protected@file@percent }
+\newlabel{api:api-base-url}{{7.1}{21}{API Base URL}{section.7.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.2}Authentication}{21}{section.7.2}\protected@file@percent }
+\newlabel{api:authentication}{{7.2}{21}{Authentication}{section.7.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.3}Step 1: Retrieve Dataset and Document IDs}{22}{section.7.3}\protected@file@percent }
+\newlabel{api:step-1-retrieve-dataset-and-document-ids}{{7.3}{22}{Step 1: Retrieve Dataset and Document IDs}{section.7.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.4}Step 2: Add Metadata to a Document (via PUT)}{22}{section.7.4}\protected@file@percent }
+\newlabel{api:step-2-add-metadata-to-a-document-via-put}{{7.4}{22}{Step 2: Add Metadata to a Document (via PUT)}{section.7.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.5}Use Case: Batch Metadata Enrichment}{23}{section.7.5}\protected@file@percent }
+\newlabel{api:use-case-batch-metadata-enrichment}{{7.5}{23}{Use Case: Batch Metadata Enrichment}{section.7.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.6}Other Batch\sphinxhyphen {}Capable Endpoints}{24}{section.7.6}\protected@file@percent }
+\newlabel{api:other-batch-capable-endpoints}{{7.6}{24}{Other Batch\sphinxhyphen {}Capable Endpoints}{section.7.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.7}Best Practices}{24}{section.7.7}\protected@file@percent }
+\newlabel{api:best-practices}{{7.7}{24}{Best Practices}{section.7.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.8}See also:}{24}{section.7.8}\protected@file@percent }
+\newlabel{api:see-also}{{7.8}{24}{See also:}{section.7.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.9}Summary}{24}{section.7.9}\protected@file@percent }
+\newlabel{api:summary}{{7.9}{24}{Summary}{section.7.9}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {8}How the Knowledge Graph in Infiniflow/RAGFlow Works}{25}{chapter.8}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{llama-cpp:running-llama-3-1-with-llama-cpp}{{8}{25}{Running Llama 3.1 with llama.cpp}{chapter.8}{}}
-\newlabel{llama-cpp:llama-cpp-model-format-gguf}{{8}{25}{Running Llama 3.1 with llama.cpp}{chapter.8}{}}
-\newlabel{llama-cpp::doc}{{8}{25}{Running Llama 3.1 with llama.cpp}{chapter.8}{}}
-\newlabel{llama-cpp:id1}{{8}{25}{Running Llama 3.1 with llama.cpp}{section*.3}{}}
-\newlabel{llama-cpp:id2}{{8}{25}{Running Llama 3.1 with llama.cpp}{section*.4}{}}
-\newlabel{llama-cpp:id3}{{8}{25}{Running Llama 3.1 with llama.cpp}{section*.5}{}}
-\newlabel{llama-cpp:id4}{{8}{25}{Running Llama 3.1 with llama.cpp}{section*.6}{}}
-\newlabel{llama-cpp:id5}{{8}{25}{Running Llama 3.1 with llama.cpp}{section*.7}{}}
-\newlabel{llama-cpp:id6}{{8}{25}{Running Llama 3.1 with llama.cpp}{section*.8}{}}
-\newlabel{llama-cpp:id7}{{8}{25}{Running Llama 3.1 with llama.cpp}{section*.9}{}}
-\newlabel{llama-cpp:id8}{{8}{25}{Running Llama 3.1 with llama.cpp}{section*.10}{}}
-\newlabel{llama-cpp:id9}{{8}{25}{Running Llama 3.1 with llama.cpp}{section*.11}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8.1}1. Model Format: GGUF}{25}{section.8.1}\protected@file@percent }
-\newlabel{llama-cpp:model-format-gguf}{{8.1}{25}{1. Model Format: GGUF}{section.8.1}{}}
-\newlabel{llama-cpp:llama-cpp-compile-llama-cpp-for-intel-i7-cpu-only}{{8.1}{25}{1. Model Format: GGUF}{section.8.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8.2}2. Compile llama.cpp for Intel i7 (CPU\sphinxhyphen {}only)}{26}{section.8.2}\protected@file@percent }
-\newlabel{llama-cpp:compile-llama-cpp-for-intel-i7-cpu-only}{{8.2}{26}{2. Compile llama.cpp for Intel i7 (CPU\sphinxhyphen {}only)}{section.8.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8.3}3. Run the Model with Web Interface}{26}{section.8.3}\protected@file@percent }
-\newlabel{llama-cpp:run-the-model-with-web-interface}{{8.3}{26}{3. Run the Model with Web Interface}{section.8.3}{}}
-\newlabel{llama-cpp:llama-cpp-run-the-model-with-web-interface}{{8.3}{26}{3. Run the Model with Web Interface}{section.8.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.3.1}Features}{26}{subsection.8.3.1}\protected@file@percent }
-\newlabel{llama-cpp:features}{{8.3.1}{26}{Features}{subsection.8.3.1}{}}
-\newlabel{llama-cpp:llama-cpp-features}{{8.3.1}{26}{Features}{subsection.8.3.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8.4}4. Compile llama.cpp with NVIDIA GPU Support (CUDA)}{27}{section.8.4}\protected@file@percent }
-\newlabel{llama-cpp:compile-llama-cpp-with-nvidia-gpu-support-cuda}{{8.4}{27}{4. Compile llama.cpp with NVIDIA GPU Support (CUDA)}{section.8.4}{}}
-\newlabel{llama-cpp:llama-cpp-compile-llama-cpp-with-nvidia-gpu-support-cuda}{{8.4}{27}{4. Compile llama.cpp with NVIDIA GPU Support (CUDA)}{section.8.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.4.1}Prerequisites}{27}{subsection.8.4.1}\protected@file@percent }
-\newlabel{llama-cpp:prerequisites}{{8.4.1}{27}{Prerequisites}{subsection.8.4.1}{}}
-\newlabel{llama-cpp:llama-cpp-prerequisites}{{8.4.1}{27}{Prerequisites}{subsection.8.4.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.4.2}Build with CUDA}{27}{subsection.8.4.2}\protected@file@percent }
-\newlabel{llama-cpp:build-with-cuda}{{8.4.2}{27}{Build with CUDA}{subsection.8.4.2}{}}
-\newlabel{llama-cpp:llama-cpp-build-with-cuda}{{8.4.2}{27}{Build with CUDA}{subsection.8.4.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.4.3}Run with GPU offloading}{28}{subsection.8.4.3}\protected@file@percent }
-\newlabel{llama-cpp:run-with-gpu-offloading}{{8.4.3}{28}{Run with GPU offloading}{subsection.8.4.3}{}}
-\newlabel{llama-cpp:llama-cpp-run-with-gpu-offloading}{{8.4.3}{28}{Run with GPU offloading}{subsection.8.4.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8.5}Summary}{28}{section.8.5}\protected@file@percent }
-\newlabel{llama-cpp:summary}{{8.5}{28}{Summary}{section.8.5}{}}
-\newlabel{llama-cpp:llama-cpp-summary}{{8.5}{28}{Summary}{section.8.5}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {9}Running Multiple Models on llama.cpp Using Docker}{29}{chapter.9}\protected@file@percent }
+\newlabel{graph:how-the-knowledge-graph-in-infiniflow-ragflow-works}{{8}{25}{How the Knowledge Graph in Infiniflow/RAGFlow Works}{chapter.8}{}}
+\newlabel{graph::doc}{{8}{25}{How the Knowledge Graph in Infiniflow/RAGFlow Works}{chapter.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8.1}Overview}{25}{section.8.1}\protected@file@percent }
+\newlabel{graph:overview}{{8.1}{25}{Overview}{section.8.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8.2}Construction Process}{25}{section.8.2}\protected@file@percent }
+\newlabel{graph:construction-process}{{8.2}{25}{Construction Process}{section.8.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8.3}Query and Retrieval Process}{26}{section.8.3}\protected@file@percent }
+\newlabel{graph:query-and-retrieval-process}{{8.3}{26}{Query and Retrieval Process}{section.8.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8.4}Key Features and Limitations}{26}{section.8.4}\protected@file@percent }
+\newlabel{graph:key-features-and-limitations}{{8.4}{26}{Key Features and Limitations}{section.8.4}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {9}Running Llama 3.1 with llama.cpp}{27}{chapter.9}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{multiple-models-llamacpp:running-multiple-models-on-llama-cpp-using-docker}{{9}{29}{Running Multiple Models on llama.cpp Using Docker}{chapter.9}{}}
-\newlabel{multiple-models-llamacpp:running-multiple-models-llama-cpp-docker}{{9}{29}{Running Multiple Models on llama.cpp Using Docker}{chapter.9}{}}
-\newlabel{multiple-models-llamacpp::doc}{{9}{29}{Running Multiple Models on llama.cpp Using Docker}{chapter.9}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9.1}Example \sphinxstyleliteralintitle {\sphinxupquote {docker\sphinxhyphen {}compose.yml}}}{29}{section.9.1}\protected@file@percent }
-\newlabel{multiple-models-llamacpp:example-docker-compose-yml}{{9.1}{29}{Example \sphinxstyleliteralintitle {\sphinxupquote {docker\sphinxhyphen {}compose.yml}}}{section.9.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9.2}Key Configuration Notes}{30}{section.9.2}\protected@file@percent }
-\newlabel{multiple-models-llamacpp:key-configuration-notes}{{9.2}{30}{Key Configuration Notes}{section.9.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9.3}Usage}{30}{section.9.3}\protected@file@percent }
-\newlabel{multiple-models-llamacpp:usage}{{9.3}{30}{Usage}{section.9.3}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {10}Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{31}{chapter.10}\protected@file@percent }
+\newlabel{llama-cpp:running-llama-3-1-with-llama-cpp}{{9}{27}{Running Llama 3.1 with llama.cpp}{chapter.9}{}}
+\newlabel{llama-cpp:llama-cpp-model-format-gguf}{{9}{27}{Running Llama 3.1 with llama.cpp}{chapter.9}{}}
+\newlabel{llama-cpp::doc}{{9}{27}{Running Llama 3.1 with llama.cpp}{chapter.9}{}}
+\newlabel{llama-cpp:id1}{{9}{27}{Running Llama 3.1 with llama.cpp}{section*.3}{}}
+\newlabel{llama-cpp:id2}{{9}{27}{Running Llama 3.1 with llama.cpp}{section*.4}{}}
+\newlabel{llama-cpp:id3}{{9}{27}{Running Llama 3.1 with llama.cpp}{section*.5}{}}
+\newlabel{llama-cpp:id4}{{9}{27}{Running Llama 3.1 with llama.cpp}{section*.6}{}}
+\newlabel{llama-cpp:id5}{{9}{27}{Running Llama 3.1 with llama.cpp}{section*.7}{}}
+\newlabel{llama-cpp:id6}{{9}{27}{Running Llama 3.1 with llama.cpp}{section*.8}{}}
+\newlabel{llama-cpp:id7}{{9}{27}{Running Llama 3.1 with llama.cpp}{section*.9}{}}
+\newlabel{llama-cpp:id8}{{9}{27}{Running Llama 3.1 with llama.cpp}{section*.10}{}}
+\newlabel{llama-cpp:id9}{{9}{27}{Running Llama 3.1 with llama.cpp}{section*.11}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.1}1. Model Format: GGUF}{27}{section.9.1}\protected@file@percent }
+\newlabel{llama-cpp:model-format-gguf}{{9.1}{27}{1. Model Format: GGUF}{section.9.1}{}}
+\newlabel{llama-cpp:llama-cpp-compile-llama-cpp-for-intel-i7-cpu-only}{{9.1}{27}{1. Model Format: GGUF}{section.9.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.2}2. Compile llama.cpp for Intel i7 (CPU\sphinxhyphen {}only)}{28}{section.9.2}\protected@file@percent }
+\newlabel{llama-cpp:compile-llama-cpp-for-intel-i7-cpu-only}{{9.2}{28}{2. Compile llama.cpp for Intel i7 (CPU\sphinxhyphen {}only)}{section.9.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.3}3. Run the Model with Web Interface}{28}{section.9.3}\protected@file@percent }
+\newlabel{llama-cpp:run-the-model-with-web-interface}{{9.3}{28}{3. Run the Model with Web Interface}{section.9.3}{}}
+\newlabel{llama-cpp:llama-cpp-run-the-model-with-web-interface}{{9.3}{28}{3. Run the Model with Web Interface}{section.9.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3.1}Features}{29}{subsection.9.3.1}\protected@file@percent }
+\newlabel{llama-cpp:features}{{9.3.1}{29}{Features}{subsection.9.3.1}{}}
+\newlabel{llama-cpp:llama-cpp-features}{{9.3.1}{29}{Features}{subsection.9.3.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.4}4. Compile llama.cpp with NVIDIA GPU Support (CUDA)}{29}{section.9.4}\protected@file@percent }
+\newlabel{llama-cpp:compile-llama-cpp-with-nvidia-gpu-support-cuda}{{9.4}{29}{4. Compile llama.cpp with NVIDIA GPU Support (CUDA)}{section.9.4}{}}
+\newlabel{llama-cpp:llama-cpp-compile-llama-cpp-with-nvidia-gpu-support-cuda}{{9.4}{29}{4. Compile llama.cpp with NVIDIA GPU Support (CUDA)}{section.9.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4.1}Prerequisites}{29}{subsection.9.4.1}\protected@file@percent }
+\newlabel{llama-cpp:prerequisites}{{9.4.1}{29}{Prerequisites}{subsection.9.4.1}{}}
+\newlabel{llama-cpp:llama-cpp-prerequisites}{{9.4.1}{29}{Prerequisites}{subsection.9.4.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4.2}Build with CUDA}{30}{subsection.9.4.2}\protected@file@percent }
+\newlabel{llama-cpp:build-with-cuda}{{9.4.2}{30}{Build with CUDA}{subsection.9.4.2}{}}
+\newlabel{llama-cpp:llama-cpp-build-with-cuda}{{9.4.2}{30}{Build with CUDA}{subsection.9.4.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4.3}Run with GPU offloading}{30}{subsection.9.4.3}\protected@file@percent }
+\newlabel{llama-cpp:run-with-gpu-offloading}{{9.4.3}{30}{Run with GPU offloading}{subsection.9.4.3}{}}
+\newlabel{llama-cpp:llama-cpp-run-with-gpu-offloading}{{9.4.3}{30}{Run with GPU offloading}{subsection.9.4.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.5}Summary}{30}{section.9.5}\protected@file@percent }
+\newlabel{llama-cpp:summary}{{9.5}{30}{Summary}{section.9.5}{}}
+\newlabel{llama-cpp:llama-cpp-summary}{{9.5}{30}{Summary}{section.9.5}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {10}Running Multiple Models on llama.cpp Using Docker}{31}{chapter.10}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{hybrid:deploying-llms-in-hybrid-cloud-why-llama-cpp-wins-for-us}{{10}{31}{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{chapter.10}{}}
-\newlabel{hybrid::doc}{{10}{31}{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{chapter.10}{}}
-\newlabel{hybrid:id5}{{10}{31}{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{section*.12}{}}
-\newlabel{hybrid:id6}{{10}{31}{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{section*.13}{}}
-\newlabel{hybrid:id7}{{10}{31}{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{section*.14}{}}
-\newlabel{hybrid:id8}{{10}{31}{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{section*.15}{}}
-\newlabel{hybrid:id9}{{10}{31}{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{section*.16}{}}
-\newlabel{hybrid:id10}{{10}{31}{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{section*.17}{}}
-\newlabel{hybrid:id11}{{10}{31}{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{section*.18}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {10.1}1. Current Setup: Ollama in Testing}{31}{section.10.1}\protected@file@percent }
-\newlabel{hybrid:current-setup-ollama-in-testing}{{10.1}{31}{1. Current Setup: Ollama in Testing}{section.10.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {10.2}2. Production Requirements: Hybrid Cloud \& Multi\sphinxhyphen {}User Access}{32}{section.10.2}\protected@file@percent }
-\newlabel{hybrid:production-requirements-hybrid-cloud-multi-user-access}{{10.2}{32}{2. Production Requirements: Hybrid Cloud \& Multi\sphinxhyphen {}User Access}{section.10.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {10.3}3. Evaluation: vLLM vs llama.cpp}{32}{section.10.3}\protected@file@percent }
-\newlabel{hybrid:evaluation-vllm-vs-llama-cpp}{{10.3}{32}{3. Evaluation: vLLM vs llama.cpp}{section.10.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {10.4}4. Why llama.cpp Is Our Production Choice}{32}{section.10.4}\protected@file@percent }
-\newlabel{hybrid:why-llama-cpp-is-our-production-choice}{{10.4}{32}{4. Why llama.cpp Is Our Production Choice}{section.10.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.4.1}Example: Production\sphinxhyphen {}Ready Server}{33}{subsection.10.4.1}\protected@file@percent }
-\newlabel{hybrid:example-production-ready-server}{{10.4.1}{33}{Example: Production\sphinxhyphen {}Ready Server}{subsection.10.4.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {10.5}5. Migration Path: From Ollama \(\rightarrow \) llama.cpp}{33}{section.10.5}\protected@file@percent }
-\newlabel{hybrid:migration-path-from-ollama-llama-cpp}{{10.5}{33}{5. Migration Path: From Ollama \(\rightarrow \) llama.cpp}{section.10.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {10.6}Summary}{33}{section.10.6}\protected@file@percent }
-\newlabel{hybrid:summary}{{10.6}{33}{Summary}{section.10.6}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {11}Indices and tables}{35}{chapter.11}\protected@file@percent }
+\newlabel{multiple-models-llamacpp:running-multiple-models-on-llama-cpp-using-docker}{{10}{31}{Running Multiple Models on llama.cpp Using Docker}{chapter.10}{}}
+\newlabel{multiple-models-llamacpp:running-multiple-models-llama-cpp-docker}{{10}{31}{Running Multiple Models on llama.cpp Using Docker}{chapter.10}{}}
+\newlabel{multiple-models-llamacpp::doc}{{10}{31}{Running Multiple Models on llama.cpp Using Docker}{chapter.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10.1}Example \sphinxstyleliteralintitle {\sphinxupquote {docker\sphinxhyphen {}compose.yml}}}{31}{section.10.1}\protected@file@percent }
+\newlabel{multiple-models-llamacpp:example-docker-compose-yml}{{10.1}{31}{Example \sphinxstyleliteralintitle {\sphinxupquote {docker\sphinxhyphen {}compose.yml}}}{section.10.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10.2}Key Configuration Notes}{32}{section.10.2}\protected@file@percent }
+\newlabel{multiple-models-llamacpp:key-configuration-notes}{{10.2}{32}{Key Configuration Notes}{section.10.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10.3}Usage}{32}{section.10.3}\protected@file@percent }
+\newlabel{multiple-models-llamacpp:usage}{{10.3}{32}{Usage}{section.10.3}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {11}Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{33}{chapter.11}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{index:indices-and-tables}{{11}{35}{Indices and tables}{chapter.11}{}}
-\gdef \@abspage@last{39}
+\newlabel{hybrid:deploying-llms-in-hybrid-cloud-why-llama-cpp-wins-for-us}{{11}{33}{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{chapter.11}{}}
+\newlabel{hybrid::doc}{{11}{33}{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{chapter.11}{}}
+\newlabel{hybrid:id5}{{11}{33}{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{section*.12}{}}
+\newlabel{hybrid:id6}{{11}{33}{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{section*.13}{}}
+\newlabel{hybrid:id7}{{11}{33}{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{section*.14}{}}
+\newlabel{hybrid:id8}{{11}{33}{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{section*.15}{}}
+\newlabel{hybrid:id9}{{11}{33}{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{section*.16}{}}
+\newlabel{hybrid:id10}{{11}{33}{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{section*.17}{}}
+\newlabel{hybrid:id11}{{11}{33}{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}{section*.18}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.1}1. Current Setup: Ollama in Testing}{33}{section.11.1}\protected@file@percent }
+\newlabel{hybrid:current-setup-ollama-in-testing}{{11.1}{33}{1. Current Setup: Ollama in Testing}{section.11.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.2}2. Production Requirements: Hybrid Cloud \& Multi\sphinxhyphen {}User Access}{34}{section.11.2}\protected@file@percent }
+\newlabel{hybrid:production-requirements-hybrid-cloud-multi-user-access}{{11.2}{34}{2. Production Requirements: Hybrid Cloud \& Multi\sphinxhyphen {}User Access}{section.11.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.3}3. Evaluation: vLLM vs llama.cpp}{34}{section.11.3}\protected@file@percent }
+\newlabel{hybrid:evaluation-vllm-vs-llama-cpp}{{11.3}{34}{3. Evaluation: vLLM vs llama.cpp}{section.11.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.4}4. Why llama.cpp Is Our Production Choice}{34}{section.11.4}\protected@file@percent }
+\newlabel{hybrid:why-llama-cpp-is-our-production-choice}{{11.4}{34}{4. Why llama.cpp Is Our Production Choice}{section.11.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.4.1}Example: Production\sphinxhyphen {}Ready Server}{35}{subsection.11.4.1}\protected@file@percent }
+\newlabel{hybrid:example-production-ready-server}{{11.4.1}{35}{Example: Production\sphinxhyphen {}Ready Server}{subsection.11.4.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.5}5. Migration Path: From Ollama \(\rightarrow \) llama.cpp}{35}{section.11.5}\protected@file@percent }
+\newlabel{hybrid:migration-path-from-ollama-llama-cpp}{{11.5}{35}{5. Migration Path: From Ollama \(\rightarrow \) llama.cpp}{section.11.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.6}Summary}{35}{section.11.6}\protected@file@percent }
+\newlabel{hybrid:summary}{{11.6}{35}{Summary}{section.11.6}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {12}How InfiniFlow RAGFlow Uses gVisor}{37}{chapter.12}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{gvisor:how-infiniflow-ragflow-uses-gvisor}{{12}{37}{How InfiniFlow RAGFlow Uses gVisor}{chapter.12}{}}
+\newlabel{gvisor::doc}{{12}{37}{How InfiniFlow RAGFlow Uses gVisor}{chapter.12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {12.1}gVisor Integration}{37}{section.12.1}\protected@file@percent }
+\newlabel{gvisor:gvisor-integration}{{12.1}{37}{gVisor Integration}{section.12.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.1.1}What is gVisor?}{37}{subsection.12.1.1}\protected@file@percent }
+\newlabel{gvisor:what-is-gvisor}{{12.1.1}{37}{What is gVisor?}{subsection.12.1.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {12.2}How RAGFlow Uses gVisor Sandboxes}{37}{section.12.2}\protected@file@percent }
+\newlabel{gvisor:how-ragflow-uses-gvisor-sandboxes}{{12.2}{37}{How RAGFlow Uses gVisor Sandboxes}{section.12.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {12.3}Security Advantages in Practice}{38}{section.12.3}\protected@file@percent }
+\newlabel{gvisor:security-advantages-in-practice}{{12.3}{38}{Security Advantages in Practice}{section.12.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {12.4}Enabling/Disabling the Sandbox}{38}{section.12.4}\protected@file@percent }
+\newlabel{gvisor:enabling-disabling-the-sandbox}{{12.4}{38}{Enabling/Disabling the Sandbox}{section.12.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {12.5}Summary}{38}{section.12.5}\protected@file@percent }
+\newlabel{gvisor:summary}{{12.5}{38}{Summary}{section.12.5}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {13}RAGFlow GPU vs CPU: Full Explanation (2025 Edition)}{39}{chapter.13}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{ragflow-gpu-cpu:ragflow-gpu-vs-cpu-full-explanation-2025-edition}{{13}{39}{RAGFlow GPU vs CPU: Full Explanation (2025 Edition)}{chapter.13}{}}
+\newlabel{ragflow-gpu-cpu::doc}{{13}{39}{RAGFlow GPU vs CPU: Full Explanation (2025 Edition)}{chapter.13}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {13.1}Why Does RAGFlow Still Need a GPU Even When Using Ollama?}{39}{section.13.1}\protected@file@percent }
+\newlabel{ragflow-gpu-cpu:why-does-ragflow-still-need-a-gpu-even-when-using-ollama}{{13.1}{39}{Why Does RAGFlow Still Need a GPU Even When Using Ollama?}{section.13.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {13.2}Complete RAGFlow Pipeline (with GPU usage marked)}{39}{section.13.2}\protected@file@percent }
+\newlabel{ragflow-gpu-cpu:complete-ragflow-pipeline-with-gpu-usage-marked}{{13.2}{39}{Complete RAGFlow Pipeline (with GPU usage marked)}{section.13.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {13.3}What DeepDoc Actually Does (and Why GPU Makes It 5\textendash {}20× Faster)}{40}{section.13.3}\protected@file@percent }
+\newlabel{ragflow-gpu-cpu:what-deepdoc-actually-does-and-why-gpu-makes-it-520-faster}{{13.3}{40}{What DeepDoc Actually Does (and Why GPU Makes It 5\textendash {}20× Faster)}{section.13.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {13.4}Real\sphinxhyphen {}World Performance Numbers}{40}{section.13.4}\protected@file@percent }
+\newlabel{ragflow-gpu-cpu:real-world-performance-numbers}{{13.4}{40}{Real\sphinxhyphen {}World Performance Numbers}{section.13.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {13.5}When Do You Actually Need ragflow\sphinxhyphen {}gpu?}{40}{section.13.5}\protected@file@percent }
+\newlabel{ragflow-gpu-cpu:when-do-you-actually-need-ragflow-gpu}{{13.5}{40}{When Do You Actually Need ragflow\sphinxhyphen {}gpu?}{section.13.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {13.6}Recommended Setup in 2025 (Best of Both Worlds)}{40}{section.13.6}\protected@file@percent }
+\newlabel{ragflow-gpu-cpu:recommended-setup-in-2025-best-of-both-worlds}{{13.6}{40}{Recommended Setup in 2025 (Best of Both Worlds)}{section.13.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {13.7}Monitoring \& Verification}{41}{section.13.7}\protected@file@percent }
+\newlabel{ragflow-gpu-cpu:monitoring-verification}{{13.7}{41}{Monitoring \& Verification}{section.13.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {13.8}Conclusion}{41}{section.13.8}\protected@file@percent }
+\newlabel{ragflow-gpu-cpu:conclusion}{{13.8}{41}{Conclusion}{section.13.8}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {14}Indices and tables}{43}{chapter.14}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{index:indices-and-tables}{{14}{43}{Indices and tables}{chapter.14}{}}
+\gdef \@abspage@last{47}

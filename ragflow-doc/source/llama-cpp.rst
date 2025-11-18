@@ -81,6 +81,22 @@ Start the server on port **8087** using **12 threads**:
      --threads 12 \
      --host 0.0.0.0
 
+In a corporate network : avoid contacting the proxy !!
+
+.. code-block:: bash
+
+    curl -X POST http://127.0.0.1:8087/v1/chat/completions \
+      --noproxy 127.0.0.1,localhost \
+      -H "Content-Type: application/json" \
+      -d '{
+        "model": "Meta-Llama-3-8B",
+        "messages": [
+          {"role": "system", "content": "You are a helpful assistant."},
+          {"role": "user", "content": "Hello! How are you?"}
+        ]
+      }'
+    
+
 .. _llama-cpp:features:
 
 Features

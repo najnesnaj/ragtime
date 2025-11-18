@@ -11,6 +11,7 @@ Welcome to Ragflow's documentation!
    :caption: Contents:
 
    about
+   architecture
    rerank
    vllm
    vllm-cpu
@@ -21,6 +22,7 @@ Welcome to Ragflow's documentation!
    multiple-models-llamacpp
    hybrid
    gvisor
+   ragflow-gpu-cpu
 
 Indices and tables
 ==================

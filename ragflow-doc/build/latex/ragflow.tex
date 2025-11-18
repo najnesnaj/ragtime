@@ -64,7 +64,7 @@
 
 
 \title{Ragflow}
-\date{Nov 10, 2025}
+\date{Nov 18, 2025}
 \release{1}
 \author{Jansen Jan}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -234,6 +234,146 @@ From \sphinxstylestrong{deep document parsing} to \sphinxstylestrong{scalable ag
 
 \sphinxAtStartPar
 \sphinxstylestrong{The future of enterprise AI is context\sphinxhyphen{}aware, agent\sphinxhyphen{}driven, and open source—and RAGFlow is building it.}
+
+\sphinxstepscope
+
+
+\chapter{RAGFlow System Architecture}
+\label{\detokenize{architecture:ragflow-system-architecture}}\label{\detokenize{architecture::doc}}
+
+\section{Overview}
+\label{\detokenize{architecture:overview}}
+\sphinxAtStartPar
+RAGFlow is a \sphinxstylestrong{fully containerized}, micro\sphinxhyphen{}service\sphinxhyphen{}based RAG (Retrieval\sphinxhyphen{}Augmented Generation) engine.
+When you run the official \sphinxcode{\sphinxupquote{docker\sphinxhyphen{}compose.yml}} (or \sphinxcode{\sphinxupquote{docker\sphinxhyphen{}compose\sphinxhyphen{}gpu.yml}}), the following Docker containers are launched automatically:
+
+
+\section{Core Infrastructure Containers}
+\label{\detokenize{architecture:core-infrastructure-containers}}
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabular}[t]{\X{30}{100}\X{70}{100}}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Container
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Responsibility
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxstylestrong{mysql}
+&
+\sphinxAtStartPar
+Persistent storage for users, knowledge bases, datasets, conversation history, API keys, etc.
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{redis}
+&
+\sphinxAtStartPar
+Cache layer + task queue (Celery) for asynchronous jobs (document parsing, chunking, embedding)
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{elasticsearch}
+&
+\sphinxAtStartPar
+Hybrid search engine: stores text chunks, keyword indices, and (optionally) dense vectors
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{minio}
+&
+\sphinxAtStartPar
+S3\sphinxhyphen{}compatible object storage for original uploaded files (PDFs, Word, images, etc.)
+\\
+\sphinxbottomrule
+\end{tabular}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+
+\section{RAGFlow Application Containers}
+\label{\detokenize{architecture:ragflow-application-containers}}
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabular}[t]{\X{30}{100}\X{70}{100}}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Container
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Responsibility
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxstylestrong{ragflow\sphinxhyphen{}server} (a.k.a. ragflow\sphinxhyphen{}api)
+&
+\sphinxAtStartPar
+Main FastAPI backend. Exposes all REST endpoints (/api/v1/…)
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{ragflow\sphinxhyphen{}web}
+&
+\sphinxAtStartPar
+Frontend (React + Ant Design) \textendash{} the chat \& knowledge\sphinxhyphen{}base management UI
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{celery\sphinxhyphen{}worker} (often named ragflow\sphinxhyphen{}worker)
+&
+\sphinxAtStartPar
+Background workers that execute long\sphinxhyphen{}running tasks (DeepDoc parsing, embedding generation, indexing)
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxstylestrong{nginx} (optional in some setups)
+&
+\sphinxAtStartPar
+Reverse proxy / static file server (used in production deployments)
+\\
+\sphinxbottomrule
+\end{tabular}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+
+\section{High\sphinxhyphen{}Level Architecture Diagram}
+\label{\detokenize{architecture:high-level-architecture-diagram}}
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=1.000\linewidth]{{system-architecture}.png}
+\caption{RAGFlow complete system architecture (as of v0.19+, 2025)}\label{\detokenize{architecture:id1}}\end{figure}
+
+
+\section{Data \& Execution Flow}
+\label{\detokenize{architecture:data-execution-flow}}\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{User uploads a document} \(\rightarrow\) stored in MinIO \(\rightarrow\) metadata saved in MySQL \(\rightarrow\) parsing task queued in Redis.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Celery worker} picks the task \(\rightarrow\) runs DeepDoc (layout detection, OCR, table extraction) \(\rightarrow\) splits into chunks.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Chunks} are sent to the configured embedding model (Ollama, vLLM, OpenAI, etc.) \(\rightarrow\) vectors returned.
+
+\end{enumerate}
 
 \sphinxstepscope
 
@@ -1187,6 +1327,12 @@ Improve \sphinxstylestrong{traceability} and \sphinxstylestrong{auditability}
 —
 
 
+\section{See also:}
+\label{\detokenize{api:see-also}}
+\sphinxAtStartPar
+\sphinxurl{https://github.com/infiniflow/ragflow/blob/main/example/http/dataset\_example.sh}
+
+
 \section{Summary}
 \label{\detokenize{api:summary}}
 \sphinxAtStartPar
@@ -1494,6 +1640,22 @@ Start the server on port \sphinxstylestrong{8087} using \sphinxstylestrong{12 th
 \PYG{+w}{  }\PYGZhy{}\PYGZhy{}port\PYG{+w}{ }\PYG{l+m}{8087}\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
 \PYG{+w}{  }\PYGZhy{}\PYGZhy{}threads\PYG{+w}{ }\PYG{l+m}{12}\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
 \PYG{+w}{  }\PYGZhy{}\PYGZhy{}host\PYG{+w}{ }\PYG{l+m}{0}.0.0.0
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+In a corporate network : avoid contacting the proxy !!
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+curl\PYG{+w}{ }\PYGZhy{}X\PYG{+w}{ }POST\PYG{+w}{ }http://127.0.0.1:8087/v1/chat/completions\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{  }\PYGZhy{}\PYGZhy{}noproxy\PYG{+w}{ }\PYG{l+m}{127}.0.0.1,localhost\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{  }\PYGZhy{}H\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}Content\PYGZhy{}Type: application/json\PYGZdq{}}\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{  }\PYGZhy{}d\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}\PYGZob{}}
+\PYG{l+s+s1}{    \PYGZdq{}model\PYGZdq{}: \PYGZdq{}Meta\PYGZhy{}Llama\PYGZhy{}3\PYGZhy{}8B\PYGZdq{},}
+\PYG{l+s+s1}{    \PYGZdq{}messages\PYGZdq{}: [}
+\PYG{l+s+s1}{      \PYGZob{}\PYGZdq{}role\PYGZdq{}: \PYGZdq{}system\PYGZdq{}, \PYGZdq{}content\PYGZdq{}: \PYGZdq{}You are a helpful assistant.\PYGZdq{}\PYGZcb{},}
+\PYG{l+s+s1}{      \PYGZob{}\PYGZdq{}role\PYGZdq{}: \PYGZdq{}user\PYGZdq{}, \PYGZdq{}content\PYGZdq{}: \PYGZdq{}Hello! How are you?\PYGZdq{}\PYGZcb{}}
+\PYG{l+s+s1}{    ]}
+\PYG{l+s+s1}{  \PYGZcb{}\PYGZsq{}}
 \end{sphinxVerbatim}
 
 
@@ -2156,6 +2318,424 @@ vLLM (if AVX\sphinxhyphen{}512 available)
 
 \sphinxAtStartPar
 —
+
+\sphinxstepscope
+
+
+\chapter{How InfiniFlow RAGFlow Uses gVisor}
+\label{\detokenize{gvisor:how-infiniflow-ragflow-uses-gvisor}}\label{\detokenize{gvisor::doc}}
+\sphinxAtStartPar
+InfiniFlow RAGFlow is an open\sphinxhyphen{}source RAG (Retrieval\sphinxhyphen{}Augmented Generation) engine that supports document understanding and LLM orchestration. To enhance security when executing untrusted or user\sphinxhyphen{}provided code (e.g., Python agents, dynamic data processing scripts, or custom tool functions), RAGFlow runs certain components inside isolated sandboxes.
+
+
+\section{gVisor Integration}
+\label{\detokenize{gvisor:gvisor-integration}}
+\sphinxAtStartPar
+RAGFlow leverages \sphinxstylestrong{gVisor} as its primary sandboxing technology in containerized (Docker/Kubernetes) deployments.
+
+
+\subsection{What is gVisor?}
+\label{\detokenize{gvisor:what-is-gvisor}}
+\sphinxAtStartPar
+gVisor is an open\sphinxhyphen{}source project by Google that provides a user\sphinxhyphen{}space kernel (the Sentry component) and a lightweight virtual machine (runsc runtime). It intercepts and emulates Linux system calls instead of letting the container directly access the host kernel.
+
+\sphinxAtStartPar
+Key benefits of gVisor in a containerized environment:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Strong syscall isolation}: Only a limited, explicitly allowed set of syscalls reaches the host kernel. Unknown or dangerous syscalls are blocked or emulated in user space.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Reduced kernel attack surface}: Even if a process escapes the container’s namespaces/cgroups/seccomp filters, it still operates through gVisor’s restricted interface.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Compatibility with standard Docker}: gVisor integrates as an OCI\sphinxhyphen{}compatible runtime (\sphinxcode{\sphinxupquote{runsc}}), so no changes to Dockerfile or Kubernetes pod spec syntax are required beyond specifying the runtime.
+
+\end{itemize}
+
+
+\section{How RAGFlow Uses gVisor Sandboxes}
+\label{\detokenize{gvisor:how-ragflow-uses-gvisor-sandboxes}}
+\sphinxAtStartPar
+When the sandbox feature is enabled (default in recent RAGFlow releases), the following happens:
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Agent/Tool Execution Sandbox}
+\sphinxhyphen{} Python\sphinxhyphen{}based agents and custom tools are executed inside a dedicated gVisor\sphinxhyphen{}powered container.
+\sphinxhyphen{} The sandbox container has extremely limited privileges:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+No direct access to the host filesystem (only a small tmpfs and necessary code mounts as read\sphinxhyphen{}only).
+
+\item {} 
+\sphinxAtStartPar
+Restricted network access (usually completely disabled or limited to internal RAGFlow services).
+
+\item {} 
+\sphinxAtStartPar
+Dropped capabilities and a strict seccomp profile enforced by gVisor.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Runtime Selection}
+\sphinxhyphen{} RAGFlow’s Docker Compose and Helm charts include a \sphinxcode{\sphinxupquote{ragflow\sphinxhyphen{}sandbox}} service that uses the \sphinxcode{\sphinxupquote{runsc}} runtime:
+\begin{quote}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nt}{runtime}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{runsc}
+\PYG{n+nt}{runtime\PYGZhy{}config}\PYG{p}{:}
+\PYG{+w}{  }\PYG{c+c1}{\PYGZsh{} Optional gVisor flags}
+\PYG{+w}{  }\PYG{n+nt}{platform}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{ptrace}\PYG{+w}{  }\PYG{c+c1}{\PYGZsh{} or kvm on supported hardware}
+\end{sphinxVerbatim}
+\end{quote}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Communication}
+\sphinxhyphen{} The main RAGFlow application communicates with the sandbox via gRPC or stdin/stdout (depending on version).
+\sphinxhyphen{} Code and data are injected securely at container startup; no runtime file writes from inside the sandbox are allowed.
+
+\end{enumerate}
+
+
+\section{Security Advantages in Practice}
+\label{\detokenize{gvisor:security-advantages-in-practice}}
+
+\section{Enabling/Disabling the Sandbox}
+\label{\detokenize{gvisor:enabling-disabling-the-sandbox}}
+\sphinxAtStartPar
+In \sphinxcode{\sphinxupquote{docker\sphinxhyphen{}compose.yml}} or Helm values:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nt}{services}\PYG{p}{:}
+\PYG{+w}{  }\PYG{n+nt}{ragflow}\PYG{p}{:}
+\PYG{+w}{    }\PYG{n+nt}{environment}\PYG{p}{:}
+\PYG{+w}{      }\PYG{p+pIndicator}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{ENABLE\PYGZus{}SANDBOX=true}\PYG{+w}{   }\PYG{c+c1}{\PYGZsh{} default true in v0.10+}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+To run without gVisor (less secure, for trusted environments only):
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nt}{environment}\PYG{p}{:}
+\PYG{+w}{  }\PYG{p+pIndicator}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{ENABLE\PYGZus{}SANDBOX=false}
+\end{sphinxVerbatim}
+
+
+\section{Summary}
+\label{\detokenize{gvisor:summary}}
+\sphinxAtStartPar
+By running untrusted code execution inside gVisor\sphinxhyphen{}powered containers, RAGFlow significantly reduces the risk of a compromised agent or malicious user\sphinxhyphen{}uploaded script affecting the host system or other services, while maintaining good performance and seamless integration with standard container orchestration tools.
+
+\sphinxstepscope
+
+
+\chapter{RAGFlow GPU vs CPU: Full Explanation (2025 Edition)}
+\label{\detokenize{ragflow-gpu-cpu:ragflow-gpu-vs-cpu-full-explanation-2025-edition}}\label{\detokenize{ragflow-gpu-cpu::doc}}
+
+\section{Why Does RAGFlow Still Need a GPU Even When Using Ollama?}
+\label{\detokenize{ragflow-gpu-cpu:why-does-ragflow-still-need-a-gpu-even-when-using-ollama}}
+\sphinxAtStartPar
+You are absolutely right to ask this question.
+
+\sphinxAtStartPar
+Most people configure RAGFlow to use \sphinxstylestrong{external services} (Ollama, Xinference, vLLM, OpenAI, etc.) for:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Embedding model
+
+\item {} 
+\sphinxAtStartPar
+Re\sphinxhyphen{}ranking model
+
+\item {} 
+\sphinxAtStartPar
+Inference LLM (the actual answer generator)
+
+\end{itemize}
+
+\sphinxAtStartPar
+Ollama runs these models \sphinxstylestrong{entirely on your GPU} — RAGFlow only sends HTTP requests.
+So why does the official documentation and community still strongly recommend the \sphinxstylestrong{ragflow\sphinxhyphen{}gpu} image (or setting \sphinxcode{\sphinxupquote{DEVICE=gpu}})?
+
+\sphinxAtStartPar
+The answer is simple: \sphinxstylestrong{Deep Document Understanding (DeepDoc)} — the part that happens \sphinxstyleemphasis{before} any embedding or LLM call.
+
+
+\section{Complete RAGFlow Pipeline (with GPU usage marked)}
+\label{\detokenize{ragflow-gpu-cpu:complete-ragflow-pipeline-with-gpu-usage-marked}}
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabular}[t]{*{4}{\X{1}{4}}}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Step
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Component
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Runs inside RAGFlow?
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Uses GPU when?
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+Document Upload
+
+\end{enumerate}
+&
+\sphinxAtStartPar
+DeepDoc parser
+&
+\sphinxAtStartPar
+Yes (core of RAGFlow)
+&
+\sphinxAtStartPar
+\sphinxstylestrong{YES} — heavily
+\\
+\sphinxhline\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{1}
+\item {} 
+\sphinxAtStartPar
+Chunking
+
+\end{enumerate}
+&
+\sphinxAtStartPar
+Text splitting
+&
+\sphinxAtStartPar
+Yes
+&
+\sphinxAtStartPar
+No (pure CPU)
+\\
+\sphinxhline\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{2}
+\item {} 
+\sphinxAtStartPar
+Embedding
+
+\end{enumerate}
+&
+\sphinxAtStartPar
+Sentence\sphinxhyphen{}Transformers, BGE…
+&
+\sphinxAtStartPar
+External (Ollama, etc.)
+&
+\sphinxAtStartPar
+GPU via Ollama/vLLM
+\\
+\sphinxhline\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{3}
+\item {} 
+\sphinxAtStartPar
+Vector storage
+
+\end{enumerate}
+&
+\sphinxAtStartPar
+Elasticsearch / InfiniFlow DB
+&
+\sphinxAtStartPar
+Yes
+&
+\sphinxAtStartPar
+No
+\\
+\sphinxhline\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{4}
+\item {} 
+\sphinxAtStartPar
+Retrieval
+
+\end{enumerate}
+&
+\sphinxAtStartPar
+Vector + keyword search
+&
+\sphinxAtStartPar
+Yes
+&
+\sphinxAtStartPar
+No
+\\
+\sphinxhline\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{5}
+\item {} 
+\sphinxAtStartPar
+Re\sphinxhyphen{}ranking
+
+\end{enumerate}
+&
+\sphinxAtStartPar
+Cross\sphinxhyphen{}encoder (optional)
+&
+\sphinxAtStartPar
+External or local
+&
+\sphinxAtStartPar
+GPU via external service
+\\
+\sphinxhline\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\setcounter{enumi}{6}
+\item {} 
+\sphinxAtStartPar
+Answer generation
+
+\end{enumerate}
+&
+\sphinxAtStartPar
+LLM (Llama 3, Qwen2, etc.)
+&
+\sphinxAtStartPar
+External (Ollama, etc.)
+&
+\sphinxAtStartPar
+GPU via Ollama/vLLM
+\\
+\sphinxbottomrule
+\end{tabular}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+\sphinxAtStartPar
+\(\rightarrow\) The \sphinxstylestrong{only part that RAGFlow itself accelerates with GPU} is Step 1 — but it is by far the most compute\sphinxhyphen{}intensive for real\sphinxhyphen{}world documents.
+
+
+\section{What DeepDoc Actually Does (and Why GPU Makes It 5\textendash{}20× Faster)}
+\label{\detokenize{ragflow-gpu-cpu:what-deepdoc-actually-does-and-why-gpu-makes-it-520-faster}}
+\sphinxAtStartPar
+When you upload a PDF, scanned image, or complex report, DeepDoc performs these AI\sphinxhyphen{}heavy tasks:
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Layout Detection}
+Detects columns, headers, footers, reading order using CNN\sphinxhyphen{}based models (LayoutLM\sphinxhyphen{}style).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Table Structure Recognition (TSR)}
+Identifies table boundaries, row/column spans, merged cells — extremely important for accurate retrieval.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Formula \& Math Recognition}
+Converts LaTeX/math images into readable text.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Enhanced OCR}
+For scanned PDFs: runs deep\sphinxhyphen{}learning OCR models (not just Tesseract CPU).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Visual Language Model Tasks} (charts, diagrams, screenshots)
+Optionally calls lightweight VLMs (Qwen2\sphinxhyphen{}VL, LLaVA, etc.) to describe images inside the document.
+
+\end{enumerate}
+
+\sphinxAtStartPar
+All of these run \sphinxstylestrong{inside RAGFlow’s deepdoc module} using PyTorch + CUDA when \sphinxcode{\sphinxupquote{DEVICE=gpu}} is enabled.
+
+
+\section{Real\sphinxhyphen{}World Performance Numbers}
+\label{\detokenize{ragflow-gpu-cpu:real-world-performance-numbers}}
+
+\section{When Do You Actually Need ragflow\sphinxhyphen{}gpu?}
+\label{\detokenize{ragflow-gpu-cpu:when-do-you-actually-need-ragflow-gpu}}
+\sphinxAtStartPar
+\sphinxstylestrong{YES \textendash{} You need it if your documents contain any of the following:}
+\sphinxhyphen{} Scanned pages (images instead of selectable text)
+\sphinxhyphen{} Complex tables or financial reports
+\sphinxhyphen{} Charts, graphs, screenshots
+\sphinxhyphen{} Mixed layouts (multi\sphinxhyphen{}column, sidebars, footnotes)
+\sphinxhyphen{} Handwritten notes or formulas
+
+\sphinxAtStartPar
+\sphinxstylestrong{NO \textendash{} You can stay on ragflow\sphinxhyphen{}cpu if:}
+\sphinxhyphen{} All documents are clean, born\sphinxhyphen{}digital text (Word \(\rightarrow\) PDF, Markdown, etc.)
+\sphinxhyphen{} You only do quick prototypes with a few simple files
+\sphinxhyphen{} You have no NVIDIA GPU available
+
+
+\section{Recommended Setup in 2025 (Best of Both Worlds)}
+\label{\detokenize{ragflow-gpu-cpu:recommended-setup-in-2025-best-of-both-worlds}}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} .env file}
+\PYG{n+nv}{DEVICE}\PYG{o}{=}gpu\PYG{+w}{                     }\PYG{c+c1}{\PYGZsh{} ← Enables DeepDoc GPU acceleration}
+\PYG{n+nv}{SVR\PYGZus{}HTTP\PYGZus{}PORT}\PYG{o}{=}\PYG{l+m}{80}
+
+\PYG{c+c1}{\PYGZsh{} Use Ollama (or vLLM) for embeddings + LLM}
+\PYG{n+nv}{EMBEDDING\PYGZus{}MODEL}\PYG{o}{=}ollama/bge\PYGZhy{}large
+\PYG{n+nv}{RERANK\PYGZus{}MODEL}\PYG{o}{=}reranker\PYG{+w}{  }\PYG{o}{(}this\PYG{+w}{ }cannnot\PYG{+w}{ }be\PYG{+w}{ }served\PYG{+w}{ }by\PYG{+w}{ }ollama,\PYG{+w}{ }vLLM\PYG{+w}{ }or\PYG{+w}{ }llama.cpp\PYG{+w}{ }is\PYG{+w}{ }needed\PYG{o}{)}
+\PYG{n+nv}{LLM\PYGZus{}MODEL}\PYG{o}{=}ollama/llama3.1:70b
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Result:
+\sphinxhyphen{} DeepDoc parsing \(\rightarrow\) blazing fast on your NVIDIA GPU (inside RAGFlow container)
+\sphinxhyphen{} Embeddings + LLM \(\rightarrow\) also blazing fast on the same GPU (inside Ollama container)
+\sphinxhyphen{} No bottlenecks anywhere
+
+
+\section{Monitoring \& Verification}
+\label{\detokenize{ragflow-gpu-cpu:monitoring-verification}}
+\sphinxAtStartPar
+During document upload:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+watch\PYG{+w}{ }\PYGZhy{}n\PYG{+w}{ }\PYG{l+m}{1}\PYG{+w}{ }nvidia\PYGZhy{}smi
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+You will see:
+\sphinxhyphen{} RAGFlow container using 4\textendash{}12 GB VRAM during parsing
+\sphinxhyphen{} Ollama container using VRAM only when embedding or generatinging
+
+
+\section{Conclusion}
+\label{\detokenize{ragflow-gpu-cpu:conclusion}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{ragflow\sphinxhyphen{}cpu}  \(\rightarrow\) fine for clean text only
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{ragflow\sphinxhyphen{}gpu}  \(\rightarrow\) mandatory for real\sphinxhyphen{}world unstructured documents
+
+\end{itemize}
+
+\sphinxAtStartPar
+Even if Ollama handles your LLM and embeddings perfectly, \sphinxstylestrong{without ragflow\sphinxhyphen{}gpu, the very first step (understanding the document) will be painfully slow or inaccurate}.
+
+\sphinxAtStartPar
+Use \sphinxcode{\sphinxupquote{DEVICE=gpu}} — it’s the difference between a toy and a true enterprise\sphinxhyphen{}grade RAG system.
 
 
 \chapter{Indices and tables}
