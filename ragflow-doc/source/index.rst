@@ -23,6 +23,9 @@ Welcome to Ragflow's documentation!
    hybrid
    gvisor
    ragflow-gpu-cpu
+   upload-document
+   graphrag
+   chat  
 
 Indices and tables
 ==================

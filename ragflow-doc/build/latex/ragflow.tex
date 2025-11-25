@@ -64,7 +64,7 @@
 
 
 \title{Ragflow}
-\date{Nov 18, 2025}
+\date{Nov 25, 2025}
 \release{1}
 \author{Jansen Jan}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -1225,8 +1225,8 @@ curl\PYG{+w}{ }\PYGZhy{}\PYGZhy{}request\PYG{+w}{ }PUT\PYG{+w}{ }\PYG{l+s+se}{\P
 You can \sphinxstylestrong{automate metadata tagging} for \sphinxstylestrong{1000s of documents} using a script:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{import} \PYG{n+nn}{requests}
-\PYG{k+kn}{import} \PYG{n+nn}{json}
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{requests}
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{json}
 
 \PYG{n}{BASE\PYGZus{}URL} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{http://192.168.0.213/api/v1}\PYG{l+s+s2}{\PYGZdq{}}
 \PYG{n}{TOKEN} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ragflow\PYGZhy{}QxNWIzMGNlOWRmMzExZjBhZjljMDI0Mm}\PYG{l+s+s2}{\PYGZdq{}}
@@ -1236,7 +1236,7 @@ You can \sphinxstylestrong{automate metadata tagging} for \sphinxstylestrong{100
 \PYG{p}{\PYGZcb{}}
 
 \PYG{c+c1}{\PYGZsh{} Example: Load CSV with doc\PYGZus{}id, author, date, url...}
-\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{pandas}\PYG{+w}{ }\PYG{k}{as}\PYG{+w}{ }\PYG{n+nn}{pd}
 \PYG{n}{df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents\PYGZus{}metadata.csv}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
 
 \PYG{k}{for} \PYG{n}{\PYGZus{}}\PYG{p}{,} \PYG{n}{row} \PYG{o+ow}{in} \PYG{n}{df}\PYG{o}{.}\PYG{n}{iterrows}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
@@ -1504,8 +1504,8 @@ For implementation details, refer to the official guide at \sphinxurl{https://gi
 
 \chapter{Running Llama 3.1 with llama.cpp}
 \label{\detokenize{llama-cpp:running-llama-3-1-with-llama-cpp}}\label{\detokenize{llama-cpp:llama-cpp-model-format-gguf}}\label{\detokenize{llama-cpp::doc}}
-\begin{sphinxShadowBox}
-\sphinxstyletopictitle{Table of Contents}
+\begin{sphinxcontents}
+\sphinxstylecontentstitle{Table of Contents}
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
@@ -1548,7 +1548,7 @@ For implementation details, refer to the official guide at \sphinxurl{https://gi
 \phantomsection\label{\detokenize{llama-cpp:id9}}{\hyperref[\detokenize{llama-cpp:summary}]{\sphinxcrossref{Summary}}}
 
 \end{itemize}
-\end{sphinxShadowBox}
+\end{sphinxcontents}
 
 
 \bigskip\hrule\bigskip
@@ -1989,8 +1989,8 @@ Send requests using the OpenAI\sphinxhyphen{}compatible API or \sphinxcode{\sphi
 
 \chapter{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}
 \label{\detokenize{hybrid:deploying-llms-in-hybrid-cloud-why-llama-cpp-wins-for-us}}\label{\detokenize{hybrid::doc}}
-\begin{sphinxShadowBox}
-\sphinxstyletopictitle{Table of Contents}
+\begin{sphinxcontents}
+\sphinxstylecontentstitle{Table of Contents}
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
@@ -2023,7 +2023,7 @@ Send requests using the OpenAI\sphinxhyphen{}compatible API or \sphinxcode{\sphi
 \phantomsection\label{\detokenize{hybrid:id11}}{\hyperref[\detokenize{hybrid:summary}]{\sphinxcrossref{Summary}}}
 
 \end{itemize}
-\end{sphinxShadowBox}
+\end{sphinxcontents}
 
 
 \bigskip\hrule\bigskip
@@ -2737,20 +2737,141 @@ Even if Ollama handles your LLM and embeddings perfectly, \sphinxstylestrong{wit
 \sphinxAtStartPar
 Use \sphinxcode{\sphinxupquote{DEVICE=gpu}} — it’s the difference between a toy and a true enterprise\sphinxhyphen{}grade RAG system.
 
+\sphinxstepscope
+
+
+\chapter{upload document}
+\label{\detokenize{upload-document:upload-document}}\label{\detokenize{upload-document::doc}}
+\sphinxAtStartPar
+first get dataset\_id (0fbeb780b40d11f0bf690242ac170006)
+\begin{quote}
+\begin{description}
+\sphinxlineitem{curl \textendash{}request POST }
+\sphinxAtStartPar
+\textendash{}url \sphinxurl{http://192.168.0.213/api/v1/datasets/0fbeb780b40d11f0bf690242ac170006/documents} \textendash{}header ‘Content\sphinxhyphen{}Type: multipart/form\sphinxhyphen{}data’ \textendash{}header ‘Authorization: Bearer ragflow\sphinxhyphen{}\_FdZQN68Q1NgLLeLmKe\sphinxhyphen{}3qbGHv15fqXg2AfJRENBIIw’ \textendash{}form ‘file=@./aai2228.pdf’
+
+\end{description}
+\end{quote}
+
+
+\section{response}
+\label{\detokenize{upload-document:response}}
+\sphinxAtStartPar
+\{“code”:0,”data”:{[}\{“chunk\_method”:”paper”,”created\_by”:”b61ff88eb40611f08d0f0242ac170006”,”dataset\_id”:”0fbeb780b40d11f0bf690242ac170006”,”id”:”67288092c92411f0953d0242ac170003”,”location”:”aai2228.pdf”,”name”:”aai2228.pdf”,”parser\_config”:\{“auto\_keywords”:0,”auto\_questions”:0,”chunk\_token\_num”:512,”delimiter”:”n”,”graphrag”:\{“entity\_types”:{[}“organization”,”person”,”geo”,”event”,”category”{]},”method”:”light”,”use\_graphrag”:true\},”html4excel”:false,”layout\_recognize”:”Docling”,”raptor”:\{“max\_cluster”:64,”max\_token”:256,”prompt”:”Please summarize the following paragraphs. Be careful with the numbers, do not make things up. Paragraphs as following:n      \{cluster\_content\}nThe above is the content you need to summarize.”,”random\_seed”:0,”scope”:”file”,”threshold”:0.1,”use\_raptor”:true\},”toc\_extraction”:false,”topn\_tags”:3\},”pipeline\_id”:””,”run”:”UNSTART”,”size”:2128247,”source\_type”:”local”,”suffix”:”pdf”,”thumbnail”:”thumbnail\_67288092c92411f0953d0242ac170003.png”,”type”:”pdf”\}{]}\}
+
+\sphinxstepscope
+
+
+\chapter{Graphrag}
+\label{\detokenize{graphrag:graphrag}}\label{\detokenize{graphrag::doc}}\begin{description}
+\sphinxlineitem{curl \textendash{}request POST }
+\sphinxAtStartPar
+\textendash{}url \sphinxurl{http:/}/\{address\}/api/v1/datasets/\{dataset\_id\}/run\_graphrag \textendash{}header ‘Authorization: Bearer \textless{}YOUR\_API\_KEY\textgreater{}’
+
+\end{description}
+
+\sphinxAtStartPar
+\sphinxhyphen{}\textgreater{} get dataset ID
+\begin{quote}
+
+\sphinxAtStartPar
+curl \sphinxhyphen{}H “Authorization: Bearer ragflow\sphinxhyphen{}\_FdZQN68Q1NgLLeLmKe\sphinxhyphen{}3qbGHv15fqXg2AfJRENBIIw”         \sphinxurl{http://192.168.0.213/api/v1/datasets}
+\end{quote}
+
+
+\section{reponse (json)}
+\label{\detokenize{graphrag:reponse-json}}
+\sphinxAtStartPar
+\{“code”:0,”data”:{[}\{“avatar”:null,”chunk\_count”:698,”chunk\_method”:”paper”,”create\_date”:”Tue, 28 Oct 2025 22:47:44 GMT”,”create\_time”:1761662864024,”created\_by”:”b61ff88eb40611f08d0f0242ac170006”,”description”:”  “,”document\_count”:6,”embedding\_model”:”mxbai\sphinxhyphen{}embed\sphinxhyphen{}large:latest@Ollama”,”graphrag\_task\_finish\_at”:null,”graphrag\_task\_id”:null,”id”:”0fbeb780b40d11f0bf690242ac170006”,”language”:”English”,”mindmap\_task\_finish\_at”:null,”mindmap\_task\_id”:null,”name”:”testaankoop”,”pagerank”:15,”parser\_config”:\{“auto\_keywords”:5,”auto\_questions”:2,”chunk\_token\_num”:512,”delimiter”:”n”,”graphrag”:\{“community”:true,”entity\_types”:{[}“organization”,”person”,”geo”,”event”,”category”{]},”method”:”general”,”resolution”:true,”use\_graphrag”:true\},”html4excel”:false,”layout\_recognize”:”DeepDOC”,”raptor”:\{“max\_cluster”:64,”max\_token”:256,”prompt”:”Please summarize the following paragraphs. Be careful with the numbers, do not make things up. Paragraphs as following:n      \{cluster\_content\}nThe above is the content you need to summarize.”,”random\_seed”:0,”scope”:”file”,”threshold”:0.1,”use\_raptor”:true\},”tag\_kb\_ids”:{[}{]},”toc\_extraction”:false,”topn\_tags”:3\},”permission”:”me”,”pipeline\_id”:””,”raptor\_task\_finish\_at”:null,”raptor\_task\_id”:null,”similarity\_threshold”:0.2,”status”:”1”,”tenant\_id”:”b61ff88eb40611f08d0f0242ac170006”,”token\_num”:90496,”update\_date”:”Mon, 24 Nov 2025 23:09:25 GMT”,”update\_time”:1763996965365,”vector\_similarity\_weight”:0.3\}{]},”total\_datasets”:1\}
+
+\sphinxAtStartPar
+\textendash{}\textgreater{} we need: testaankoop
+“id”:”0fbeb780b40d11f0bf690242ac170006”
+
+
+\section{graphrag}
+\label{\detokenize{graphrag:id1}}\begin{description}
+\sphinxlineitem{curl \textendash{}request POST }
+\sphinxAtStartPar
+\textendash{}url \sphinxurl{http:/}/\{address\}/api/v1/datasets/\{dataset\_id\}/run\_graphrag \textendash{}header ‘Authorization: Bearer \textless{}YOUR\_API\_KEY\textgreater{}’
+
+\sphinxlineitem{curl \textendash{}request POST }
+\sphinxAtStartPar
+\textendash{}url \sphinxurl{http://192.168.0.213/api/v1/datasets/0fbeb780b40d11f0bf690242ac170006/run\_graphrag} \textendash{}header “Authorization: Bearer ragflow\sphinxhyphen{}\_FdZQN68Q1NgLLeLmKe\sphinxhyphen{}3qbGHv15fqXg2AfJRENBIIw”
+
+\end{description}
+
+\sphinxAtStartPar
+respons : \{“code”:0,”data”:\{“graphrag\_task\_id”:”9512c8e8c9e511f09b860242ac170003”\}\}
+
+\sphinxAtStartPar
+(very resource intensive!!!!!)
+
+\sphinxAtStartPar
+{[}GIN{]} 2025/11/25 \sphinxhyphen{} 10:12:59 | 200 |         8m10s |      172.17.0.1 | POST     “/api/chat”
+
+\sphinxAtStartPar
+{[}GIN{]} 2025/11/25 \sphinxhyphen{} 10:13:15 | 200 |         7m18s |      172.17.0.1 | POST     “/api/chat”
+
+\sphinxAtStartPar
+{[}GIN{]} 2025/11/25 \sphinxhyphen{} 10:13:57 | 200 |         6m56s |      172.17.0.1 | POST     “/api/chat”
+
+\sphinxAtStartPar
+{[}GIN{]} 2025/11/25 \sphinxhyphen{} 10:14:47 | 200 |          6m9s |      172.17.0.1 | POST     “/api/chat”
+
+
+\subsection{{[}GIN{]} 2025/11/25 \sphinxhyphen{} 10:15:40 | 200 |         5m44s |      172.17.0.1 | POST     “/api/chat”}
+\label{\detokenize{graphrag:gin-2025-11-25-10-15-40-200-5m44s-172-17-0-1-post-api-chat}}
+
+\section{So slow, need to see progress}
+\label{\detokenize{graphrag:so-slow-need-to-see-progress}}
+\sphinxAtStartPar
+check log docker container docker\sphinxhyphen{}ragflow\sphinxhyphen{}cpu\sphinxhyphen{}1:
+
+\sphinxAtStartPar
+2025\sphinxhyphen{}11\sphinxhyphen{}25 21:05:43,460 INFO     8082 task\_executor\_cedac6537903\_0 reported heartbeat: \{“ip\_address”: “172.23.0.3”, “pid”: 8082, “name”: “task\_executor\_cedac6537903\_0”, “now”: “2025\sphinxhyphen{}11\sphinxhyphen{}25T21:05:43.459+08:00”, “boot\_at”: “2025\sphinxhyphen{}11\sphinxhyphen{}25T16:43:07.370+08:00”, “pending”: 1, “lag”: 0, “done”: 0, “failed”: 0, “current”: \{“9512c8e8c9e511f09b860242ac170003”: \{“id”: “9512c8e8c9e511f09b860242ac170003”, “doc\_id”: “graph\_raptor\_x”, “from\_page”: 100000000, “to\_page”: 100000000, “retry\_count”: 0, “kb\_id”: “0fbeb780b40d11f0bf690242ac170006”, “parser\_id”: “paper”, “parser\_config”: \{“layout\_recognize”: “DeepDOC”, “chunk\_token\_num”: 512, “delimiter”: “n”, “auto\_keywords”: 0, “auto\_questions”: 0, “html4excel”: false, “topn\_tags”: 3, “raptor”: \{“use\_raptor”: true, “prompt”: “Please summarize the following paragraphs. Be careful with the numbers, do not make things up. Paragraphs as following:n      \{cluster\_content\}nThe above is the content you need to summarize.”, “max\_token”: 256, “threshold”: 0.1, “max\_cluster”: 64, “random\_seed”: 0\}, “graphrag”: \{“use\_graphrag”: true, “entity\_types”: {[}“organization”, “person”, “geo”, “event”, “category”{]}, “method”: “light”\}\}, “name”: “aai2225.pdf”, “type”: “pdf”, “location”: “aai2225.pdf”, “size”: 2893963, “tenant\_id”: “b61ff88eb40611f08d0f0242ac170006”, “language”: “English”, “embd\_id”: “mxbai\sphinxhyphen{}embed\sphinxhyphen{}large:latest@Ollama”, “pagerank”: 15, “kb\_parser\_config”: \{“layout\_recognize”: “DeepDOC”, “chunk\_token\_num”: 512, “delimiter”: “n”, “auto\_keywords”: 5, “auto\_questions”: 2, “html4excel”: false, “tag\_kb\_ids”: {[}{]}, “topn\_tags”: 3, “toc\_extraction”: false, “raptor”: \{“use\_raptor”: true, “prompt”: “Please summarize the following paragraphs. Be careful with the numbers, do not make things up. Paragraphs as following:n      \{cluster\_content\}nThe above is the content you need to summarize.”, “max\_token”: 256, “threshold”: 0.1, “max\_cluster”: 64, “random\_seed”: 0, “scope”: “file”\}, “graphrag”: \{“use\_graphrag”: true, “entity\_types”: {[}“organization”, “person”, “geo”, “event”, “category”{]}, “method”: “general”, “resolution”: true, “community”: true\}\}, “img2txt\_id”: “”, “asr\_id”: “”, “llm\_id”: “qwen2.5:14b@Ollama”, “update\_time”: 1764064833424, “doc\_ids”: {[}“2d7ce1c0b40d11f0aad70242ac170006”, “2dbc4db0b40d11f0aad70242ac170006”, “2df27a3eb40d11f0aad70242ac170006”, “2e46ad98b40d11f0aad70242ac170006”, “2ed60b1eb40d11f0aad70242ac170006”, “67288092c92411f0953d0242ac170003”{]}, “task\_type”: “graphrag”\}\}\}
+2025\sphinxhyphen{}11\sphinxhyphen{}25 21:06:13,466 INFO     8082 task\_executor\_cedac6537903\_0 reported heartbeat: \{“ip\_address”: “172.23.0.3”, “pid”: 8082, “name”: “task\_executor\_cedac6537903\_0”, “now”: “2025\sphinxhyphen{}11\sphinxhyphen{}25T21:06:13.465+08:00”, “boot\_at”: “2025\sphinxhyphen{}11\sphinxhyphen{}25T16:43:07.370+08:00”, “pending”: 1, “lag”: 0, “done”: 0, “failed”: 0, “current”: \{“9512c8e8c9e511f09b860242ac170003”: \{“id”: “9512c8e8c9e511f09b860242ac170003”, “doc\_id”: “graph\_raptor\_x”, “from\_page”: 100000000, “to\_page”: 100000000, “retry\_count”: 0, “kb\_id”: “0fbeb780b40d11f0bf690242ac170006”, “parser\_id”: “paper”, “parser\_config”: \{“layout\_recognize”: “DeepDOC”, “chunk\_token\_num”: 512, “delimiter”: “n”, “auto\_keywords”: 0, “auto\_questions”: 0, “html4excel”: false, “topn\_tags”: 3, “raptor”: \{“use\_raptor”: true, “prompt”: “Please summarize the following paragraphs. Be careful with the numbers, do not make things up. Paragraphs as following:n      \{cluster\_content\}nThe above is the content you need to summarize.”, “max\_token”: 256, “threshold”: 0.1, “max\_cluster”: 64, “random\_seed”: 0\}, “graphrag”: \{“use\_graphrag”: true, “entity\_types”: {[}“organization”, “person”, “geo”, “event”, “category”{]}, “method”: “light”\}\}, “name”: “aai2225.pdf”, “type”: “pdf”, “location”: “aai2225.pdf”, “size”: 2893963, “tenant\_id”: “b61ff88eb40611f08d0f0242ac170006”, “language”: “English”, “embd\_id”: “mxbai\sphinxhyphen{}embed\sphinxhyphen{}large:latest@Ollama”, “pagerank”: 15, “kb\_parser\_config”: \{“layout\_recognize”: “DeepDOC”, “chunk\_token\_num”: 512, “delimiter”: “n”, “auto\_keywords”: 5, “auto\_questions”: 2, “html4excel”: false, “tag\_kb\_ids”: {[}{]}, “topn\_tags”: 3, “toc\_extraction”: false, “raptor”: \{“use\_raptor”: true, “prompt”: “Please summarize the following paragraphs. Be careful with the numbers, do not make things up. Paragraphs as following:n      \{cluster\_content\}nThe above is the content you need to summarize.”, “max\_token”: 256, “threshold”: 0.1, “max\_cluster”: 64, “random\_seed”: 0, “scope”: “file”\}, “graphrag”: \{“use\_graphrag”: true, “entity\_types”: {[}“organization”, “person”, “geo”, “event”, “category”{]}, “method”: “general”, “resolution”: true, “community”: true\}\}, “img2txt\_id”: “”, “asr\_id”: “”, “llm\_id”: “qwen2.5:14b@Ollama”, “update\_time”: 1764064833424, “doc\_ids”: {[}“2d7ce1c0b40d11f0aad70242ac170006”, “2dbc4db0b40d11f0aad70242ac170006”, “2df27a3eb40d11f0aad70242ac170006”, “2e46ad98b40d11f0aad70242ac170006”, “2ed60b1eb40d11f0aad70242ac170006”, “67288092c92411f0953d0242ac170003”{]}, “task\_type”: “graphrag”\}\}\}
+
+
+\section{Stuck ???? what now????}
+\label{\detokenize{graphrag:stuck-what-now}}
+\sphinxAtStartPar
+stopped the container ….
+
+\sphinxAtStartPar
+2025\sphinxhyphen{}11\sphinxhyphen{}25 21:18:25,668 INFO     36 task\_executor\_cedac6537903\_0 reported heartbeat: \{“ip\_address”: “172.23.0.3”, “pid”: 36, “name”: “task\_executor\_cedac6537903\_0”, “now”: “2025\sphinxhyphen{}11\sphinxhyphen{}25T21:18:25.667+08:00”, “boot\_at”: “2025\sphinxhyphen{}11\sphinxhyphen{}25T21:15:55.594+08:00”, “pending”: 0, “lag”: 0, “done”: 0, “failed”: 1, “current”: \{\}\}
+
+\sphinxAtStartPar
+(failed state task\_executor)
+
+\sphinxstepscope
+
+
+\chapter{Chat}
+\label{\detokenize{chat:chat}}\label{\detokenize{chat::doc}}
+\sphinxAtStartPar
+do not forget the dataset!
+
+\begin{figure}[htbp]
+\centering
+
+\noindent\sphinxincludegraphics{{chat}.png}
+\end{figure}
+
 
 \chapter{Indices and tables}
 \label{\detokenize{index:indices-and-tables}}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\DUrole{xref,std,std-ref}{genindex}
+\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{genindex}}}
 
 \item {} 
 \sphinxAtStartPar
-\DUrole{xref,std,std-ref}{modindex}
+\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{modindex}}}
 
 \item {} 
 \sphinxAtStartPar
-\DUrole{xref,std,std-ref}{search}
+\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{search}}}
 
 \end{itemize}
 
