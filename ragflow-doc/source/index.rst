@@ -26,6 +26,7 @@ Welcome to Ragflow's documentation!
    upload-document
    graphrag
    chat  
+   homelab
 
 Indices and tables
 ==================

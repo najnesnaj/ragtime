@@ -1,5 +1,24 @@
 .. _ragflow_models:
 
+
+example:
+--------
+
+curl -X POST http://localhost:8000/v1/rerank \
+    -H "Content-Type: application/json" \
+    -d '{
+        "model": "uw-modelnaam.gguf",
+        "query": "Wat is het weer in Lokeren?",
+        "documents": [
+            "Het is vandaag zonnig in Brussel.",
+            "Lokeren ligt in Oost-Vlaanderen.",
+            "Het KNMI voorspelt regen voor morgen."
+        ]
+    }'
+
+
+
+
 Why Infiniflow RAGFlow Uses a Reranker, an Embedding Model, and a Chat Model
 ===========================================================================
 
