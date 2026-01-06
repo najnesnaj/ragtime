@@ -64,7 +64,7 @@
 
 
 \title{Ragflow}
-\date{Nov 25, 2025}
+\date{Jan 06, 2026}
 \release{1}
 \author{Jansen Jan}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -378,8 +378,37 @@ Reverse proxy / static file server (used in production deployments)
 \sphinxstepscope
 
 
-\chapter{Why Infiniflow RAGFlow Uses a Reranker, an Embedding Model, and a Chat Model}
-\label{\detokenize{rerank:why-infiniflow-ragflow-uses-a-reranker-an-embedding-model-and-a-chat-model}}\label{\detokenize{rerank:ragflow-models}}\label{\detokenize{rerank::doc}}
+\chapter{example:}
+\label{\detokenize{rerank:example}}\label{\detokenize{rerank:ragflow-models}}\label{\detokenize{rerank::doc}}\begin{description}
+\sphinxlineitem{curl \sphinxhyphen{}X POST \sphinxurl{http://localhost:8000/v1/rerank} }
+\sphinxAtStartPar
+\sphinxhyphen{}H “Content\sphinxhyphen{}Type: application/json” \sphinxhyphen{}d ‘\{
+\begin{quote}
+
+\sphinxAtStartPar
+“model”: “uw\sphinxhyphen{}modelnaam.gguf”,
+“query”: “Wat is het weer in Lokeren?”,
+“documents”: {[}
+\begin{quote}
+
+\sphinxAtStartPar
+“Het is vandaag zonnig in Brussel.”,
+“Lokeren ligt in Oost\sphinxhyphen{}Vlaanderen.”,
+“Het KNMI voorspelt regen voor morgen.”
+\end{quote}
+
+\sphinxAtStartPar
+{]}
+\end{quote}
+
+\sphinxAtStartPar
+\}’
+
+\end{description}
+
+
+\section{Why Infiniflow RAGFlow Uses a Reranker, an Embedding Model, and a Chat Model}
+\label{\detokenize{rerank:why-infiniflow-ragflow-uses-a-reranker-an-embedding-model-and-a-chat-model}}
 \sphinxAtStartPar
 Infiniflow RAGFlow is a Retrieval\sphinxhyphen{}Augmented Generation (RAG) framework designed to build high\sphinxhyphen{}quality, traceable question\sphinxhyphen{}answering systems over complex data sources. To achieve accurate and contextually relevant responses, RAGFlow employs three distinct models that work in concert:
 \begin{enumerate}
@@ -412,7 +441,7 @@ Infiniflow RAGFlow is a Retrieval\sphinxhyphen{}Augmented Generation (RAG) frame
 \end{enumerate}
 
 
-\section{Synergy of the Three Models}
+\chapter{Synergy of the Three Models}
 \label{\detokenize{rerank:synergy-of-the-three-models}}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
@@ -1225,8 +1254,8 @@ curl\PYG{+w}{ }\PYGZhy{}\PYGZhy{}request\PYG{+w}{ }PUT\PYG{+w}{ }\PYG{l+s+se}{\P
 You can \sphinxstylestrong{automate metadata tagging} for \sphinxstylestrong{1000s of documents} using a script:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{requests}
-\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{json}
+\PYG{k+kn}{import} \PYG{n+nn}{requests}
+\PYG{k+kn}{import} \PYG{n+nn}{json}
 
 \PYG{n}{BASE\PYGZus{}URL} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{http://192.168.0.213/api/v1}\PYG{l+s+s2}{\PYGZdq{}}
 \PYG{n}{TOKEN} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ragflow\PYGZhy{}QxNWIzMGNlOWRmMzExZjBhZjljMDI0Mm}\PYG{l+s+s2}{\PYGZdq{}}
@@ -1236,7 +1265,7 @@ You can \sphinxstylestrong{automate metadata tagging} for \sphinxstylestrong{100
 \PYG{p}{\PYGZcb{}}
 
 \PYG{c+c1}{\PYGZsh{} Example: Load CSV with doc\PYGZus{}id, author, date, url...}
-\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{pandas}\PYG{+w}{ }\PYG{k}{as}\PYG{+w}{ }\PYG{n+nn}{pd}
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
 \PYG{n}{df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents\PYGZus{}metadata.csv}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
 
 \PYG{k}{for} \PYG{n}{\PYGZus{}}\PYG{p}{,} \PYG{n}{row} \PYG{o+ow}{in} \PYG{n}{df}\PYG{o}{.}\PYG{n}{iterrows}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
@@ -1504,8 +1533,8 @@ For implementation details, refer to the official guide at \sphinxurl{https://gi
 
 \chapter{Running Llama 3.1 with llama.cpp}
 \label{\detokenize{llama-cpp:running-llama-3-1-with-llama-cpp}}\label{\detokenize{llama-cpp:llama-cpp-model-format-gguf}}\label{\detokenize{llama-cpp::doc}}
-\begin{sphinxcontents}
-\sphinxstylecontentstitle{Table of Contents}
+\begin{sphinxShadowBox}
+\sphinxstyletopictitle{Table of Contents}
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
@@ -1548,7 +1577,7 @@ For implementation details, refer to the official guide at \sphinxurl{https://gi
 \phantomsection\label{\detokenize{llama-cpp:id9}}{\hyperref[\detokenize{llama-cpp:summary}]{\sphinxcrossref{Summary}}}
 
 \end{itemize}
-\end{sphinxcontents}
+\end{sphinxShadowBox}
 
 
 \bigskip\hrule\bigskip
@@ -1989,8 +2018,8 @@ Send requests using the OpenAI\sphinxhyphen{}compatible API or \sphinxcode{\sphi
 
 \chapter{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}
 \label{\detokenize{hybrid:deploying-llms-in-hybrid-cloud-why-llama-cpp-wins-for-us}}\label{\detokenize{hybrid::doc}}
-\begin{sphinxcontents}
-\sphinxstylecontentstitle{Table of Contents}
+\begin{sphinxShadowBox}
+\sphinxstyletopictitle{Table of Contents}
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
@@ -2023,7 +2052,7 @@ Send requests using the OpenAI\sphinxhyphen{}compatible API or \sphinxcode{\sphi
 \phantomsection\label{\detokenize{hybrid:id11}}{\hyperref[\detokenize{hybrid:summary}]{\sphinxcrossref{Summary}}}
 
 \end{itemize}
-\end{sphinxcontents}
+\end{sphinxShadowBox}
 
 
 \bigskip\hrule\bigskip
@@ -2740,6 +2769,24 @@ Use \sphinxcode{\sphinxupquote{DEVICE=gpu}} — it’s the difference between a 
 \sphinxstepscope
 
 
+\chapter{Upgrade to latest release :}
+\label{\detokenize{upgrade:upgrade-to-latest-release}}\label{\detokenize{upgrade::doc}}
+\sphinxAtStartPar
+clone the github\sphinxhyphen{}repo : \sphinxurl{https://github.com/infiniflow/ragflow}
+(git pull to get the latest)
+
+\sphinxAtStartPar
+in the docker directory :
+\begin{quote}
+
+\sphinxAtStartPar
+sudo docker compose \sphinxhyphen{}f docker\sphinxhyphen{}compose.yml pull
+sudo docker compose \sphinxhyphen{}f docker\sphinxhyphen{}compose.yml up \sphinxhyphen{}d
+\end{quote}
+
+\sphinxstepscope
+
+
 \chapter{upload document}
 \label{\detokenize{upload-document:upload-document}}\label{\detokenize{upload-document::doc}}
 \sphinxAtStartPar
@@ -2858,20 +2905,478 @@ do not forget the dataset!
 \noindent\sphinxincludegraphics{{chat}.png}
 \end{figure}
 
+\sphinxstepscope
+
+
+\chapter{Why Infinity is a Good Alternative in RAGFlow}
+\label{\detokenize{infinity:why-infinity-is-a-good-alternative-in-ragflow}}\label{\detokenize{infinity::doc}}
+
+\section{Tailored for RAG/LLM Workloads}
+\label{\detokenize{infinity:tailored-for-rag-llm-workloads}}
+\sphinxAtStartPar
+Infinity is an AI\sphinxhyphen{}native database built from the ground up for hybrid search (dense vectors, sparse vectors, multi\sphinxhyphen{}vectors/tensors, full\sphinxhyphen{}text, structured data) with fused ranking and reranking. It outperforms Elasticsearch in benchmarks for RAG\sphinxhyphen{}specific tasks (e.g., faster query latency \sphinxcode{\sphinxupquote{\textasciitilde{}0.1ms}} on million\sphinxhyphen{}scale vectors, higher QPS, better hybrid recall).
+
+
+\section{Performance \& Efficiency}
+\label{\detokenize{infinity:performance-efficiency}}
+\sphinxAtStartPar
+Claims several times faster than Elasticsearch for multi\sphinxhyphen{}recall scenarios, lower resource consumption, and advanced features like real\sphinxhyphen{}time search, better pruning for phrase queries, and native support for RAG needs (e.g., tensor\sphinxhyphen{}based reranking).
+
+
+\section{Integration in RAGFlow}
+\label{\detokenize{infinity:integration-in-ragflow}}
+\sphinxAtStartPar
+Introduced as an option in v0.14 (late 2024), with ongoing improvements. RAGFlow docs and blog state Infinity will become the preferred/default engine once fully mature, as it’s more powerful for their use case. Switching is simple (set \sphinxcode{\sphinxupquote{DOC\_ENGINE=infinity}} in \sphinxcode{\sphinxupquote{.env}}), and it replaces Elasticsearch entirely for storage/retrieval.
+
+
+\section{Fully Open Source \& Vendor\sphinxhyphen{}Neutral}
+\label{\detokenize{infinity:fully-open-source-vendor-neutral}}
+\sphinxAtStartPar
+Apache 2.0\sphinxhyphen{}licensed, no licensing drama, developed openly by InfiniFlow.
+
+
+\section{Drawbacks}
+\label{\detokenize{infinity:drawbacks}}
+\sphinxAtStartPar
+Newer and less battle\sphinxhyphen{}tested than Elasticsearch’s ecosystem (e.g., fewer plugins, tools like Kibana). Some early RAGFlow users reported minor integration bugs, but these have been fixed in recent releases.
+
+\sphinxstepscope
+
+\sphinxAtStartPar
+Support for scanned PDFs via OCR (PaddleOCR, multilingual with over 80 languages).
+Handling of complex layouts, including scientific literature with symbols and equations.
+Multiple backends: pipeline (rule\sphinxhyphen{}based, CPU\sphinxhyphen{}friendly), VLM\sphinxhyphen{}based (vision\sphinxhyphen{}language models for higher accuracy, often GPU\sphinxhyphen{}accelerated), and hybrid modes.
+Built on PDF\sphinxhyphen{}Extract\sphinxhyphen{}Kit models for layout detection, table recognition, and formula parsing.
+AGPL\sphinxhyphen{}3.0 license.
+
+\sphinxAtStartPar
+MinerU is particularly suited for preparing documents for LLM workflows, such as Retrieval\sphinxhyphen{}Augmented Generation (RAG), due to its structured, clean output that minimizes hallucinations in downstream tasks.MinerU in RAGFlowRAGFlow is an open\sphinxhyphen{}source RAG engine focused on deep document understanding, supporting complex data ingestion for accurate question\sphinxhyphen{}answering with citations.MinerU integration was introduced experimentally in RAGFlow v0.22.0 (released October 23, 2025), supporting MinerU \textgreater{}= 2.6.3. RAGFlow acts solely as a client to MinerU:RAGFlow calls MinerU to parse uploaded PDFs.
+MinerU processes the file and outputs structured data (e.g., JSON/Markdown with images and tables).
+RAGFlow reads the output and proceeds with chunking, embedding, and indexing.
+
+\sphinxAtStartPar
+Configuration options:Enable via USE\_MINERU=true in Docker/.env or manual environment variables.
+Select MinerU in the dataset configuration UI under “PDF parser” (for built\sphinxhyphen{}in pipelines) or in the Parser component (for custom pipelines).
+Supports remote MinerU API deployment (e.g., via vLLM backend for GPU offloading, decoupling from RAGFlow’s CPU\sphinxhyphen{}only server).
+Alongside other parsers like DeepDoc (RAGFlow’s default VLM), Naive (text\sphinxhyphen{}only), and Docling.
+\begin{description}
+\sphinxlineitem{This integration leverages MinerU’s superior handling of complex PDFs (e.g., tables, formulas in academic/technical documents) to improve retrieval quality in RAGFlow\sphinxhyphen{}based applications.Comparison with Existing PDF Ingestion ToolsCommon PDF ingestion tools for RAG include Unstructured.io, LlamaParse (LlamaIndex), Docling, Marker, and traditional libraries like PyMuPDF. MinerU frequently ranks highly in 2025 benchmarks for complex PDFs, especially scientific/technical ones… table:: Comparison of PDF Parsers for RAG (as of early 2026)   =================  =============  ==========================================================================  =========================================================================  ==================================  ===========  =======================}
+\sphinxAtStartPar
+Tool               Type           Key Strengths                                                              Weaknesses                                                                 Best For                           Open\sphinxhyphen{}Source  GPU Required (Optional)
+=================  =============  ==========================================================================  =========================================================================  ==================================  ===========  =======================
+MinerU         VLM/Rule\sphinxhyphen{}based Excellent table/formula extraction (LaTeX/HTML), layout preservation, multilingual OCR, clean Markdown/JSON, handles scientific PDFs exceptionally well. Resource\sphinxhyphen{}intensive (especially VLM backend), AGPL\sphinxhyphen{}3.0 license restrictions for some commercial uses. Academic/technical PDFs, precise structured RAG ingestion. Yes          Yes (for best accuracy)
+Unstructured.io Rule\sphinxhyphen{}based + partitions Broad format support, fast partitioning, good integrations (LangChain/LlamaIndex). Weaker on complex tables/formulas vs VLM tools, may need post\sphinxhyphen{}processing. General enterprise documents, multi\sphinxhyphen{}format. Yes (core)   No
+LlamaParse     Cloud/API      Superior table extraction, fast, seamless LlamaIndex integration.           Paid/premium for advanced features, proprietary, privacy concerns.          Quick high\sphinxhyphen{}quality parsing without local setup. No           No (cloud)
+Docling        Modular (IBM)  Native parsing for multiple formats (incl. Office), local/offline, fast, balanced speed/accuracy. Less specialized for formulas/scientific content than MinerU.             Local deployments, mixed document types. Yes          No
+Marker         VLM\sphinxhyphen{}based      Fast PDF\sphinxhyphen{}to\sphinxhyphen{}Markdown, good OCR, offline.                                   Slightly behind MinerU in table/formula precision on complex docs.         Offline Markdown conversion.       Yes          Optional
+=================  =============  ==========================================================================  =========================================================================  ==================================  ===========  =======================Summary of MinerU AdvantagesOften top\sphinxhyphen{}ranked in open\sphinxhyphen{}source benchmarks for complex PDFs (tables without row/column loss, formula accuracy, multilingual support).
+
+\end{description}
+
+\sphinxAtStartPar
+Superior to Unstructured for structured scientific output; comparable or better than LlamaParse in fully open\sphinxhyphen{}source/local setups.
+In RAGFlow, it complements or outperforms the default DeepDoc parser for challenging PDFs requiring top\sphinxhyphen{}tier layout/table handling.
+
+\sphinxAtStartPar
+For most RAG pipelines in 2025\textendash{}2026, MinerU is a leading open\sphinxhyphen{}source choice for difficult PDFs, particularly when integrated into frameworks like RAGFlow.
+
+\sphinxstepscope
+
+
+\chapter{What is Agent context engine?}
+\label{\detokenize{agent-context-engine:what-is-agent-context-engine}}\label{\detokenize{agent-context-engine::doc}}
+\sphinxAtStartPar
+From 2025, a silent revolution began beneath the dazzling surface of AI Agents. While the world marveled at agents that could write code, analyze data, and automate workflows, a fundamental bottleneck emerged: why do even the most advanced agents still stumble on simple questions, forget previous conversations, or misuse available tools?
+
+\sphinxAtStartPar
+The answer lies not in the intelligence of the Large Language Model (LLM) itself, but in the quality of the Context it receives. An LLM, no matter how powerful, is only as good as the information we feed it. Today’s cutting\sphinxhyphen{}edge agents are often crippled by a cumbersome, manual, and error\sphinxhyphen{}prone process of context assembly—a process known as Context Engineering.
+
+\sphinxAtStartPar
+This is where the Agent Context Engine comes in. It is not merely an incremental improvement but a foundational shift, representing the evolution of RAG from a singular technique into the core data and intelligence substrate for the entire Agent ecosystem.
+
+
+\section{Beyond the hype: The reality of today’s “intelligent” Agents}
+\label{\detokenize{agent-context-engine:beyond-the-hype-the-reality-of-today-s-intelligent-agents}}
+\sphinxAtStartPar
+Today, the “intelligence” behind most AI Agents hides a mountain of human labor. Developers must:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Hand\sphinxhyphen{}craft elaborate prompt templates
+
+\item {} 
+\sphinxAtStartPar
+Hard\sphinxhyphen{}code document\sphinxhyphen{}retrieval logic for every task
+
+\item {} 
+\sphinxAtStartPar
+Juggle tool descriptions, conversation history, and knowledge snippets inside a tiny context window
+
+\item {} 
+\sphinxAtStartPar
+Repeat the whole process for each new scenario
+
+\end{itemize}
+
+\sphinxAtStartPar
+This pattern is called Context Engineering. It is deeply tied to expert know\sphinxhyphen{}how, almost impossible to scale, and prohibitively expensive to maintain. When an enterprise needs to keep dozens of distinct agents alive, the artisanal workshop model collapses under its own weight.
+
+\sphinxAtStartPar
+The mission of an Agent Context Engine is to turn Context Engineering from an “art” into an industrial\sphinxhyphen{}grade science.
+
+
+\section{Deconstructing the Agent Context Engine}
+\label{\detokenize{agent-context-engine:deconstructing-the-agent-context-engine}}
+\sphinxAtStartPar
+So, what exactly is an Agent Context Engine? It is a unified, intelligent, and automated platform responsible for the end\sphinxhyphen{}to\sphinxhyphen{}end process of assembling the optimal context for an LLM or Agent at the moment of inference. It moves from artisanal crafting to industrialized production.
+
+\sphinxAtStartPar
+At its core, an Agent Context Engine is built on a triumvirate of next\sphinxhyphen{}generation retrieval capabilities, seamlessly integrated into a single service layer:
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+The Knowledge Core (Advanced RAG): This is the evolution of traditional RAG. It moves beyond simple chunk\sphinxhyphen{}and\sphinxhyphen{}embed to intelligently process static, private enterprise knowledge. Techniques like TreeRAG (building LLM\sphinxhyphen{}generated document outlines for “locate\sphinxhyphen{}then\sphinxhyphen{}expand” retrieval) and GraphRAG (extracting entity networks to find semantically distant connections) work to close the “semantic gap.” The engine’s Ingestion Pipeline acts as the ETL for unstructured data, parsing multi\sphinxhyphen{}format documents and using LLMs to enrich content with summaries, metadata, and structure before indexing.
+
+\item {} 
+\sphinxAtStartPar
+The Memory Layer: An Agent’s intelligence is defined by its ability to learn from interaction. The Memory Layer is a specialized retrieval system for dynamic, episodic data: conversation history, user preferences, and the agent’s own internal state (e.g., “waiting for human input”). It manages the lifecycle of this data—storing raw dialogue, triggering summarization into semantic memory, and retrieving relevant past interactions to provide continuity and personalization. Technologically, it is a close sibling to RAG, but focused on a temporal stream of data.
+
+\item {} 
+\sphinxAtStartPar
+The Tool Orchestrator: As MCP (Model Context Protocol) enables the connection of hundreds of internal services as tools, a new problem arises: tool selection. The Context Engine solves this with Tool Retrieval. Instead of dumping all tool descriptions into the prompt, it maintains an index of tools and—critically—an index of Playbooks or Guidelines (best practices on when and how to use tools). For a given task, it retrieves only the most relevant tools and instructions, transforming the LLM’s job from “searching a haystack” to “following a recipe.”
+
+\end{enumerate}
+
+
+\section{Why we need a dedicated engine? The case for a unified substrate}
+\label{\detokenize{agent-context-engine:why-we-need-a-dedicated-engine-the-case-for-a-unified-substrate}}
+\sphinxAtStartPar
+The necessity of an Agent Context Engine becomes clear when we examine the alternative: siloed, manually wired components.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+The Data Silo Problem: Knowledge, memory, and tools reside in separate systems, requiring complex integration for each new agent.
+
+\item {} 
+\sphinxAtStartPar
+The Assembly Line Bottleneck: Developers spend more time on context plumbing than on agent logic, slowing innovation to a crawl.
+
+\item {} 
+\sphinxAtStartPar
+The “Context Ownership” Dilemma: In manually engineered systems, context logic is buried in code, owned by developers, and opaque to business users. An Engine makes context a configurable, observable, and customer\sphinxhyphen{}owned asset.
+
+\end{itemize}
+
+\sphinxAtStartPar
+The shift from Context Engineering to a Context Platform/Engine marks the maturation of enterprise AI, as summarized in the table below:
+
+
+\section{RAGFlow: A resolute march toward the context engine of Agents}
+\label{\detokenize{agent-context-engine:ragflow-a-resolute-march-toward-the-context-engine-of-agents}}
+\sphinxAtStartPar
+This is the future RAGFlow is forging.
+
+\sphinxAtStartPar
+We left behind the label of “yet another RAG system” long ago. From DeepDoc—our deeply\sphinxhyphen{}optimized, multimodal document parser—to the bleeding\sphinxhyphen{}edge architectures that bridge semantic chasms in complex RAG scenarios, all the way to a full\sphinxhyphen{}blown, enterprise\sphinxhyphen{}grade ingestion pipeline, every evolutionary step RAGFlow takes is a deliberate stride toward the ultimate form: an Agentic Context Engine.
+
+\sphinxAtStartPar
+We believe tomorrow’s enterprise AI advantage will hinge not on who owns the largest model, but on who can feed that model the highest\sphinxhyphen{}quality, most real\sphinxhyphen{}time, and most relevant context. An Agentic Context Engine is the critical infrastructure that turns this vision into reality.
+
+\sphinxAtStartPar
+In the paradigm shift from “hand\sphinxhyphen{}crafted prompts” to “intelligent context,” RAGFlow is determined to be the most steadfast propeller and enabler. We invite every developer, enterprise, and researcher who cares about the future of AI agents to follow RAGFlow’s journey—so together we can witness and build the cornerstone of the next\sphinxhyphen{}generation AI stack.
+
+\sphinxstepscope
+
+
+\chapter{Using SearXNG with RAGFlow}
+\label{\detokenize{searxng:using-searxng-with-ragflow}}\label{\detokenize{searxng::doc}}
+
+\section{Introduction to SearXNG in RAGFlow Agents}
+\label{\detokenize{searxng:introduction-to-searxng-in-ragflow-agents}}
+\sphinxAtStartPar
+RAGFlow provides powerful \sphinxstylestrong{agent capabilities}, including built\sphinxhyphen{}in web search tools for real\sphinxhyphen{}time information retrieval during reasoning or chat sessions. The default web search often relies on cloud providers like Tavily, which require API keys and may incur costs.
+
+\sphinxAtStartPar
+\sphinxstylestrong{SearXNG} serves as a privacy\sphinxhyphen{}focused, open\sphinxhyphen{}source metasearch engine that aggregates results from multiple sources (e.g., Google, Bing, DuckDuckGo) without tracking users. Deploying SearXNG locally offers a fully self\sphinxhyphen{}hosted alternative, ideal for enterprises prioritizing data privacy, avoiding external API dependencies, or operating in restricted networks.
+
+\sphinxAtStartPar
+Although RAGFlow does not yet include native SearXNG support in its UI (as of early 2026 releases), users can integrate it easily via \sphinxstylestrong{custom agent tools} or by pointing the web search component to a local SearXNG instance. This approach mirrors integrations in similar open\sphinxhyphen{}source tools like Open WebUI, AnythingLLM, and Perplexica.
+
+
+\section{Benefits of Using SearXNG with RAGFlow}
+\label{\detokenize{searxng:benefits-of-using-searxng-with-ragflow}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Full Privacy and Control} — All searches stay within your infrastructure. No data leaks to third\sphinxhyphen{}party APIs, making it perfect for sensitive or regulated environments.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{No Costs or Rate Limits} — Unlike Tavily or SerpAPI, SearXNG runs free with unlimited queries (limited only by your hardware).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Customizable Search Engines} — Configure SearXNG to use specific engines, add restrictions, or focus on reliable sources.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Hybrid Real\sphinxhyphen{}Time Retrieval} — Agents combine internal knowledge bases (private documents) with fresh web results, reducing hallucinations on current events or external facts.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Intranet Compatibility} — Deploy SearXNG in air\sphinxhyphen{}gapped or intranet\sphinxhyphen{}only setups. For purely internal “browsing,” configure it to search indexed intranet pages (via custom engines or plugins) or pair it with RAGFlow’s built\sphinxhyphen{}in web page ingestion for static internal sites.
+
+\end{itemize}
+
+
+\section{Benefits for Intranet Page Browsing}
+\label{\detokenize{searxng:benefits-for-intranet-page-browsing}}
+\sphinxAtStartPar
+RAGFlow excels at ingesting and querying private/internal documents, but dynamic intranet pages (e.g., wikis, dashboards) may require real\sphinxhyphen{}time access.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{With Internet Access}: SearXNG provides standard web search while keeping queries internal to your server.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Without Internet (Pure Intranet)}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Use RAGFlow’s native web crawling/ingestion to periodically index intranet URLs into knowledge bases.
+
+\item {} 
+\sphinxAtStartPar
+Configure SearXNG with custom “site:” restrictions or internal search engines (e.g., via plugins for mediawiki or confluence) to query only intranet domains.
+
+\item {} 
+\sphinxAtStartPar
+This creates a “local web search” experience where agents retrieve up\sphinxhyphen{}to\sphinxhyphen{}date content from internal sites without exposing data externally.
+
+\end{itemize}
+
+\end{itemize}
+
+
+\section{Deployment in Docker Containers}
+\label{\detokenize{searxng:deployment-in-docker-containers}}
+\sphinxAtStartPar
+Both RAGFlow and SearXNG deploy easily with Docker, often on the same network for seamless communication.
+
+
+\subsection{1. Deploy SearXNG}
+\label{\detokenize{searxng:deploy-searxng}}
+\sphinxAtStartPar
+Use the official \sphinxcode{\sphinxupquote{searxng/searxng}} image or the dedicated docker repo.
+
+\sphinxAtStartPar
+Example \sphinxcode{\sphinxupquote{docker\sphinxhyphen{}compose.yml}} for SearXNG:
+
+\sphinxAtStartPar
+.. code\sphinxhyphen{}block:: yaml
+
+\sphinxAtStartPar
+version: ‘3’
+services:
+searxng:
+image: searxng/searxng:latest
+container\_name: searxng
+ports:
+\sphinxhyphen{} “8080:8080”
+volumes:
+\sphinxhyphen{} ./searxng:/etc/searxng
+environment:
+\sphinxhyphen{} BASE\_URL=http://localhost:8080
+restart: unless\sphinxhyphen{}stopped
+
+\sphinxAtStartPar
+Key configuration in \sphinxcode{\sphinxupquote{searxng/settings.yml}} (mounted volume):
+
+\sphinxAtStartPar
+.. code\sphinxhyphen{}block:: yaml
+
+\sphinxAtStartPar
+search:
+formats:
+\sphinxhyphen{} html
+\sphinxhyphen{} json  \# Required for API/tool calls
+server:
+limiter: false  \# Disable rate limiting for agent use
+secret\_key: your\_strong\_secret
+
+\sphinxAtStartPar
+Run: \sphinxcode{\sphinxupquote{docker compose up \sphinxhyphen{}d}}
+
+
+\subsection{2. Integrate with RAGFlow}
+\label{\detokenize{searxng:integrate-with-ragflow}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Deploy RAGFlow normally (via its official docker\sphinxhyphen{}compose.yml).
+
+\item {} 
+\sphinxAtStartPar
+Place both in the same Docker network or use \sphinxcode{\sphinxupquote{host}} networking.
+
+\item {} 
+\sphinxAtStartPar
+In RAGFlow’s Agent builder:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Create a custom tool that calls your local SearXNG API (\sphinxcode{\sphinxupquote{http://searxng:8080/search?q=\{query\}\&format=json}}).
+
+\item {} 
+\sphinxAtStartPar
+Or, if using the built\sphinxhyphen{}in Websearch Agent, configure it (via env vars or custom code) to route to your SearXNG endpoint instead of Tavily.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+Many users report success with similar custom integrations in agent frameworks.
+
+\end{itemize}
+
+
+\subsection{Combined Example Network}
+\label{\detokenize{searxng:combined-example-network}}
+\sphinxAtStartPar
+Extend RAGFlow’s compose file to include SearXNG:
+
+\sphinxAtStartPar
+.. code\sphinxhyphen{}block:: yaml
+
+\sphinxAtStartPar
+services:
+\# … existing RAGFlow services …
+searxng:
+image: searxng/searxng:latest
+ports:
+\sphinxhyphen{} “8080:8080”
+volumes:
+\sphinxhyphen{} ./searxng:/etc/searxng
+networks:
+\sphinxhyphen{} ragflow\_network
+
+\sphinxAtStartPar
+This setup keeps everything containerized, secure, and scalable.
+
+
+\section{Conclusion}
+\label{\detokenize{searxng:conclusion}}
+\sphinxAtStartPar
+Integrating SearXNG with RAGFlow delivers a powerful, private alternative to cloud\sphinxhyphen{}based web search in agents—especially valuable for intranet deployments where data sovereignty matters. While awaiting potential native support, the custom tool approach works reliably and aligns with RAGFlow’s extensible design.
+
+\sphinxAtStartPar
+For the latest updates, monitor RAGFlow’s GitHub issues/releases or community discussions. This combination empowers fully self\sphinxhyphen{}hosted, real\sphinxhyphen{}time augmented agents without compromising privacy.
+
+\sphinxstepscope
+
+
+\chapter{homelab}
+\label{\detokenize{homelab:homelab}}\label{\detokenize{homelab::doc}}
+
+\section{problem older hardware :}
+\label{\detokenize{homelab:problem-older-hardware}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Xeon E5\sphinxhyphen{}2690 v2
+
+\item {} 
+\sphinxAtStartPar
+Tesla P100 16GB
+
+\item {} 
+\sphinxAtStartPar
+Driver CUDA 11.8
+
+\end{itemize}
+
+
+\section{software :}
+\label{\detokenize{homelab:software}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+CUDA 12.8
+
+\item {} 
+\sphinxAtStartPar
+AVX512 or AV2 (\textgreater{} xeon v3
+
+\end{itemize}
+
+
+\section{problem reranking:}
+\label{\detokenize{homelab:problem-reranking}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+compiled llama.cpp and gguf model which works OK
+
+\item {} 
+\sphinxAtStartPar
+unfortunately not recognised in infiniflow/ragflow (not anymore)
+
+\end{itemize}
+
+
+\section{possible solution:}
+\label{\detokenize{homelab:possible-solution}}
+\sphinxAtStartPar
+installing xinference (cpu version) (dockercontainer for GPU too big and CUDA 12.8)
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+docker\PYG{+w}{ }run\PYG{+w}{ }\PYGZhy{}d\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}\PYGZhy{}name\PYG{+w}{ }xinference\PYGZhy{}cpu\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}p\PYG{+w}{ }\PYG{l+m}{9997}:9997\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}\PYGZhy{}shm\PYGZhy{}size\PYG{o}{=}8g\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}\PYGZhy{}restart\PYG{+w}{ }unless\PYGZhy{}stopped\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}v\PYG{+w}{ }/home/jan/models:/models\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }xprobe/xinference:latest\PYGZhy{}cpu\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }xinference\PYGZhy{}local\PYG{+w}{ }\PYGZhy{}H\PYG{+w}{ }\PYG{l+m}{0}.0.0.0
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+docker\PYG{+w}{ }\PYG{n+nb}{exec}\PYG{+w}{ }xinference\PYGZhy{}cpu\PYG{+w}{ }xinference\PYG{+w}{ }launch\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}\PYGZhy{}model\PYGZhy{}name\PYG{+w}{ }qwen3\PYGZhy{}reranker\PYGZhy{}4b\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}\PYGZhy{}model\PYGZhy{}format\PYG{+w}{ }gguf\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}\PYGZhy{}model\PYGZhy{}uri\PYG{+w}{ }/models/Qwen3\PYGZhy{}Reranker\PYGZhy{}4B\PYGZhy{}q5\PYGZus{}k\PYGZus{}m.gguf\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}\PYGZhy{}model\PYGZhy{}type\PYG{+w}{ }rerank
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+docker\PYG{+w}{ }\PYG{n+nb}{exec}\PYG{+w}{ }\PYGZhy{}it\PYG{+w}{ }xinference\PYGZhy{}cpu\PYG{+w}{ }xinference\PYG{+w}{ }launch\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}\PYGZhy{}model\PYGZhy{}name\PYG{+w}{ }Qwen3\PYGZhy{}Reranker\PYGZhy{}4B\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}\PYGZhy{}model\PYGZhy{}type\PYG{+w}{ }rerank\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}\PYGZhy{}\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}\PYGZhy{}model\PYGZhy{}format\PYG{+w}{ }gguf\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}\PYGZhy{}model\PYGZhy{}uri\PYG{+w}{ }/models/Qwen3\PYGZhy{}Reranker\PYGZhy{}4B\PYGZhy{}q5\PYGZus{}k\PYGZus{}m.gguf
+
+
+\PYG{k}{in}\PYG{+w}{ }the\PYG{+w}{ }container\PYG{+w}{ }:\PYG{+w}{  }\PYG{o}{(}this\PYG{+w}{ }seems\PYG{+w}{ }to\PYG{+w}{ }work\PYG{+w}{ }OK\PYG{o}{)}
+xinference\PYG{+w}{ }launch\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}\PYGZhy{}model\PYGZhy{}name\PYG{+w}{ }Qwen3\PYGZhy{}Reranker\PYGZhy{}4B\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}\PYGZhy{}model\PYGZhy{}type\PYG{+w}{ }rerank\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}\PYGZhy{}\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}\PYGZhy{}model\PYGZhy{}format\PYG{+w}{ }gguf\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{+w}{    }\PYGZhy{}\PYGZhy{}model\PYGZhy{}uri\PYG{+w}{ }/models/Qwen3\PYGZhy{}Reranker\PYGZhy{}4B\PYGZhy{}q5\PYGZus{}k\PYGZus{}m.gguf
+\end{sphinxVerbatim}
+
 
 \chapter{Indices and tables}
 \label{\detokenize{index:indices-and-tables}}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{genindex}}}
+\DUrole{xref,std,std-ref}{genindex}
 
 \item {} 
 \sphinxAtStartPar
-\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{modindex}}}
+\DUrole{xref,std,std-ref}{modindex}
 
 \item {} 
 \sphinxAtStartPar
-\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{search}}}
+\DUrole{xref,std,std-ref}{search}
 
 \end{itemize}
 

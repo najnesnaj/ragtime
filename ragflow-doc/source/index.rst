@@ -23,9 +23,14 @@ Welcome to Ragflow's documentation!
    hybrid
    gvisor
    ragflow-gpu-cpu
+   upgrade
    upload-document
    graphrag
    chat  
+   infinity
+   minerU
+   agent-context-engine
+   searxng
    homelab
 
 Indices and tables
