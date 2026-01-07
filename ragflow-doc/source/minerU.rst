@@ -1,6 +1,16 @@
 MinerU and Its Use in RAGFlow
 =============================
 
+test : https://huggingface.co/spaces/opendatalab/MinerU 
+
+
+.. code-block:: bash
+
+   docker build -t mineru:latest -f Dockerfile .   (34GB in size!!)
+   docker run --gpus all   --shm-size 32g   -p 30000:30000 -p 7860:7860 -p 8003:8003   --ipc=host   -it mineru:latest /bin/bash (normally with port 8000, but I used 8003) 
+
+
+
 Introduction to MinerU
 ----------------------
 
@@ -76,38 +86,38 @@ ones with tables and formulas.
 
 .. table:: Comparison of PDF Parsers for RAG (as of early 2026)
 
-================= =============
-==========================================================================
-=========================================================================
-============================================= ===========
-======================= Tool Type Key Strengths Weaknesses Best For
-Open-Source GPU Required (Optional) ================= =============
-==========================================================================
-=========================================================================
-============================================= ===========
-======================= **MinerU** VLM/Rule-based Excellent
-table/formula extraction (LaTeX/HTML), layout preservation, multilingual
-OCR, clean Markdown/JSON, SOTA on scientific PDFs. Resource-intensive
-(VLM backend), AGPL-3.0 may require source disclosure for SaaS.
-Academic/technical PDFs, precise structured RAG. Yes Yes (for best
-accuracy) **Unstructured.io** Rule-based + partitions Broad format
-support, fast partitioning, good integrations. Weaker on complex
-tables/formulas vs VLM tools, needs post-processing. General enterprise
-documents, multi-format. Yes (core) No **LlamaParse** Cloud/API Fast,
-superior table extraction, seamless LlamaIndex integration.
-Proprietary/paid for advanced features, privacy concerns. Quick
-high-quality parsing (cloud). No No (cloud) **Docling** Modular (IBM)
-Fast, local/offline, native Office format support, balanced accuracy.
-Less strong on formulas/scientific content or complex tables than
-MinerU. Local deployments, mixed document types. Yes No **Marker**
-VLM-based Fast PDF-to-Markdown, good OCR, offline. Slightly behind
-MinerU on table/formula precision in recent benchmarks. Offline Markdown
-conversion. Yes Optional ================= =============
-==========================================================================
-=========================================================================
-============================================= ===========
-=======================
-
+    ================= =============
+    ==========================================================================
+    =========================================================================
+    ============================================= ===========
+    ======================= Tool Type Key Strengths Weaknesses Best For
+    Open-Source GPU Required (Optional) ================= =============
+    ==========================================================================
+    =========================================================================
+    ============================================= ===========
+    ======================= **MinerU** VLM/Rule-based Excellent
+    table/formula extraction (LaTeX/HTML), layout preservation, multilingual
+    OCR, clean Markdown/JSON, SOTA on scientific PDFs. Resource-intensive
+    (VLM backend), AGPL-3.0 may require source disclosure for SaaS.
+    Academic/technical PDFs, precise structured RAG. Yes Yes (for best
+    accuracy) **Unstructured.io** Rule-based + partitions Broad format
+    support, fast partitioning, good integrations. Weaker on complex
+    tables/formulas vs VLM tools, needs post-processing. General enterprise
+    documents, multi-format. Yes (core) No **LlamaParse** Cloud/API Fast,
+    superior table extraction, seamless LlamaIndex integration.
+    Proprietary/paid for advanced features, privacy concerns. Quick
+    high-quality parsing (cloud). No No (cloud) **Docling** Modular (IBM)
+    Fast, local/offline, native Office format support, balanced accuracy.
+    Less strong on formulas/scientific content or complex tables than
+    MinerU. Local deployments, mixed document types. Yes No **Marker**
+    VLM-based Fast PDF-to-Markdown, good OCR, offline. Slightly behind
+    MinerU on table/formula precision in recent benchmarks. Offline Markdown
+    conversion. Yes Optional ================= =============
+    ==========================================================================
+    =========================================================================
+    ============================================= ===========
+    =======================
+    
 Summary of MinerU Advantages
 ----------------------------
 

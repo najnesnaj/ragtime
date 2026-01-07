@@ -114,11 +114,63 @@ Extend RAGFlow’s compose file to include SearXNG:
 
 .. code-block:: yaml
 
-services: # … existing RAGFlow services … searxng: image:
-searxng/searxng:latest ports: - “8080:8080” volumes: -
-./searxng:/etc/searxng networks: - ragflow_network
+    services: # … existing RAGFlow services … searxng: image:
+    searxng/searxng:latest ports: - “8080:8080” volumes: -
+    ./searxng:/etc/searxng networks: - ragflow_network
 
 This setup keeps everything containerized, secure, and scalable.
+
+example on homelab
+
+.. code-block:: yaml
+
+   services:
+     caddy:
+       container_name: caddy
+       image: docker.io/library/caddy:2-alpine
+       network_mode: host
+       restart: unless-stopped
+       volumes:
+         - ./Caddyfile:/etc/caddy/Caddyfile:ro
+         - caddy-data:/data:rw
+         - caddy-config:/config:rw
+       environment:
+         - SEARXNG_HOSTNAME=${SEARXNG_HOSTNAME:-http://192.168.0.213}
+         - SEARXNG_TLS=${LETSENCRYPT_EMAIL:-internal}
+       logging:
+         driver: "json-file"
+         options:
+           max-size: "1m"
+           max-file: "1"
+   
+     searxng:
+       container_name: searxng
+       image: docker.io/searxng/searxng:latest
+       restart: unless-stopped
+       networks:
+         - searxng
+       ports:
+         - "192.168.0.213:8080:8080"
+       volumes:
+         - ./searxng:/etc/searxng:rw
+       environment:
+         - SEARXNG_BASE_URL=https://${SEARXNG_HOSTNAME:-192.168.0.213}/
+       depends_on:
+         - caddy
+       logging:
+         driver: "json-file"
+         options:
+           max-size: "1m"
+           max-file: "1"
+
+networks:
+  searxng:
+
+volumes:
+  caddy-data:
+  caddy-config:
+
+
 
 Conclusion
 ----------

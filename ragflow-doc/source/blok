@@ -1,0 +1,29 @@
+   version: '3.8'
+   services:
+     qwen-reranker:
+       image: vllm-cpu:latest
+       ports: ["8123:8000"]
+       volumes:
+         - /home/naj/qwen3-reranker-0.6b:/models/qwen3-reranker-0.6b:ro
+       environment:
+         VLLM_HF_OVERRIDES: |
+           {
+             "architectures": ["Qwen3ForSequenceClassification"],
+             "classifier_from_token": ["no", "yes"],
+             "is_original_qwen3_reranker": true
+           }
+       command: >
+         /models/qwen3-reranker-0.6b
+         --task score
+         --dtype float32
+         --port 8000
+         --trust-remote-code
+         --max-model-len 8192
+       deploy:
+         resources:
+           limits:
+             cpus: '10'
+             memory: 16G
+       shm_size: 4g
+       restart: unless-stopped
+
