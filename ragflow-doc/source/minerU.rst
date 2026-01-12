@@ -131,3 +131,18 @@ Summary of MinerU Advantages
 For most RAG pipelines in 2026, MinerU is a leading open-source choice
 for difficult PDFs, particularly when integrated into frameworks like
 RAGFlow.
+
+
+Activating MinerU in RagFlow
+------------------------------
+
+in the dataset select in the configuration / ingestion pipeline / pdf parser -> mineru-from-env-1 Experimental
+
+adapt the .env settings :
+# Enable Mineru
+# Uncommenting these lines will automatically add MinerU to the model provider whenever possible.
+# More details see https://ragflow.io/docs/faq#how-to-use-mineru-to-parse-pdf-documents.
+MINERU_APISERVER=http://host.docker.internal:8003
+MINERU_DELETE_OUTPUT=0   # keep output directory
+MINERU_BACKEND=pipeline  # or another backend you prefer
+
