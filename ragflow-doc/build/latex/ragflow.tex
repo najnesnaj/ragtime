@@ -64,7 +64,7 @@
 
 
 \title{Ragflow}
-\date{Jan 06, 2026}
+\date{Jan 12, 2026}
 \release{1}
 \author{Jansen Jan}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -374,6 +374,247 @@ Reverse proxy / static file server (used in production deployments)
 \sphinxstylestrong{Chunks} are sent to the configured embedding model (Ollama, vLLM, OpenAI, etc.) \(\rightarrow\) vectors returned.
 
 \end{enumerate}
+
+\sphinxstepscope
+
+
+\chapter{From RAG to Context \sphinxhyphen{} A 2025 Year\sphinxhyphen{}End Review of RAG}
+\label{\detokenize{blog-dec-2025:from-rag-to-context-a-2025-year-end-review-of-rag}}\label{\detokenize{blog-dec-2025::doc}}
+\begin{DUlineblock}{0em}
+\item[] \sphinxstylestrong{Date:} December 22, 2025
+\item[] \sphinxstylestrong{Source:} RAGFlow Blog
+\end{DUlineblock}
+
+\sphinxAtStartPar
+As 2025 draws to a close, the field of Retrieval\sphinxhyphen{}Augmented Generation
+(RAG) has undergone profound reflection, vigorous debate, and marked
+evolution. Far from fading into obsolescence as some bold predictions
+foresaw—amid lingering scepticism over its supposedly transient role—RAG
+has solidified its indispensability as a cornerstone of data
+infrastructure in the demanding arena of enterprise AI adoption.
+
+\sphinxAtStartPar
+Looking back, RAG’s trajectory this year has been complex. On one hand,
+its practical effectiveness faced significant skepticism, partly due to
+the “easy to use, hard to master” tuning challenges inherent to RAG
+systems. On the other hand, its share of public attention seemed to be
+overshadowed by the undisputed focus of 2025’s LLM applications: \sphinxstylestrong{AI
+Agents}.
+
+\sphinxAtStartPar
+However, an intriguing trend emerged. Despite the controversies and not
+being in the spotlight, enterprises genuinely committed to building core
+AI competencies—especially mid\sphinxhyphen{}to\sphinxhyphen{}large\sphinxhyphen{}sized organizations—deepened and
+systematized their investments in RAG. Rather than being marginalized,
+RAG has solidified its core role in enterprise AI architecture. Its
+position as critical infrastructure remains unshaken, forming the robust
+foundation for enterprise intelligence.
+
+\sphinxAtStartPar
+Therefore, we must first move beyond surface\sphinxhyphen{}level debates to examine
+the intrinsic vitality of RAG technology. Is it merely a transitional
+“band\sphinxhyphen{}aid” to patch LLM knowledge gaps, or is it an architecture capable
+of continuous evolution into a cornerstone for next\sphinxhyphen{}generation AI
+applications? To answer this, we must systematically review its
+technical improvements, architectural evolution, and new role in the age
+of Agents.
+
+
+\section{Can RAG Still Be Improved?}
+\label{\detokenize{blog-dec-2025:can-rag-still-be-improved}}
+
+\subsection{The Debate About Long Context and RAG}
+\label{\detokenize{blog-dec-2025:the-debate-about-long-context-and-rag}}
+\sphinxAtStartPar
+In 2025, the core of many RAG debates stems from a widely acknowledged
+contradiction: enterprises feel they “cannot live without RAG, yet
+remain unsatisfied.” RAG lowers the barrier to accessing private
+knowledge, but achieving stable and accurate results—especially for
+complex queries—often requires extensive, fine\sphinxhyphen{}tuned optimization,
+complicating total cost of ownership assessments.
+
+\sphinxAtStartPar
+Consequently, the theoretical question heatedly discussed in 2024—“Can
+Long Context replace RAG?”—rapidly entered practical testing in 2025.
+Some scenarios less sensitive to latency and cost, with relatively fixed
+query patterns (e.g., certain contract reviews, fixed\sphinxhyphen{}format report
+analysis), began experimenting with directly using long\sphinxhyphen{}context windows.
+They feed entire or large batches of relevant documents into the model
+at once, hoping to bypass potential information loss or noise from RAG
+retrieval and directly address inconsistent conversational quality.
+
+\sphinxAtStartPar
+However, research since 2024 offers a clearer picture of the technical
+comparison. Mechanically stuffing lengthy text into an LLM’s context
+window is essentially a “brute\sphinxhyphen{}force” strategy. It inevitably scatters
+the model’s attention, significantly degrading answer quality through
+the \sphinxstylestrong{“Lost in the Middle”} or \sphinxstylestrong{“information flooding”} effect. More
+importantly, this approach incurs high costs—computational overhead for
+processing long context grows non\sphinxhyphen{}linearly.
+
+\sphinxAtStartPar
+Thus, for enterprises, the practical question is not engaging in
+simplistic debates like “RAG is dead,” but returning to the core
+challenge: how to incorporate the most relevant and effective
+information into the model’s context processing system with the best
+cost\sphinxhyphen{}performance ratio. This is precisely the original design goal of
+RAG technology.
+
+\sphinxAtStartPar
+Improved long\sphinxhyphen{}context capabilities have not signaled RAG’s demise.
+Instead, they prompt deeper thinking about how the two can collaborate.
+For example, RAG systems can use long\sphinxhyphen{}context windows to hold more
+complete, semantically coherent retrieved chunks or to aggregate
+intermediate results for multi\sphinxhyphen{}step retrieval and reflection. This
+“retrieval\sphinxhyphen{}first, long\sphinxhyphen{}context containment” synergy is a key driver
+behind the emerging field of \sphinxstylestrong{“Context Engineering.”} It marks a shift
+from optimizing single “retrieval algorithms” to the systematic design
+of the end\sphinxhyphen{}to\sphinxhyphen{}end “retrieval\sphinxhyphen{}context assembly\sphinxhyphen{}model reasoning” pipeline.
+
+\sphinxAtStartPar
+Currently, paradigms for providing external knowledge to LLMs mainly
+fall into four categories:
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+Relying solely on LLM’s long\sphinxhyphen{}context capability.
+
+\item {} 
+\sphinxAtStartPar
+Utilizing KV Cache.
+
+\item {} 
+\sphinxAtStartPar
+Using simple search methods like Grep.
+
+\item {} 
+\sphinxAtStartPar
+Employing a full RAG architecture.
+
+\end{enumerate}
+
+\sphinxAtStartPar
+Cost\sphinxhyphen{}wise, there is roughly a \sphinxstylestrong{two\sphinxhyphen{}order\sphinxhyphen{}of\sphinxhyphen{}magnitude gap} between
+option 1 and option 4. Option 2 (KV Cache based) remains at least an
+order of magnitude more expensive than full RAG, while facing serious
+limitations in scalability, real\sphinxhyphen{}time updates, and complex enterprise
+scenarios.
+
+\sphinxAtStartPar
+Option 3 (index\sphinxhyphen{}free / Grep\sphinxhyphen{}style) works in very narrow, highly
+structured domains (e.g. clean codebases or logs) but fails completely
+for the majority of enterprise unstructured/multi\sphinxhyphen{}modal data.
+
+
+\subsection{Optimizations for RAG Conversational Quality}
+\label{\detokenize{blog-dec-2025:optimizations-for-rag-conversational-quality}}
+\sphinxAtStartPar
+A common source of inaccurate or unstable answers lies in a structural
+conflict within the traditional “chunk\sphinxhyphen{}embed\sphinxhyphen{}retrieve” pipeline: using a
+\sphinxstylestrong{single\sphinxhyphen{}granularity, fixed\sphinxhyphen{}size} text chunk to perform two inherently
+conflicting tasks:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Semantic matching (recall)}: Smaller chunks (100\textendash{}256 tokens) \(\rightarrow\)
+better precision
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Context understanding (utilization)}: Larger chunks (1024+ tokens)
+\(\rightarrow\) better coherence
+
+\end{itemize}
+
+\sphinxAtStartPar
+This forces a difficult trade\sphinxhyphen{}off.
+
+\sphinxAtStartPar
+A fundamental improvement is to \sphinxstylestrong{decouple} the process into two
+stages:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Search} (scanning/locating): Use small, precise units for high
+recall
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Retrieve} (reading/understanding): Dynamically assemble larger,
+coherent context
+
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+
+\noindent\sphinxincludegraphics{{tree-rag}.png}
+\end{figure}
+
+\sphinxAtStartPar
+\sphinxstylestrong{RAGFlow’s TreeRAG} technology embodies this:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Offline}: LLM builds hierarchical tree summaries (Chapter \(\rightarrow\)
+Section \(\rightarrow\) Subsection \(\rightarrow\) Key Paragraph)
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Online}: Precise small\sphinxhyphen{}chunk search \(\rightarrow\) use tree as navigation map \(\rightarrow\)
+auto\sphinxhyphen{}expand to complete logical fragments
+
+\end{itemize}
+
+\sphinxAtStartPar
+This mitigates \sphinxstylestrong{“Lost in the Middle”} and context fragmentation.
+
+\sphinxAtStartPar
+For even more complex queries (scattered info, cross\sphinxhyphen{}document reasoning)
+\(\rightarrow\) \sphinxstylestrong{GraphRAG} (entity\sphinxhyphen{}relationship graphs) becomes relevant, though it
+has challenges:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Massive token consumption during graph building
+
+\item {} 
+\sphinxAtStartPar
+Noisy auto\sphinxhyphen{}extracted entities/relations
+
+\item {} 
+\sphinxAtStartPar
+Fragmented knowledge output
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Hybrid TreeRAG + GraphRAG} (“Long\sphinxhyphen{}Context RAG”) approaches appear
+most promising.
+
+\sphinxAtStartPar
+Modern RAG philosophy: Leverage LLMs during \sphinxstylestrong{ingestion} for deep
+semantic enhancement (summaries, entities, metadata, potential
+questions) \(\rightarrow\) use this as intelligent “navigation map” during
+\sphinxstylestrong{retrieval} \(\rightarrow\) achieve optimal balance of effectiveness, performance
+and cost.
+
+
+\subsection{From Knowledge Base to Data Foundation}
+\label{\detokenize{blog-dec-2025:from-knowledge-base-to-data-foundation}}
+\sphinxAtStartPar
+RAG is an architectural paradigm, not just a Q\&A tool.
+
+\sphinxAtStartPar
+With the rise of \sphinxstylestrong{AI Agents}, enterprise RAG is evolving into a
+\sphinxstylestrong{general\sphinxhyphen{}purpose data foundation} for unstructured data — serving as
+unified, efficient, secure access layer for all types of Agents.
+
+\sphinxAtStartPar
+A robust, scalable, configurable \sphinxstylestrong{Ingestion Pipeline} has become the
+core of modern RAG engines, handling the full lifecycle from raw
+documents to structured, semantically rich, query\sphinxhyphen{}ready knowledge.
 
 \sphinxstepscope
 
@@ -1254,8 +1495,8 @@ curl\PYG{+w}{ }\PYGZhy{}\PYGZhy{}request\PYG{+w}{ }PUT\PYG{+w}{ }\PYG{l+s+se}{\P
 You can \sphinxstylestrong{automate metadata tagging} for \sphinxstylestrong{1000s of documents} using a script:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{import} \PYG{n+nn}{requests}
-\PYG{k+kn}{import} \PYG{n+nn}{json}
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{requests}
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{json}
 
 \PYG{n}{BASE\PYGZus{}URL} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{http://192.168.0.213/api/v1}\PYG{l+s+s2}{\PYGZdq{}}
 \PYG{n}{TOKEN} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ragflow\PYGZhy{}QxNWIzMGNlOWRmMzExZjBhZjljMDI0Mm}\PYG{l+s+s2}{\PYGZdq{}}
@@ -1265,7 +1506,7 @@ You can \sphinxstylestrong{automate metadata tagging} for \sphinxstylestrong{100
 \PYG{p}{\PYGZcb{}}
 
 \PYG{c+c1}{\PYGZsh{} Example: Load CSV with doc\PYGZus{}id, author, date, url...}
-\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{pandas}\PYG{+w}{ }\PYG{k}{as}\PYG{+w}{ }\PYG{n+nn}{pd}
 \PYG{n}{df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents\PYGZus{}metadata.csv}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
 
 \PYG{k}{for} \PYG{n}{\PYGZus{}}\PYG{p}{,} \PYG{n}{row} \PYG{o+ow}{in} \PYG{n}{df}\PYG{o}{.}\PYG{n}{iterrows}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
@@ -1533,8 +1774,8 @@ For implementation details, refer to the official guide at \sphinxurl{https://gi
 
 \chapter{Running Llama 3.1 with llama.cpp}
 \label{\detokenize{llama-cpp:running-llama-3-1-with-llama-cpp}}\label{\detokenize{llama-cpp:llama-cpp-model-format-gguf}}\label{\detokenize{llama-cpp::doc}}
-\begin{sphinxShadowBox}
-\sphinxstyletopictitle{Table of Contents}
+\begin{sphinxcontents}
+\sphinxstylecontentstitle{Table of Contents}
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
@@ -1577,7 +1818,7 @@ For implementation details, refer to the official guide at \sphinxurl{https://gi
 \phantomsection\label{\detokenize{llama-cpp:id9}}{\hyperref[\detokenize{llama-cpp:summary}]{\sphinxcrossref{Summary}}}
 
 \end{itemize}
-\end{sphinxShadowBox}
+\end{sphinxcontents}
 
 
 \bigskip\hrule\bigskip
@@ -2018,8 +2259,8 @@ Send requests using the OpenAI\sphinxhyphen{}compatible API or \sphinxcode{\sphi
 
 \chapter{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}
 \label{\detokenize{hybrid:deploying-llms-in-hybrid-cloud-why-llama-cpp-wins-for-us}}\label{\detokenize{hybrid::doc}}
-\begin{sphinxShadowBox}
-\sphinxstyletopictitle{Table of Contents}
+\begin{sphinxcontents}
+\sphinxstylecontentstitle{Table of Contents}
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
@@ -2052,7 +2293,7 @@ Send requests using the OpenAI\sphinxhyphen{}compatible API or \sphinxcode{\sphi
 \phantomsection\label{\detokenize{hybrid:id11}}{\hyperref[\detokenize{hybrid:summary}]{\sphinxcrossref{Summary}}}
 
 \end{itemize}
-\end{sphinxShadowBox}
+\end{sphinxcontents}
 
 
 \bigskip\hrule\bigskip
@@ -2942,43 +3183,164 @@ Newer and less battle\sphinxhyphen{}tested than Elasticsearch’s ecosystem (e.g
 
 \sphinxstepscope
 
+
+\chapter{MinerU and Its Use in RAGFlow}
+\label{\detokenize{minerU:mineru-and-its-use-in-ragflow}}\label{\detokenize{minerU::doc}}
 \sphinxAtStartPar
-Support for scanned PDFs via OCR (PaddleOCR, multilingual with over 80 languages).
-Handling of complex layouts, including scientific literature with symbols and equations.
-Multiple backends: pipeline (rule\sphinxhyphen{}based, CPU\sphinxhyphen{}friendly), VLM\sphinxhyphen{}based (vision\sphinxhyphen{}language models for higher accuracy, often GPU\sphinxhyphen{}accelerated), and hybrid modes.
-Built on PDF\sphinxhyphen{}Extract\sphinxhyphen{}Kit models for layout detection, table recognition, and formula parsing.
+test : \sphinxurl{https://huggingface.co/spaces/opendatalab/MinerU}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+docker\PYG{+w}{ }build\PYG{+w}{ }\PYGZhy{}t\PYG{+w}{ }mineru:latest\PYG{+w}{ }\PYGZhy{}f\PYG{+w}{ }Dockerfile\PYG{+w}{ }.\PYG{+w}{   }\PYG{o}{(}34GB\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }size!!\PYG{o}{)}
+docker\PYG{+w}{ }run\PYG{+w}{ }\PYGZhy{}\PYGZhy{}gpus\PYG{+w}{ }all\PYG{+w}{   }\PYGZhy{}\PYGZhy{}shm\PYGZhy{}size\PYG{+w}{ }32g\PYG{+w}{   }\PYGZhy{}p\PYG{+w}{ }\PYG{l+m}{30000}:30000\PYG{+w}{ }\PYGZhy{}p\PYG{+w}{ }\PYG{l+m}{7860}:7860\PYG{+w}{ }\PYGZhy{}p\PYG{+w}{ }\PYG{l+m}{8003}:8003\PYG{+w}{   }\PYGZhy{}\PYGZhy{}ipc\PYG{o}{=}host\PYG{+w}{   }\PYGZhy{}it\PYG{+w}{ }mineru:latest\PYG{+w}{ }/bin/bash\PYG{+w}{ }\PYG{o}{(}normally\PYG{+w}{ }with\PYG{+w}{ }port\PYG{+w}{ }\PYG{l+m}{8000},\PYG{+w}{ }but\PYG{+w}{ }I\PYG{+w}{ }used\PYG{+w}{ }\PYG{l+m}{8003}\PYG{o}{)}
+\end{sphinxVerbatim}
+
+
+\section{Introduction to MinerU}
+\label{\detokenize{minerU:introduction-to-mineru}}
+\sphinxAtStartPar
+MinerU is an open\sphinxhyphen{}source tool developed by OpenDataLab (Shanghai AI
+Laboratory) for converting complex PDF documents into machine\sphinxhyphen{}readable
+formats, such as Markdown or JSON. It excels at extracting text, tables
+(in HTML or LaTeX), mathematical formulas (in LaTeX), images (with
+captions), and preserving document structure, including headings,
+paragraphs, lists, and reading order for multi\sphinxhyphen{}column layouts.
+
+\sphinxAtStartPar
+Key features include:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Removal of noise elements like headers, footers, footnotes, and page
+numbers.
+
+\item {} 
+\sphinxAtStartPar
+Support for scanned PDFs via OCR (PaddleOCR, multilingual with over
+80 languages).
+
+\item {} 
+\sphinxAtStartPar
+Handling of complex layouts, including scientific literature with
+symbols and equations.
+
+\item {} 
+\sphinxAtStartPar
+Multiple backends: pipeline (rule\sphinxhyphen{}based, CPU\sphinxhyphen{}friendly), VLM\sphinxhyphen{}based
+(vision\sphinxhyphen{}language models for higher accuracy, often GPU\sphinxhyphen{}accelerated),
+and hybrid modes.
+
+\item {} 
+\sphinxAtStartPar
+Built on PDF\sphinxhyphen{}Extract\sphinxhyphen{}Kit models for layout detection, table
+recognition, and formula parsing.
+
+\item {} 
+\sphinxAtStartPar
 AGPL\sphinxhyphen{}3.0 license.
 
-\sphinxAtStartPar
-MinerU is particularly suited for preparing documents for LLM workflows, such as Retrieval\sphinxhyphen{}Augmented Generation (RAG), due to its structured, clean output that minimizes hallucinations in downstream tasks.MinerU in RAGFlowRAGFlow is an open\sphinxhyphen{}source RAG engine focused on deep document understanding, supporting complex data ingestion for accurate question\sphinxhyphen{}answering with citations.MinerU integration was introduced experimentally in RAGFlow v0.22.0 (released October 23, 2025), supporting MinerU \textgreater{}= 2.6.3. RAGFlow acts solely as a client to MinerU:RAGFlow calls MinerU to parse uploaded PDFs.
-MinerU processes the file and outputs structured data (e.g., JSON/Markdown with images and tables).
-RAGFlow reads the output and proceeds with chunking, embedding, and indexing.
+\end{itemize}
 
 \sphinxAtStartPar
-Configuration options:Enable via USE\_MINERU=true in Docker/.env or manual environment variables.
-Select MinerU in the dataset configuration UI under “PDF parser” (for built\sphinxhyphen{}in pipelines) or in the Parser component (for custom pipelines).
-Supports remote MinerU API deployment (e.g., via vLLM backend for GPU offloading, decoupling from RAGFlow’s CPU\sphinxhyphen{}only server).
-Alongside other parsers like DeepDoc (RAGFlow’s default VLM), Naive (text\sphinxhyphen{}only), and Docling.
-\begin{description}
-\sphinxlineitem{This integration leverages MinerU’s superior handling of complex PDFs (e.g., tables, formulas in academic/technical documents) to improve retrieval quality in RAGFlow\sphinxhyphen{}based applications.Comparison with Existing PDF Ingestion ToolsCommon PDF ingestion tools for RAG include Unstructured.io, LlamaParse (LlamaIndex), Docling, Marker, and traditional libraries like PyMuPDF. MinerU frequently ranks highly in 2025 benchmarks for complex PDFs, especially scientific/technical ones… table:: Comparison of PDF Parsers for RAG (as of early 2026)   =================  =============  ==========================================================================  =========================================================================  ==================================  ===========  =======================}
-\sphinxAtStartPar
-Tool               Type           Key Strengths                                                              Weaknesses                                                                 Best For                           Open\sphinxhyphen{}Source  GPU Required (Optional)
-=================  =============  ==========================================================================  =========================================================================  ==================================  ===========  =======================
-MinerU         VLM/Rule\sphinxhyphen{}based Excellent table/formula extraction (LaTeX/HTML), layout preservation, multilingual OCR, clean Markdown/JSON, handles scientific PDFs exceptionally well. Resource\sphinxhyphen{}intensive (especially VLM backend), AGPL\sphinxhyphen{}3.0 license restrictions for some commercial uses. Academic/technical PDFs, precise structured RAG ingestion. Yes          Yes (for best accuracy)
-Unstructured.io Rule\sphinxhyphen{}based + partitions Broad format support, fast partitioning, good integrations (LangChain/LlamaIndex). Weaker on complex tables/formulas vs VLM tools, may need post\sphinxhyphen{}processing. General enterprise documents, multi\sphinxhyphen{}format. Yes (core)   No
-LlamaParse     Cloud/API      Superior table extraction, fast, seamless LlamaIndex integration.           Paid/premium for advanced features, proprietary, privacy concerns.          Quick high\sphinxhyphen{}quality parsing without local setup. No           No (cloud)
-Docling        Modular (IBM)  Native parsing for multiple formats (incl. Office), local/offline, fast, balanced speed/accuracy. Less specialized for formulas/scientific content than MinerU.             Local deployments, mixed document types. Yes          No
-Marker         VLM\sphinxhyphen{}based      Fast PDF\sphinxhyphen{}to\sphinxhyphen{}Markdown, good OCR, offline.                                   Slightly behind MinerU in table/formula precision on complex docs.         Offline Markdown conversion.       Yes          Optional
-=================  =============  ==========================================================================  =========================================================================  ==================================  ===========  =======================Summary of MinerU AdvantagesOften top\sphinxhyphen{}ranked in open\sphinxhyphen{}source benchmarks for complex PDFs (tables without row/column loss, formula accuracy, multilingual support).
+MinerU is particularly suited for preparing documents for LLM workflows,
+such as Retrieval\sphinxhyphen{}Augmented Generation (RAG), due to its structured,
+clean output that minimizes hallucinations in downstream tasks. Recent
+versions (e.g., MinerU 2.5) achieve state\sphinxhyphen{}of\sphinxhyphen{}the\sphinxhyphen{}art performance on
+benchmarks like OmniDocBench.
 
-\end{description}
+
+\section{MinerU in RAGFlow}
+\label{\detokenize{minerU:mineru-in-ragflow}}
+\sphinxAtStartPar
+RAGFlow is an open\sphinxhyphen{}source RAG engine focused on deep document
+understanding, supporting complex data ingestion for accurate
+question\sphinxhyphen{}answering with citations.
 
 \sphinxAtStartPar
-Superior to Unstructured for structured scientific output; comparable or better than LlamaParse in fully open\sphinxhyphen{}source/local setups.
-In RAGFlow, it complements or outperforms the default DeepDoc parser for challenging PDFs requiring top\sphinxhyphen{}tier layout/table handling.
+MinerU integration was introduced in RAGFlow v0.22.0 (released October
+2025), supporting MinerU \textgreater{}= 2.6.3. RAGFlow acts solely as a \sphinxstylestrong{client}
+to MinerU:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+RAGFlow calls MinerU to parse uploaded PDFs.
+
+\item {} 
+\sphinxAtStartPar
+MinerU processes the file and outputs structured data (e.g.,
+JSON/Markdown with images and tables).
+
+\item {} 
+\sphinxAtStartPar
+RAGFlow reads the output and proceeds with chunking, embedding, and
+indexing.
+
+\end{itemize}
 
 \sphinxAtStartPar
-For most RAG pipelines in 2025\textendash{}2026, MinerU is a leading open\sphinxhyphen{}source choice for difficult PDFs, particularly when integrated into frameworks like RAGFlow.
+Configuration options:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Enable via \sphinxcode{\sphinxupquote{USE\_MINERU=true}} in Docker/.env or manual environment
+variables.
+
+\item {} 
+\sphinxAtStartPar
+Select MinerU in the dataset configuration UI under “PDF parser” (for
+built\sphinxhyphen{}in pipelines) or in the Parser component (for custom
+pipelines).
+
+\item {} 
+\sphinxAtStartPar
+Supports remote MinerU API deployment (e.g., via vLLM backend for GPU
+offloading, decoupling from RAGFlow’s CPU\sphinxhyphen{}only server).
+
+\item {} 
+\sphinxAtStartPar
+Alongside other parsers like DeepDoc (RAGFlow’s default VLM), Naive
+(text\sphinxhyphen{}only), and Docling.
+
+\end{itemize}
+
+\sphinxAtStartPar
+This integration leverages MinerU’s superior handling of complex PDFs
+(e.g., tables, formulas in academic/technical documents) to improve
+retrieval quality in RAGFlow\sphinxhyphen{}based applications.
+
+
+\section{Comparison with Existing PDF Ingestion Tools}
+\label{\detokenize{minerU:comparison-with-existing-pdf-ingestion-tools}}
+\sphinxAtStartPar
+Common PDF ingestion tools for RAG include Unstructured.io, LlamaParse
+(LlamaIndex), Docling, Marker, and traditional libraries like PyMuPDF.
+As of early 2026, MinerU frequently ranks among the top open\sphinxhyphen{}source
+options in benchmarks for complex PDFs, especially scientific/technical
+ones with tables and formulas.
+
+
+\section{Summary of MinerU Advantages}
+\label{\detokenize{minerU:summary-of-mineru-advantages}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+High performance in 2025\textendash{}2026 benchmarks (e.g., top scores in table
+recognition, formula parsing, and layout accuracy on complex docs).
+
+\item {} 
+\sphinxAtStartPar
+Superior to Unstructured for structured scientific output; often
+comparable to or better than LlamaParse in open\sphinxhyphen{}source/local setups.
+
+\item {} 
+\sphinxAtStartPar
+In RAGFlow, it complements or outperforms the default DeepDoc parser
+for challenging PDFs requiring top\sphinxhyphen{}tier layout/table handling.
+
+\end{itemize}
+
+\sphinxAtStartPar
+For most RAG pipelines in 2026, MinerU is a leading open\sphinxhyphen{}source choice
+for difficult PDFs, particularly when integrated into frameworks like
+RAGFlow.
 
 \sphinxstepscope
 
@@ -3095,36 +3457,58 @@ In the paradigm shift from “hand\sphinxhyphen{}crafted prompts” to “intell
 \section{Introduction to SearXNG in RAGFlow Agents}
 \label{\detokenize{searxng:introduction-to-searxng-in-ragflow-agents}}
 \sphinxAtStartPar
-RAGFlow provides powerful \sphinxstylestrong{agent capabilities}, including built\sphinxhyphen{}in web search tools for real\sphinxhyphen{}time information retrieval during reasoning or chat sessions. The default web search often relies on cloud providers like Tavily, which require API keys and may incur costs.
+RAGFlow provides powerful \sphinxstylestrong{agent capabilities}, including built\sphinxhyphen{}in web
+search tools for real\sphinxhyphen{}time information retrieval during reasoning or
+chat sessions. The default web search often relies on cloud providers
+like Tavily, which require API keys and may incur costs.
 
 \sphinxAtStartPar
-\sphinxstylestrong{SearXNG} serves as a privacy\sphinxhyphen{}focused, open\sphinxhyphen{}source metasearch engine that aggregates results from multiple sources (e.g., Google, Bing, DuckDuckGo) without tracking users. Deploying SearXNG locally offers a fully self\sphinxhyphen{}hosted alternative, ideal for enterprises prioritizing data privacy, avoiding external API dependencies, or operating in restricted networks.
+\sphinxstylestrong{SearXNG} serves as a privacy\sphinxhyphen{}focused, open\sphinxhyphen{}source metasearch engine
+that aggregates results from multiple sources (e.g., Google, Bing,
+DuckDuckGo) without tracking users. Deploying SearXNG locally offers a
+fully self\sphinxhyphen{}hosted alternative, ideal for enterprises prioritizing data
+privacy, avoiding external API dependencies, or operating in restricted
+networks.
 
 \sphinxAtStartPar
-Although RAGFlow does not yet include native SearXNG support in its UI (as of early 2026 releases), users can integrate it easily via \sphinxstylestrong{custom agent tools} or by pointing the web search component to a local SearXNG instance. This approach mirrors integrations in similar open\sphinxhyphen{}source tools like Open WebUI, AnythingLLM, and Perplexica.
+Although RAGFlow does not yet include native SearXNG support in its UI
+(as of early 2026 releases), users can integrate it easily via \sphinxstylestrong{custom
+agent tools} or by pointing the web search component to a local SearXNG
+instance. This approach mirrors integrations in similar open\sphinxhyphen{}source
+tools like Open WebUI, AnythingLLM, and Perplexica.
 
 
 \section{Benefits of Using SearXNG with RAGFlow}
 \label{\detokenize{searxng:benefits-of-using-searxng-with-ragflow}}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Full Privacy and Control} — All searches stay within your infrastructure. No data leaks to third\sphinxhyphen{}party APIs, making it perfect for sensitive or regulated environments.
+\sphinxstylestrong{Full Privacy and Control} — All searches stay within your
+infrastructure. No data leaks to third\sphinxhyphen{}party APIs, making it perfect
+for sensitive or regulated environments.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{No Costs or Rate Limits} — Unlike Tavily or SerpAPI, SearXNG runs free with unlimited queries (limited only by your hardware).
+\sphinxstylestrong{No Costs or Rate Limits} — Unlike Tavily or SerpAPI, SearXNG runs
+free with unlimited queries (limited only by your hardware).
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Customizable Search Engines} — Configure SearXNG to use specific engines, add restrictions, or focus on reliable sources.
+\sphinxstylestrong{Customizable Search Engines} — Configure SearXNG to use specific
+engines, add restrictions, or focus on reliable sources.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Hybrid Real\sphinxhyphen{}Time Retrieval} — Agents combine internal knowledge bases (private documents) with fresh web results, reducing hallucinations on current events or external facts.
+\sphinxstylestrong{Hybrid Real\sphinxhyphen{}Time Retrieval} — Agents combine internal knowledge
+bases (private documents) with fresh web results, reducing
+hallucinations on current events or external facts.
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Intranet Compatibility} — Deploy SearXNG in air\sphinxhyphen{}gapped or intranet\sphinxhyphen{}only setups. For purely internal “browsing,” configure it to search indexed intranet pages (via custom engines or plugins) or pair it with RAGFlow’s built\sphinxhyphen{}in web page ingestion for static internal sites.
+\sphinxstylestrong{Intranet Compatibility} — Deploy SearXNG in air\sphinxhyphen{}gapped or
+intranet\sphinxhyphen{}only setups. For purely internal “browsing,” configure it to
+search indexed intranet pages (via custom engines or plugins) or pair
+it with RAGFlow’s built\sphinxhyphen{}in web page ingestion for static internal
+sites.
 
 \end{itemize}
 
@@ -3132,11 +3516,14 @@ Although RAGFlow does not yet include native SearXNG support in its UI (as of ea
 \section{Benefits for Intranet Page Browsing}
 \label{\detokenize{searxng:benefits-for-intranet-page-browsing}}
 \sphinxAtStartPar
-RAGFlow excels at ingesting and querying private/internal documents, but dynamic intranet pages (e.g., wikis, dashboards) may require real\sphinxhyphen{}time access.
+RAGFlow excels at ingesting and querying private/internal documents, but
+dynamic intranet pages (e.g., wikis, dashboards) may require real\sphinxhyphen{}time
+access.
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{With Internet Access}: SearXNG provides standard web search while keeping queries internal to your server.
+\sphinxstylestrong{With Internet Access}: SearXNG provides standard web search while
+keeping queries internal to your server.
 
 \item {} 
 \sphinxAtStartPar
@@ -3144,15 +3531,20 @@ RAGFlow excels at ingesting and querying private/internal documents, but dynamic
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-Use RAGFlow’s native web crawling/ingestion to periodically index intranet URLs into knowledge bases.
+Use RAGFlow’s native web crawling/ingestion to periodically index
+intranet URLs into knowledge bases.
 
 \item {} 
 \sphinxAtStartPar
-Configure SearXNG with custom “site:” restrictions or internal search engines (e.g., via plugins for mediawiki or confluence) to query only intranet domains.
+Configure SearXNG with custom “site:” restrictions or internal
+search engines (e.g., via plugins for mediawiki or confluence) to
+query only intranet domains.
 
 \item {} 
 \sphinxAtStartPar
-This creates a “local web search” experience where agents retrieve up\sphinxhyphen{}to\sphinxhyphen{}date content from internal sites without exposing data externally.
+This creates a “local web search” experience where agents retrieve
+up\sphinxhyphen{}to\sphinxhyphen{}date content from internal sites without exposing data
+externally.
 
 \end{itemize}
 
@@ -3162,7 +3554,8 @@ This creates a “local web search” experience where agents retrieve up\sphinx
 \section{Deployment in Docker Containers}
 \label{\detokenize{searxng:deployment-in-docker-containers}}
 \sphinxAtStartPar
-Both RAGFlow and SearXNG deploy easily with Docker, often on the same network for seamless communication.
+Both RAGFlow and SearXNG deploy easily with Docker, often on the same
+network for seamless communication.
 
 
 \subsection{1. Deploy SearXNG}
@@ -3173,37 +3566,27 @@ Use the official \sphinxcode{\sphinxupquote{searxng/searxng}} image or the dedic
 \sphinxAtStartPar
 Example \sphinxcode{\sphinxupquote{docker\sphinxhyphen{}compose.yml}} for SearXNG:
 
-\sphinxAtStartPar
-.. code\sphinxhyphen{}block:: yaml
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+
+\end{sphinxVerbatim}
 
 \sphinxAtStartPar
-version: ‘3’
-services:
-searxng:
-image: searxng/searxng:latest
-container\_name: searxng
-ports:
-\sphinxhyphen{} “8080:8080”
-volumes:
-\sphinxhyphen{} ./searxng:/etc/searxng
-environment:
-\sphinxhyphen{} BASE\_URL=http://localhost:8080
+version: ‘3’ services: searxng: image: searxng/searxng:latest
+container\_name: searxng ports: \sphinxhyphen{} “8080:8080” volumes: \sphinxhyphen{}
+./searxng:/etc/searxng environment: \sphinxhyphen{} BASE\_URL=http://localhost:8080
 restart: unless\sphinxhyphen{}stopped
 
 \sphinxAtStartPar
 Key configuration in \sphinxcode{\sphinxupquote{searxng/settings.yml}} (mounted volume):
 
-\sphinxAtStartPar
-.. code\sphinxhyphen{}block:: yaml
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+
+\end{sphinxVerbatim}
 
 \sphinxAtStartPar
-search:
-formats:
-\sphinxhyphen{} html
-\sphinxhyphen{} json  \# Required for API/tool calls
-server:
-limiter: false  \# Disable rate limiting for agent use
-secret\_key: your\_strong\_secret
+search: formats: \sphinxhyphen{} html \sphinxhyphen{} json \# Required for API/tool calls server:
+limiter: false \# Disable rate limiting for agent use secret\_key:
+your\_strong\_secret
 
 \sphinxAtStartPar
 Run: \sphinxcode{\sphinxupquote{docker compose up \sphinxhyphen{}d}}
@@ -3225,17 +3608,21 @@ In RAGFlow’s Agent builder:
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-Create a custom tool that calls your local SearXNG API (\sphinxcode{\sphinxupquote{http://searxng:8080/search?q=\{query\}\&format=json}}).
+Create a custom tool that calls your local SearXNG API
+(\sphinxcode{\sphinxupquote{http://searxng:8080/search?q=\{query\}\&format=json}}).
 
 \item {} 
 \sphinxAtStartPar
-Or, if using the built\sphinxhyphen{}in Websearch Agent, configure it (via env vars or custom code) to route to your SearXNG endpoint instead of Tavily.
+Or, if using the built\sphinxhyphen{}in Websearch Agent, configure it (via env
+vars or custom code) to route to your SearXNG endpoint instead of
+Tavily.
 
 \end{itemize}
 
 \item {} 
 \sphinxAtStartPar
-Many users report success with similar custom integrations in agent frameworks.
+Many users report success with similar custom integrations in agent
+frameworks.
 
 \end{itemize}
 
@@ -3245,32 +3632,84 @@ Many users report success with similar custom integrations in agent frameworks.
 \sphinxAtStartPar
 Extend RAGFlow’s compose file to include SearXNG:
 
-\sphinxAtStartPar
-.. code\sphinxhyphen{}block:: yaml
-
-\sphinxAtStartPar
-services:
-\# … existing RAGFlow services …
-searxng:
-image: searxng/searxng:latest
-ports:
-\sphinxhyphen{} “8080:8080”
-volumes:
-\sphinxhyphen{} ./searxng:/etc/searxng
-networks:
-\sphinxhyphen{} ragflow\_network
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nt}{services}\PYG{p}{:}\PYG{+w}{ }\PYG{c+c1}{\PYGZsh{} … existing RAGFlow services … searxng: image:}
+\PYG{n+nt}{searxng/searxng:latest ports: \PYGZhy{} “8080:8080” volumes}\PYG{p}{:}\PYG{+w}{ }\PYG{err}{\PYGZhy{}}
+\PYG{n+nt}{./searxng:/etc/searxng networks}\PYG{p}{:}\PYG{+w}{ }\PYG{err}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{ragflow\PYGZus{}network}
+\end{sphinxVerbatim}
 
 \sphinxAtStartPar
 This setup keeps everything containerized, secure, and scalable.
+
+\sphinxAtStartPar
+example on homelab
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nt}{services}\PYG{p}{:}
+\PYG{+w}{  }\PYG{n+nt}{caddy}\PYG{p}{:}
+\PYG{+w}{    }\PYG{n+nt}{container\PYGZus{}name}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{caddy}
+\PYG{+w}{    }\PYG{n+nt}{image}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{docker.io/library/caddy:2\PYGZhy{}alpine}
+\PYG{+w}{    }\PYG{n+nt}{network\PYGZus{}mode}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{host}
+\PYG{+w}{    }\PYG{n+nt}{restart}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{unless\PYGZhy{}stopped}
+\PYG{+w}{    }\PYG{n+nt}{volumes}\PYG{p}{:}
+\PYG{+w}{      }\PYG{p+pIndicator}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{./Caddyfile:/etc/caddy/Caddyfile:ro}
+\PYG{+w}{      }\PYG{p+pIndicator}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{caddy\PYGZhy{}data:/data:rw}
+\PYG{+w}{      }\PYG{p+pIndicator}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{caddy\PYGZhy{}config:/config:rw}
+\PYG{+w}{    }\PYG{n+nt}{environment}\PYG{p}{:}
+\PYG{+w}{      }\PYG{p+pIndicator}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{SEARXNG\PYGZus{}HOSTNAME=\PYGZdl{}\PYGZob{}SEARXNG\PYGZus{}HOSTNAME:\PYGZhy{}http://192.168.0.213\PYGZcb{}}
+\PYG{+w}{      }\PYG{p+pIndicator}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{SEARXNG\PYGZus{}TLS=\PYGZdl{}\PYGZob{}LETSENCRYPT\PYGZus{}EMAIL:\PYGZhy{}internal\PYGZcb{}}
+\PYG{+w}{    }\PYG{n+nt}{logging}\PYG{p}{:}
+\PYG{+w}{      }\PYG{n+nt}{driver}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{json\PYGZhy{}file}\PYG{l+s}{\PYGZdq{}}
+\PYG{+w}{      }\PYG{n+nt}{options}\PYG{p}{:}
+\PYG{+w}{        }\PYG{n+nt}{max\PYGZhy{}size}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{1m}\PYG{l+s}{\PYGZdq{}}
+\PYG{+w}{        }\PYG{n+nt}{max\PYGZhy{}file}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{1}\PYG{l+s}{\PYGZdq{}}
+
+\PYG{+w}{  }\PYG{n+nt}{searxng}\PYG{p}{:}
+\PYG{+w}{    }\PYG{n+nt}{container\PYGZus{}name}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{searxng}
+\PYG{+w}{    }\PYG{n+nt}{image}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{docker.io/searxng/searxng:latest}
+\PYG{+w}{    }\PYG{n+nt}{restart}\PYG{p}{:}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{unless\PYGZhy{}stopped}
+\PYG{+w}{    }\PYG{n+nt}{networks}\PYG{p}{:}
+\PYG{+w}{      }\PYG{p+pIndicator}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{searxng}
+\PYG{+w}{    }\PYG{n+nt}{ports}\PYG{p}{:}
+\PYG{+w}{      }\PYG{p+pIndicator}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{192.168.0.213:8080:8080}\PYG{l+s}{\PYGZdq{}}
+\PYG{+w}{    }\PYG{n+nt}{volumes}\PYG{p}{:}
+\PYG{+w}{      }\PYG{p+pIndicator}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{./searxng:/etc/searxng:rw}
+\PYG{+w}{    }\PYG{n+nt}{environment}\PYG{p}{:}
+\PYG{+w}{      }\PYG{p+pIndicator}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{SEARXNG\PYGZus{}BASE\PYGZus{}URL=https://\PYGZdl{}\PYGZob{}SEARXNG\PYGZus{}HOSTNAME:\PYGZhy{}192.168.0.213\PYGZcb{}/}
+\PYG{+w}{    }\PYG{n+nt}{depends\PYGZus{}on}\PYG{p}{:}
+\PYG{+w}{      }\PYG{p+pIndicator}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+lScalar+lScalarPlain}{caddy}
+\PYG{+w}{    }\PYG{n+nt}{logging}\PYG{p}{:}
+\PYG{+w}{      }\PYG{n+nt}{driver}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{json\PYGZhy{}file}\PYG{l+s}{\PYGZdq{}}
+\PYG{+w}{      }\PYG{n+nt}{options}\PYG{p}{:}
+\PYG{+w}{        }\PYG{n+nt}{max\PYGZhy{}size}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{1m}\PYG{l+s}{\PYGZdq{}}
+\PYG{+w}{        }\PYG{n+nt}{max\PYGZhy{}file}\PYG{p}{:}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{1}\PYG{l+s}{\PYGZdq{}}
+\end{sphinxVerbatim}
+\begin{description}
+\sphinxlineitem{networks:}
+\sphinxAtStartPar
+searxng:
+
+\sphinxlineitem{volumes:}
+\sphinxAtStartPar
+caddy\sphinxhyphen{}data:
+caddy\sphinxhyphen{}config:
+
+\end{description}
 
 
 \section{Conclusion}
 \label{\detokenize{searxng:conclusion}}
 \sphinxAtStartPar
-Integrating SearXNG with RAGFlow delivers a powerful, private alternative to cloud\sphinxhyphen{}based web search in agents—especially valuable for intranet deployments where data sovereignty matters. While awaiting potential native support, the custom tool approach works reliably and aligns with RAGFlow’s extensible design.
+Integrating SearXNG with RAGFlow delivers a powerful, private
+alternative to cloud\sphinxhyphen{}based web search in agents—especially valuable for
+intranet deployments where data sovereignty matters. While awaiting
+potential native support, the custom tool approach works reliably and
+aligns with RAGFlow’s extensible design.
 
 \sphinxAtStartPar
-For the latest updates, monitor RAGFlow’s GitHub issues/releases or community discussions. This combination empowers fully self\sphinxhyphen{}hosted, real\sphinxhyphen{}time augmented agents without compromising privacy.
+For the latest updates, monitor RAGFlow’s GitHub issues/releases or
+community discussions. This combination empowers fully self\sphinxhyphen{}hosted,
+real\sphinxhyphen{}time augmented agents without compromising privacy.
 
 \sphinxstepscope
 
@@ -3368,15 +3807,15 @@ xinference\PYG{+w}{ }launch\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
 \label{\detokenize{index:indices-and-tables}}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\DUrole{xref,std,std-ref}{genindex}
+\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{genindex}}}
 
 \item {} 
 \sphinxAtStartPar
-\DUrole{xref,std,std-ref}{modindex}
+\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{modindex}}}
 
 \item {} 
 \sphinxAtStartPar
-\DUrole{xref,std,std-ref}{search}
+\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{search}}}
 
 \end{itemize}
 

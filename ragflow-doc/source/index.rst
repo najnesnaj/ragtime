@@ -12,6 +12,7 @@ Welcome to Ragflow's documentation!
 
    about
    architecture
+   blog-dec-2025
    rerank
    vllm
    vllm-cpu
