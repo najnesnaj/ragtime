@@ -64,7 +64,7 @@
 
 
 \title{Ragflow}
-\date{Jan 12, 2026}
+\date{Jan 13, 2026}
 \release{1}
 \author{Jansen Jan}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -238,6 +238,122 @@ From \sphinxstylestrong{deep document parsing} to \sphinxstylestrong{scalable ag
 \sphinxstepscope
 
 
+\chapter{Security Concerns}
+\label{\detokenize{security-concerns:security-concerns}}\label{\detokenize{security-concerns::doc}}
+\sphinxAtStartPar
+The origin of ragflow is Chinese. Infiniflow is a Chinese company.
+It was open\sphinxhyphen{}sourced in 2024.
+
+\sphinxAtStartPar
+Chinese origin of RAGFlow is not a material security concern in practice — the project is one of the technically strongest deep\sphinxhyphen{}document\sphinxhyphen{}understanding RAG engines available right now.For organizations that must comply with very strict procurement rules, national security guidelines, or have board\sphinxhyphen{}level “no Chinese tech” policies \(\rightarrow\) yes, it’s frequently considered a blocking factor, even if the technical risk is low.Choose according to your actual risk appetite and compliance requirements — not just origin country.
+
+
+\section{considerations:}
+\label{\detokenize{security-concerns:considerations}}
+\sphinxAtStartPar
+to mitigate risc :
+\(\rightarrow\) Self\sphinxhyphen{}host + build your own Docker image from the official source code
+\(\rightarrow\) Audit the diff yourself or let your security team do it (very feasible — the codebase is not enormous)
+\(\rightarrow\) Use only Western/local/open\sphinxhyphen{}source LLMs \& embedding models
+\(\rightarrow\) Result: concern level drops to same as any other active open\sphinxhyphen{}source project
+
+
+\section{sandbox:}
+\label{\detokenize{security-concerns:sandbox}}
+\sphinxAtStartPar
+RAGFlow is an excellent open\sphinxhyphen{}source deep\sphinxhyphen{}document\sphinxhyphen{}understanding + Agent\sphinxhyphen{}oriented RAG engine.It contains a very powerful feature: Code component inside Agents. Users can write Python or JavaScript code directly in the workflow/agent \(\rightarrow\) this code can:Process retrieved chunks
+Call external APIs
+Do calculations / data cleaning
+Transform data
+Call other tools dynamically basically anything Python/JS can do
+
+\sphinxAtStartPar
+\(\rightarrow\) This is extremely powerful, but also extremely dangerous if you let random users (or even semi\sphinxhyphen{}trusted internal users) write code.
+
+\sphinxAtStartPar
+That’s where RAGFlow Sandbox + gVisor comes in
+
+\sphinxAtStartPar
+This can be enabled in “.env”.
+\begin{description}
+\sphinxlineitem{User \(\rightarrow\) Agent workflow \(\rightarrow\) Code component (Python/JS)}\begin{quote}
+\begin{quote}
+\begin{quote}
+
+\sphinxAtStartPar
+↓
+\end{quote}
+\begin{description}
+\sphinxlineitem{RAGFlow Sandbox Executor Manager}
+\sphinxAtStartPar
+↓
+
+\end{description}
+\end{quote}
+\begin{description}
+\sphinxlineitem{Spawns short\sphinxhyphen{}lived container(s) using}\begin{description}
+\sphinxlineitem{runtime: runsc (gVisor)}
+\sphinxAtStartPar
+↓
+
+\end{description}
+
+\end{description}
+\end{quote}
+
+\sphinxAtStartPar
+Code runs inside very strong syscall sandbox
+
+\end{description}
+
+
+\section{elasticsearch:}
+\label{\detokenize{security-concerns:elasticsearch}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+xpack.security.enabled: true
+
+\item {} 
+\sphinxAtStartPar
+Transport TLS enabled + working (verification\_mode: certificate is ok)
+
+\item {} 
+\sphinxAtStartPar
+HTTP TLS enabled (HTTPS) on all nodes that receive traffic
+
+\item {} 
+\sphinxAtStartPar
+Strong passwords set for all built\sphinxhyphen{}in users (elastic, kibana\_system, logstash\_system, beats\_system, apm\_system, …)
+
+\item {} 
+\sphinxAtStartPar
+Dedicated roles + users for each service (never use elastic superuser in production apps)
+
+\item {} 
+\sphinxAtStartPar
+Keystore used for all passwords (not plaintext in yml!)
+
+\item {} 
+\sphinxAtStartPar
+Firewall: 9300 only between nodes, 9200 only from trusted sources
+
+\item {} 
+\sphinxAtStartPar
+Regular certificate rotation plan (at least yearly, better automated)
+
+\item {} 
+\sphinxAtStartPar
+Monitoring of certificate expiration
+
+\item {} 
+\sphinxAtStartPar
+Audit logging enabled (at least for authentication/security events)
+
+\end{itemize}
+
+\sphinxstepscope
+
+
 \chapter{RAGFlow System Architecture}
 \label{\detokenize{architecture:ragflow-system-architecture}}\label{\detokenize{architecture::doc}}
 
@@ -380,6 +496,9 @@ Reverse proxy / static file server (used in production deployments)
 
 \chapter{From RAG to Context \sphinxhyphen{} A 2025 Year\sphinxhyphen{}End Review of RAG}
 \label{\detokenize{blog-dec-2025:from-rag-to-context-a-2025-year-end-review-of-rag}}\label{\detokenize{blog-dec-2025::doc}}
+\sphinxAtStartPar
+\sphinxurl{https://ragflow.io/blog}. On the ragflow website appears frequently a very insightful blog!
+
 \begin{DUlineblock}{0em}
 \item[] \sphinxstylestrong{Date:} December 22, 2025
 \item[] \sphinxstylestrong{Source:} RAGFlow Blog
@@ -1495,8 +1614,8 @@ curl\PYG{+w}{ }\PYGZhy{}\PYGZhy{}request\PYG{+w}{ }PUT\PYG{+w}{ }\PYG{l+s+se}{\P
 You can \sphinxstylestrong{automate metadata tagging} for \sphinxstylestrong{1000s of documents} using a script:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{requests}
-\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{json}
+\PYG{k+kn}{import} \PYG{n+nn}{requests}
+\PYG{k+kn}{import} \PYG{n+nn}{json}
 
 \PYG{n}{BASE\PYGZus{}URL} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{http://192.168.0.213/api/v1}\PYG{l+s+s2}{\PYGZdq{}}
 \PYG{n}{TOKEN} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ragflow\PYGZhy{}QxNWIzMGNlOWRmMzExZjBhZjljMDI0Mm}\PYG{l+s+s2}{\PYGZdq{}}
@@ -1506,7 +1625,7 @@ You can \sphinxstylestrong{automate metadata tagging} for \sphinxstylestrong{100
 \PYG{p}{\PYGZcb{}}
 
 \PYG{c+c1}{\PYGZsh{} Example: Load CSV with doc\PYGZus{}id, author, date, url...}
-\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{pandas}\PYG{+w}{ }\PYG{k}{as}\PYG{+w}{ }\PYG{n+nn}{pd}
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
 \PYG{n}{df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{documents\PYGZus{}metadata.csv}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
 
 \PYG{k}{for} \PYG{n}{\PYGZus{}}\PYG{p}{,} \PYG{n}{row} \PYG{o+ow}{in} \PYG{n}{df}\PYG{o}{.}\PYG{n}{iterrows}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
@@ -1774,8 +1893,8 @@ For implementation details, refer to the official guide at \sphinxurl{https://gi
 
 \chapter{Running Llama 3.1 with llama.cpp}
 \label{\detokenize{llama-cpp:running-llama-3-1-with-llama-cpp}}\label{\detokenize{llama-cpp:llama-cpp-model-format-gguf}}\label{\detokenize{llama-cpp::doc}}
-\begin{sphinxcontents}
-\sphinxstylecontentstitle{Table of Contents}
+\begin{sphinxShadowBox}
+\sphinxstyletopictitle{Table of Contents}
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
@@ -1818,7 +1937,7 @@ For implementation details, refer to the official guide at \sphinxurl{https://gi
 \phantomsection\label{\detokenize{llama-cpp:id9}}{\hyperref[\detokenize{llama-cpp:summary}]{\sphinxcrossref{Summary}}}
 
 \end{itemize}
-\end{sphinxcontents}
+\end{sphinxShadowBox}
 
 
 \bigskip\hrule\bigskip
@@ -2259,8 +2378,8 @@ Send requests using the OpenAI\sphinxhyphen{}compatible API or \sphinxcode{\sphi
 
 \chapter{Deploying LLMs in Hybrid Cloud: Why llama.cpp Wins for Us}
 \label{\detokenize{hybrid:deploying-llms-in-hybrid-cloud-why-llama-cpp-wins-for-us}}\label{\detokenize{hybrid::doc}}
-\begin{sphinxcontents}
-\sphinxstylecontentstitle{Table of Contents}
+\begin{sphinxShadowBox}
+\sphinxstyletopictitle{Table of Contents}
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
@@ -2293,7 +2412,7 @@ Send requests using the OpenAI\sphinxhyphen{}compatible API or \sphinxcode{\sphi
 \phantomsection\label{\detokenize{hybrid:id11}}{\hyperref[\detokenize{hybrid:summary}]{\sphinxcrossref{Summary}}}
 
 \end{itemize}
-\end{sphinxcontents}
+\end{sphinxShadowBox}
 
 
 \bigskip\hrule\bigskip
@@ -3342,6 +3461,21 @@ For most RAG pipelines in 2026, MinerU is a leading open\sphinxhyphen{}source ch
 for difficult PDFs, particularly when integrated into frameworks like
 RAGFlow.
 
+
+\section{Activating MinerU in RagFlow}
+\label{\detokenize{minerU:activating-mineru-in-ragflow}}
+\sphinxAtStartPar
+in the dataset select in the configuration / ingestion pipeline / pdf parser \sphinxhyphen{}\textgreater{} mineru\sphinxhyphen{}from\sphinxhyphen{}env\sphinxhyphen{}1 Experimental
+
+\sphinxAtStartPar
+adapt the .env settings :
+\# Enable Mineru
+\# Uncommenting these lines will automatically add MinerU to the model provider whenever possible.
+\# More details see \sphinxurl{https://ragflow.io/docs/faq\#how-to-use-mineru-to-parse-pdf-documents}.
+MINERU\_APISERVER=http://host.docker.internal:8003
+MINERU\_DELETE\_OUTPUT=0   \# keep output directory
+MINERU\_BACKEND=pipeline  \# or another backend you prefer
+
 \sphinxstepscope
 
 
@@ -3807,15 +3941,15 @@ xinference\PYG{+w}{ }launch\PYG{+w}{ }\PYG{l+s+se}{\PYGZbs{}}
 \label{\detokenize{index:indices-and-tables}}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{genindex}}}
+\DUrole{xref,std,std-ref}{genindex}
 
 \item {} 
 \sphinxAtStartPar
-\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{modindex}}}
+\DUrole{xref,std,std-ref}{modindex}
 
 \item {} 
 \sphinxAtStartPar
-\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{search}}}
+\DUrole{xref,std,std-ref}{search}
 
 \end{itemize}
 

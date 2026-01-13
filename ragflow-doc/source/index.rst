@@ -11,6 +11,7 @@ Welcome to Ragflow's documentation!
    :caption: Contents:
 
    about
+   security-concerns
    architecture
    blog-dec-2025
    rerank
