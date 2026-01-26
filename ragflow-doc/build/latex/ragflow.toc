@@ -12,20 +12,20 @@
 \contentsline {section}{\numberline {3.1}Overview}{5}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Core Infrastructure Containers}{5}{section.3.2}%
 \contentsline {section}{\numberline {3.3}RAGFlow Application Containers}{5}{section.3.3}%
-\contentsline {section}{\numberline {3.4}High\sphinxhyphen {}Level Architecture Diagram}{6}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Data \& Execution Flow}{6}{section.3.5}%
-\contentsline {chapter}{\numberline {4}From RAG to Context \sphinxhyphen {} A 2025 Year\sphinxhyphen {}End Review of RAG}{7}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Can RAG Still Be Improved?}{7}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}The Debate About Long Context and RAG}{7}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Optimizations for RAG Conversational Quality}{8}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}From Knowledge Base to Data Foundation}{9}{subsection.4.1.3}%
-\contentsline {chapter}{\numberline {5}example:}{11}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Why Infiniflow RAGFlow Uses a Reranker, an Embedding Model, and a Chat Model}{11}{section.5.1}%
-\contentsline {chapter}{\numberline {6}Synergy of the Three Models}{13}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Why vLLM is Used to Serve the Reranker Model}{15}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Key Reasons for Using vLLM to Serve the Reranker}{15}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Serving the Reranker Locally with vLLM}{16}{section.7.2}%
-\contentsline {section}{\numberline {7.3}RAGFlow Integration}{17}{section.7.3}%
+\contentsline {section}{\numberline {3.4}High\sphinxhyphen {}Level Architecture Diagram}{5}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Data \& Execution Flow}{5}{section.3.5}%
+\contentsline {chapter}{\numberline {4}From RAG to Context \sphinxhyphen {} A 2025 Year\sphinxhyphen {}End Review of RAG}{9}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Can RAG Still Be Improved?}{9}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}The Debate About Long Context and RAG}{9}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Optimizations for RAG Conversational Quality}{10}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}From Knowledge Base to Data Foundation}{11}{subsection.4.1.3}%
+\contentsline {chapter}{\numberline {5}example:}{13}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Why Infiniflow RAGFlow Uses a Reranker, an Embedding Model, and a Chat Model}{13}{section.5.1}%
+\contentsline {chapter}{\numberline {6}Synergy of the Three Models}{15}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Why vLLM is Used to Serve the Reranker Model}{17}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Key Reasons for Using vLLM to Serve the Reranker}{17}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Serving the Reranker Locally with vLLM}{17}{section.7.2}%
+\contentsline {section}{\numberline {7.3}RAGFlow Integration}{18}{section.7.3}%
 \contentsline {chapter}{\numberline {8}Serving vLLM Reranker Using Docker (CPU\sphinxhyphen {}Only)}{19}{chapter.8}%
 \contentsline {section}{\numberline {8.1}Docker Compose Configuration (CPU Mode)}{19}{section.8.1}%
 \contentsline {section}{\numberline {8.2}Key Components Explained}{20}{section.8.2}%
@@ -42,15 +42,15 @@
 \contentsline {section}{\numberline {9.4}Verification}{25}{section.9.4}%
 \contentsline {section}{\numberline {9.5}Benefits of This Setup}{25}{section.9.5}%
 \contentsline {section}{\numberline {9.6}Troubleshooting Tips}{25}{section.9.6}%
-\contentsline {section}{\numberline {9.7}Summary}{27}{section.9.7}%
+\contentsline {section}{\numberline {9.7}Summary}{25}{section.9.7}%
 \contentsline {chapter}{\numberline {10}Batch Processing and Metadata Management in Infiniflow RAGFlow}{29}{chapter.10}%
 \contentsline {section}{\numberline {10.1}API Base URL}{29}{section.10.1}%
 \contentsline {section}{\numberline {10.2}Authentication}{29}{section.10.2}%
-\contentsline {section}{\numberline {10.3}Step 1: Retrieve Dataset and Document IDs}{30}{section.10.3}%
+\contentsline {section}{\numberline {10.3}Step 1: Retrieve Dataset and Document IDs}{29}{section.10.3}%
 \contentsline {section}{\numberline {10.4}Step 2: Add Metadata to a Document (via PUT)}{30}{section.10.4}%
-\contentsline {section}{\numberline {10.5}Use Case: Batch Metadata Enrichment}{31}{section.10.5}%
-\contentsline {section}{\numberline {10.6}Other Batch\sphinxhyphen {}Capable Endpoints}{32}{section.10.6}%
-\contentsline {section}{\numberline {10.7}Best Practices}{32}{section.10.7}%
+\contentsline {section}{\numberline {10.5}Use Case: Batch Metadata Enrichment}{30}{section.10.5}%
+\contentsline {section}{\numberline {10.6}Other Batch\sphinxhyphen {}Capable Endpoints}{31}{section.10.6}%
+\contentsline {section}{\numberline {10.7}Best Practices}{31}{section.10.7}%
 \contentsline {section}{\numberline {10.8}See also:}{32}{section.10.8}%
 \contentsline {section}{\numberline {10.9}Summary}{32}{section.10.9}%
 \contentsline {chapter}{\numberline {11}How the Knowledge Graph in Infiniflow/RAGFlow Works}{33}{chapter.11}%
@@ -65,7 +65,7 @@
 \contentsline {subsection}{\numberline {12.3.1}Features}{37}{subsection.12.3.1}%
 \contentsline {section}{\numberline {12.4}4. Compile llama.cpp with NVIDIA GPU Support (CUDA)}{37}{section.12.4}%
 \contentsline {subsection}{\numberline {12.4.1}Prerequisites}{37}{subsection.12.4.1}%
-\contentsline {subsection}{\numberline {12.4.2}Build with CUDA}{38}{subsection.12.4.2}%
+\contentsline {subsection}{\numberline {12.4.2}Build with CUDA}{37}{subsection.12.4.2}%
 \contentsline {subsection}{\numberline {12.4.3}Run with GPU offloading}{38}{subsection.12.4.3}%
 \contentsline {section}{\numberline {12.5}Summary}{38}{section.12.5}%
 \contentsline {chapter}{\numberline {13}Running Multiple Models on llama.cpp Using Docker}{39}{chapter.13}%
@@ -77,7 +77,7 @@
 \contentsline {section}{\numberline {14.2}2. Production Requirements: Hybrid Cloud \& Multi\sphinxhyphen {}User Access}{42}{section.14.2}%
 \contentsline {section}{\numberline {14.3}3. Evaluation: vLLM vs llama.cpp}{42}{section.14.3}%
 \contentsline {section}{\numberline {14.4}4. Why llama.cpp Is Our Production Choice}{42}{section.14.4}%
-\contentsline {subsection}{\numberline {14.4.1}Example: Production\sphinxhyphen {}Ready Server}{43}{subsection.14.4.1}%
+\contentsline {subsection}{\numberline {14.4.1}Example: Production\sphinxhyphen {}Ready Server}{42}{subsection.14.4.1}%
 \contentsline {section}{\numberline {14.5}5. Migration Path: From Ollama \(\rightarrow \) llama.cpp}{43}{section.14.5}%
 \contentsline {section}{\numberline {14.6}Summary}{43}{section.14.6}%
 \contentsline {chapter}{\numberline {15}How InfiniFlow RAGFlow Uses gVisor}{45}{chapter.15}%
@@ -94,7 +94,7 @@
 \contentsline {section}{\numberline {16.4}Real\sphinxhyphen {}World Performance Numbers}{48}{section.16.4}%
 \contentsline {section}{\numberline {16.5}When Do You Actually Need ragflow\sphinxhyphen {}gpu?}{48}{section.16.5}%
 \contentsline {section}{\numberline {16.6}Recommended Setup in 2025 (Best of Both Worlds)}{48}{section.16.6}%
-\contentsline {section}{\numberline {16.7}Monitoring \& Verification}{49}{section.16.7}%
+\contentsline {section}{\numberline {16.7}Monitoring \& Verification}{48}{section.16.7}%
 \contentsline {section}{\numberline {16.8}Conclusion}{49}{section.16.8}%
 \contentsline {chapter}{\numberline {17}Upgrade to latest release :}{51}{chapter.17}%
 \contentsline {chapter}{\numberline {18}upload document}{53}{chapter.18}%
@@ -126,12 +126,12 @@
 \contentsline {chapter}{\numberline {24}Using SearXNG with RAGFlow}{67}{chapter.24}%
 \contentsline {section}{\numberline {24.1}Introduction to SearXNG in RAGFlow Agents}{67}{section.24.1}%
 \contentsline {section}{\numberline {24.2}Benefits of Using SearXNG with RAGFlow}{67}{section.24.2}%
-\contentsline {section}{\numberline {24.3}Benefits for Intranet Page Browsing}{68}{section.24.3}%
+\contentsline {section}{\numberline {24.3}Benefits for Intranet Page Browsing}{67}{section.24.3}%
 \contentsline {section}{\numberline {24.4}Deployment in Docker Containers}{68}{section.24.4}%
 \contentsline {subsection}{\numberline {24.4.1}1. Deploy SearXNG}{68}{subsection.24.4.1}%
 \contentsline {subsection}{\numberline {24.4.2}2. Integrate with RAGFlow}{68}{subsection.24.4.2}%
-\contentsline {subsection}{\numberline {24.4.3}Combined Example Network}{69}{subsection.24.4.3}%
-\contentsline {section}{\numberline {24.5}Conclusion}{70}{section.24.5}%
+\contentsline {subsection}{\numberline {24.4.3}Combined Example Network}{68}{subsection.24.4.3}%
+\contentsline {section}{\numberline {24.5}Conclusion}{69}{section.24.5}%
 \contentsline {chapter}{\numberline {25}homelab}{71}{chapter.25}%
 \contentsline {section}{\numberline {25.1}problem older hardware :}{71}{section.25.1}%
 \contentsline {section}{\numberline {25.2}software :}{71}{section.25.2}%
