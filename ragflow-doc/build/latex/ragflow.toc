@@ -105,36 +105,49 @@
 \contentsline {subsection}{\numberline {19.2.1}{[}GIN{]} 2025/11/25 \sphinxhyphen {} 10:15:40 | 200 | 5m44s | 172.17.0.1 | POST “/api/chat”}{56}{subsection.19.2.1}%
 \contentsline {section}{\numberline {19.3}So slow, need to see progress}{56}{section.19.3}%
 \contentsline {section}{\numberline {19.4}Stuck ???? what now????}{57}{section.19.4}%
-\contentsline {chapter}{\numberline {20}Chat}{59}{chapter.20}%
-\contentsline {chapter}{\numberline {21}Why Infinity is a Good Alternative in RAGFlow}{61}{chapter.21}%
-\contentsline {section}{\numberline {21.1}Tailored for RAG/LLM Workloads}{61}{section.21.1}%
-\contentsline {section}{\numberline {21.2}Performance \& Efficiency}{61}{section.21.2}%
-\contentsline {section}{\numberline {21.3}Integration in RAGFlow}{61}{section.21.3}%
-\contentsline {section}{\numberline {21.4}Fully Open Source \& Vendor\sphinxhyphen {}Neutral}{61}{section.21.4}%
-\contentsline {section}{\numberline {21.5}Drawbacks}{61}{section.21.5}%
-\contentsline {chapter}{\numberline {22}MinerU and Its Use in RAGFlow}{63}{chapter.22}%
-\contentsline {section}{\numberline {22.1}Introduction to MinerU}{63}{section.22.1}%
-\contentsline {section}{\numberline {22.2}MinerU in RAGFlow}{63}{section.22.2}%
-\contentsline {section}{\numberline {22.3}Comparison with Existing PDF Ingestion Tools}{64}{section.22.3}%
-\contentsline {section}{\numberline {22.4}Summary of MinerU Advantages}{64}{section.22.4}%
-\contentsline {section}{\numberline {22.5}Activating MinerU in RagFlow}{64}{section.22.5}%
-\contentsline {chapter}{\numberline {23}What is Agent context engine?}{65}{chapter.23}%
-\contentsline {section}{\numberline {23.1}Beyond the hype: The reality of today’s “intelligent” Agents}{65}{section.23.1}%
-\contentsline {section}{\numberline {23.2}Deconstructing the Agent Context Engine}{65}{section.23.2}%
-\contentsline {section}{\numberline {23.3}Why we need a dedicated engine? The case for a unified substrate}{66}{section.23.3}%
-\contentsline {section}{\numberline {23.4}RAGFlow: A resolute march toward the context engine of Agents}{66}{section.23.4}%
-\contentsline {chapter}{\numberline {24}Using SearXNG with RAGFlow}{67}{chapter.24}%
-\contentsline {section}{\numberline {24.1}Introduction to SearXNG in RAGFlow Agents}{67}{section.24.1}%
-\contentsline {section}{\numberline {24.2}Benefits of Using SearXNG with RAGFlow}{67}{section.24.2}%
-\contentsline {section}{\numberline {24.3}Benefits for Intranet Page Browsing}{67}{section.24.3}%
-\contentsline {section}{\numberline {24.4}Deployment in Docker Containers}{68}{section.24.4}%
-\contentsline {subsection}{\numberline {24.4.1}1. Deploy SearXNG}{68}{subsection.24.4.1}%
-\contentsline {subsection}{\numberline {24.4.2}2. Integrate with RAGFlow}{68}{subsection.24.4.2}%
-\contentsline {subsection}{\numberline {24.4.3}Combined Example Network}{68}{subsection.24.4.3}%
-\contentsline {section}{\numberline {24.5}Conclusion}{69}{section.24.5}%
-\contentsline {chapter}{\numberline {25}homelab}{71}{chapter.25}%
-\contentsline {section}{\numberline {25.1}problem older hardware :}{71}{section.25.1}%
-\contentsline {section}{\numberline {25.2}software :}{71}{section.25.2}%
-\contentsline {section}{\numberline {25.3}problem reranking:}{71}{section.25.3}%
-\contentsline {section}{\numberline {25.4}possible solution:}{71}{section.25.4}%
-\contentsline {chapter}{\numberline {26}Indices and tables}{73}{chapter.26}%
+\contentsline {chapter}{\numberline {20}Equity Investment Research}{59}{chapter.20}%
+\contentsline {section}{\numberline {20.1}High\sphinxhyphen {}Level Structure}{59}{section.20.1}%
+\contentsline {section}{\numberline {20.2}The Main Agents \& How They’re Set Up}{59}{section.20.2}%
+\contentsline {section}{\numberline {20.3}How Agents Interact (Orchestration in Practice)}{60}{section.20.3}%
+\contentsline {section}{\numberline {20.4}Why This Shows Agentic AI Working in Practice}{61}{section.20.4}%
+\contentsline {chapter}{\numberline {21}Chat}{63}{chapter.21}%
+\contentsline {chapter}{\numberline {22}Why Infinity is a Good Alternative in RAGFlow}{65}{chapter.22}%
+\contentsline {section}{\numberline {22.1}Tailored for RAG/LLM Workloads}{65}{section.22.1}%
+\contentsline {section}{\numberline {22.2}Performance \& Efficiency}{65}{section.22.2}%
+\contentsline {section}{\numberline {22.3}Integration in RAGFlow}{65}{section.22.3}%
+\contentsline {section}{\numberline {22.4}Fully Open Source \& Vendor\sphinxhyphen {}Neutral}{65}{section.22.4}%
+\contentsline {section}{\numberline {22.5}Drawbacks}{65}{section.22.5}%
+\contentsline {chapter}{\numberline {23}MinerU and Its Use in RAGFlow}{67}{chapter.23}%
+\contentsline {section}{\numberline {23.1}Introduction to MinerU}{67}{section.23.1}%
+\contentsline {section}{\numberline {23.2}MinerU in RAGFlow}{67}{section.23.2}%
+\contentsline {section}{\numberline {23.3}Comparison with Existing PDF Ingestion Tools}{68}{section.23.3}%
+\contentsline {section}{\numberline {23.4}Summary of MinerU Advantages}{68}{section.23.4}%
+\contentsline {section}{\numberline {23.5}Activating MinerU in RagFlow}{68}{section.23.5}%
+\contentsline {chapter}{\numberline {24}What is Agent context engine?}{69}{chapter.24}%
+\contentsline {section}{\numberline {24.1}Beyond the hype: The reality of today’s “intelligent” Agents}{69}{section.24.1}%
+\contentsline {section}{\numberline {24.2}Deconstructing the Agent Context Engine}{69}{section.24.2}%
+\contentsline {section}{\numberline {24.3}Why we need a dedicated engine? The case for a unified substrate}{70}{section.24.3}%
+\contentsline {section}{\numberline {24.4}RAGFlow: A resolute march toward the context engine of Agents}{70}{section.24.4}%
+\contentsline {chapter}{\numberline {25}What kind of animations ragflow.io uses}{71}{chapter.25}%
+\contentsline {section}{\numberline {25.1}1. \sphinxstylestrong {Lottie animations (very likely)}}{71}{section.25.1}%
+\contentsline {subsection}{\numberline {25.1.1}Why this fits what you see:}{71}{subsection.25.1.1}%
+\contentsline {subsection}{\numberline {25.1.2}How they’re created:}{71}{subsection.25.1.2}%
+\contentsline {section}{\numberline {25.2}2. \sphinxstylestrong {CSS + JavaScript animations}}{71}{section.25.2}%
+\contentsline {section}{\numberline {25.3}3. \sphinxstylestrong {WebM/MP4 looping videos (sometimes used)}}{72}{section.25.3}%
+\contentsline {chapter}{\numberline {26}How to confirm (if you want to check yourself)}{73}{chapter.26}%
+\contentsline {chapter}{\numberline {27}Want to create similar animations?}{75}{chapter.27}%
+\contentsline {chapter}{\numberline {28}Using SearXNG with RAGFlow}{77}{chapter.28}%
+\contentsline {section}{\numberline {28.1}Introduction to SearXNG in RAGFlow Agents}{77}{section.28.1}%
+\contentsline {section}{\numberline {28.2}Benefits of Using SearXNG with RAGFlow}{77}{section.28.2}%
+\contentsline {section}{\numberline {28.3}Benefits for Intranet Page Browsing}{77}{section.28.3}%
+\contentsline {section}{\numberline {28.4}Deployment in Docker Containers}{78}{section.28.4}%
+\contentsline {subsection}{\numberline {28.4.1}1. Deploy SearXNG}{78}{subsection.28.4.1}%
+\contentsline {subsection}{\numberline {28.4.2}2. Integrate with RAGFlow}{78}{subsection.28.4.2}%
+\contentsline {subsection}{\numberline {28.4.3}Combined Example Network}{78}{subsection.28.4.3}%
+\contentsline {section}{\numberline {28.5}Conclusion}{79}{section.28.5}%
+\contentsline {chapter}{\numberline {29}homelab}{81}{chapter.29}%
+\contentsline {section}{\numberline {29.1}problem older hardware :}{81}{section.29.1}%
+\contentsline {section}{\numberline {29.2}software :}{81}{section.29.2}%
+\contentsline {section}{\numberline {29.3}problem reranking:}{81}{section.29.3}%
+\contentsline {section}{\numberline {29.4}possible solution:}{81}{section.29.4}%
+\contentsline {chapter}{\numberline {30}Indices and tables}{83}{chapter.30}%

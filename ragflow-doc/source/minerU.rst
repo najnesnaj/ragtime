@@ -140,8 +140,6 @@ in the dataset select in the configuration / ingestion pipeline / pdf parser -> 
 
 adapt the .env settings :
 # Enable Mineru
-# Uncommenting these lines will automatically add MinerU to the model provider whenever possible.
-# More details see https://ragflow.io/docs/faq#how-to-use-mineru-to-parse-pdf-documents.
 MINERU_APISERVER=http://host.docker.internal:8003
 MINERU_DELETE_OUTPUT=0   # keep output directory
 MINERU_BACKEND=pipeline  # or another backend you prefer

@@ -64,7 +64,7 @@
 
 
 \title{Ragflow}
-\date{Jan 26, 2026}
+\date{Jan 27, 2026}
 \release{1}
 \author{Jansen Jan}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -3254,6 +3254,275 @@ stopped the container ….
 \sphinxstepscope
 
 
+\chapter{Equity Investment Research}
+\label{\detokenize{agentic-example:equity-investment-research}}\label{\detokenize{agentic-example::doc}}
+
+\section{High\sphinxhyphen{}Level Structure}
+\label{\detokenize{agentic-example:high-level-structure}}
+\sphinxAtStartPar
+The workflow runs in RAGFlow’s visual canvas (drag\sphinxhyphen{}and\sphinxhyphen{}drop nodes). It
+starts with a user query (e.g., “Analyze Apple’s financials” or “What’s
+the outlook for AAPL?”) and ends with a complete report including: \sphinxhyphen{}
+Financial metrics (tables from APIs) \sphinxhyphen{} Qualitative insights (from
+internal knowledge base + external sources) \sphinxhyphen{} Synthesized analysis
+(summary, overview, performance, trends, recommendation, citations)
+
+\begin{DUlineblock}{0em}
+\item[] Key flow: 1. \sphinxstylestrong{Input \(\rightarrow\) Ticker Extraction}
+\item[] 2. \sphinxstylestrong{Conditional check} (valid ticker?)
+\item[] 3. \sphinxstylestrong{Data collection} (financials + research)
+\item[] 4. \sphinxstylestrong{Synthesis \& Report Generation}
+\item[] 5. \sphinxstylestrong{Output}
+\end{DUlineblock}
+
+\sphinxAtStartPar
+Agents are modular nodes; they can call tools (e.g., web search, APIs),
+retrieve from knowledge bases, or delegate to sub\sphinxhyphen{}agents. The system
+maintains context (e.g., the ticker) across nodes for seamless handoffs.
+
+
+\section{The Main Agents \& How They’re Set Up}
+\label{\detokenize{agentic-example:the-main-agents-how-theyre-set-up}}
+\sphinxAtStartPar
+RAGFlow agents are configured with: \sphinxhyphen{} \sphinxstylestrong{Role/system prompt} — Defines
+personality, expertise, rules (e.g., “Act as a senior investment
+banker”, “Output only JSON”, “Never fabricate data”). \sphinxhyphen{} \sphinxstylestrong{Tools} —
+External functions/APIs they can call (via function calling). \sphinxhyphen{}
+\sphinxstylestrong{Knowledge bases} — RAG retrieval from uploaded/parsed documents. \sphinxhyphen{}
+\sphinxstylestrong{Output constraints} — Strict formats to make handoffs reliable.
+
+\sphinxAtStartPar
+Here are the key agents in this workflow:
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Stock Code Extraction Agent} (or “Search Agent”)
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Role}: Turn natural language into a standard ticker (e.g.,
+“Apple” \(\rightarrow\) “AAPL”).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Setup}: Strict prompt — output only the ticker or “Not Found”
+(no extra text). Uses \sphinxstylestrong{Tavily Search} tool for ambiguous cases
+(e.g., if company name is unclear).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Why agentic?} It reasons autonomously: if the query is vague,
+it calls a search tool to resolve \(\rightarrow\) demonstrates \sphinxstylestrong{tool use} and
+\sphinxstylestrong{planning} (decide if/when to search).
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Information Extraction Agent} (Coordinator/Planner Agent)
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Role}: Gather qualitative insights once ticker is known.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Setup}: Acts as a \sphinxstylestrong{planner} — its prompt tells it to delegate
+subtasks:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Call \sphinxstylestrong{AlphaVantage API} (via MCP tool) for earnings
+transcripts, key insights.
+
+\item {} 
+\sphinxAtStartPar
+Trigger \sphinxstylestrong{Internal Research Report Retrieval Agent}
+(sub\sphinxhyphen{}agent) for internal docs.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+Outputs structured sections (e.g., “alphavantage”: raw transcript;
+“internal”: full reports).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Agentic aspect}: This is where \sphinxstylestrong{multi\sphinxhyphen{}agent delegation}
+shines — it autonomously plans steps (“I need external + internal
+\(\rightarrow\) call these”), calls tools/agents, aggregates results.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Internal Research Report Retrieval Agent} (Sub\sphinxhyphen{}agent)
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Role}: Pure retrieval from RAGFlow’s internal knowledge base.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Setup}: Uses \sphinxstylestrong{Retrieval Tool} on a dataset (e.g., Hugging
+Face “company\_financial\_research\_agent” — parsed research reports
+with structure preserved: abstracts, forecasts, risks). Supports
+aliases, merges multiple reports chronologically.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Agentic?} Less reasoning, more execution — but fits into the
+multi\sphinxhyphen{}agent pattern as a specialized worker.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Research Report Generation Agent} (or “Report Agent”/“Analyze
+Agent”)
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Role}: Senior analyst — synthesize everything into a
+professional report.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Setup}: Detailed role prompt (experienced IB analyst). Strict
+structure:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Sections: 1. Summary, 2. Company Overview, 3. Recent Financial
+Performance, 4. Industry Trends, 5. Investment Recommendation,
+6. Appendix/References.
+
+\item {} 
+\sphinxAtStartPar
+Rules: Preserve conflicting viewpoints (don’t merge), use
+tables for comparisons (e.g., Buy/Hold ratings from sources),
+cite everything (source, date, institution).
+
+\item {} 
+\sphinxAtStartPar
+Input: Formatted financial table + extracted research texts.
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Agentic aspect}: Heavy reasoning + synthesis. It analyzes,
+compares sources, draws conclusions — all grounded in provided
+data (no hallucination allowed).
+
+\end{itemize}
+
+\end{enumerate}
+
+\sphinxAtStartPar
+Supporting nodes (not agents but crucial): \sphinxhyphen{} \sphinxstylestrong{Yahoo Finance Tool} —
+Fetches balance sheet/income data. \sphinxhyphen{} \sphinxstylestrong{Code Node} (Python) — Formats
+raw API data into clean Markdown tables. \sphinxhyphen{} \sphinxstylestrong{Conditional Node} —
+Branches (e.g., invalid ticker \(\rightarrow\) error message).
+
+
+\section{How Agents Interact (Orchestration in Practice)}
+\label{\detokenize{agentic-example:how-agents-interact-orchestration-in-practice}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Graph\sphinxhyphen{}based flow}: Nodes connect sequentially/with branches. State
+passes automatically (e.g., ticker from extraction \(\rightarrow\) all downstream
+nodes).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Handoffs}: Structured outputs (JSON/text) ensure clean transfer —
+e.g., extraction agent outputs “AAPL” \(\rightarrow\) extraction agent uses it to
+call APIs \(\rightarrow\) generation agent gets the bundle.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Autonomy \& Planning}:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Agents don’t need human input mid\sphinxhyphen{}flow.
+
+\item {} 
+\sphinxAtStartPar
+Planning happens via prompts (e.g., “Delegate to X tool if
+needed”) or sub\sphinxhyphen{}agents.
+
+\item {} 
+\sphinxAtStartPar
+Conditional nodes add dynamic routing (if\sphinxhyphen{}then logic).
+
+\end{itemize}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Collaboration}: Multi\sphinxhyphen{}agent = division of labor. No single LLM
+does everything; specialized agents reduce errors and improve quality
+(e.g., retrieval agent handles RAG perfectly, generation agent
+focuses on analysis).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Tool integration}: Agents call tools via function calling (LLM
+decides when/how based on prompt). Tools return data \(\rightarrow\) agent
+incorporates it.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{End\sphinxhyphen{}to\sphinxhyphen{}end run}: Fully autonomous — query in \(\rightarrow\) report out in
+minutes. Error handling prevents crashes.
+
+\end{itemize}
+
+
+\section{Why This Shows Agentic AI Working in Practice}
+\label{\detokenize{agentic-example:why-this-shows-agentic-ai-working-in-practice}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Beyond chat}: Classic LLM = one\sphinxhyphen{}shot response. Agentic =
+goal\sphinxhyphen{}oriented system that breaks tasks, uses tools,
+iterates/coordinates.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Reliability}: Strict prompts + structured outputs + grounding (RAG
++ APIs) minimize hallucinations.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Scalability}: Add agents/tools easily (e.g., more APIs, sentiment
+analysis agent).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Real\sphinxhyphen{}world application}: Automates tedious parts of equity
+research (data gathering, formatting) so humans focus on judgment.
+It’s not replacing analysts — it’s augmenting them with a “research
+team” of AI specialists.
+
+\end{itemize}
+
+\sphinxAtStartPar
+If you have access to RAGFlow (self\sphinxhyphen{}hosted or cloud), you can
+import/recreate this workflow via their canvas, tweak prompts/tools, or
+even see the exact node graph in their demo/examples. The blog post
+(linked in sources) has the most detailed breakdown if you want to
+replicate it.
+
+\sphinxAtStartPar
+Let me know if you’d like help adapting this to your own setup (e.g.,
+different APIs or domain)!
+
+\sphinxstepscope
+
+
 \chapter{Chat}
 \label{\detokenize{chat:chat}}\label{\detokenize{chat::doc}}
 \sphinxAtStartPar
@@ -3470,8 +3739,6 @@ in the dataset select in the configuration / ingestion pipeline / pdf parser \sp
 \sphinxAtStartPar
 adapt the .env settings :
 \# Enable Mineru
-\# Uncommenting these lines will automatically add MinerU to the model provider whenever possible.
-\# More details see \sphinxurl{https://ragflow.io/docs/faq\#how-to-use-mineru-to-parse-pdf-documents}.
 MINERU\_APISERVER=http://host.docker.internal:8003
 MINERU\_DELETE\_OUTPUT=0   \# keep output directory
 MINERU\_BACKEND=pipeline  \# or another backend you prefer
@@ -3581,6 +3848,194 @@ We believe tomorrow’s enterprise AI advantage will hinge not on who owns the l
 
 \sphinxAtStartPar
 In the paradigm shift from “hand\sphinxhyphen{}crafted prompts” to “intelligent context,” RAGFlow is determined to be the most steadfast propeller and enabler. We invite every developer, enterprise, and researcher who cares about the future of AI agents to follow RAGFlow’s journey—so together we can witness and build the cornerstone of the next\sphinxhyphen{}generation AI stack.
+
+\sphinxstepscope
+
+
+\chapter{What kind of animations ragflow.io uses}
+\label{\detokenize{web-design:what-kind-of-animations-ragflow-io-uses}}\label{\detokenize{web-design::doc}}
+
+\section{1. \sphinxstylestrong{Lottie animations (very likely)}}
+\label{\detokenize{web-design:lottie-animations-very-likely}}
+\begin{DUlineblock}{0em}
+\item[] Many of the smooth looping illustrations on the site resemble
+\sphinxstylestrong{Lottie} files.
+\item[] Lottie is a lightweight animation format exported from \sphinxstylestrong{Adobe After
+Effects} using the \sphinxstylestrong{Bodymovin} plugin.
+\end{DUlineblock}
+
+
+\subsection{Why this fits what you see:}
+\label{\detokenize{web-design:why-this-fits-what-you-see}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Smooth vector animation
+
+\item {} 
+\sphinxAtStartPar
+No pixelation at any size
+
+\item {} 
+\sphinxAtStartPar
+Very small file size
+
+\item {} 
+\sphinxAtStartPar
+Transparent backgrounds
+
+\item {} 
+\sphinxAtStartPar
+Runs via JavaScript (\sphinxcode{\sphinxupquote{lottie\sphinxhyphen{}web}})
+
+\end{itemize}
+
+
+\subsection{How they’re created:}
+\label{\detokenize{web-design:how-theyre-created}}\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\begin{DUlineblock}{0em}
+\item[] Designer animates in \sphinxstylestrong{Adobe After Effects}
+\end{DUlineblock}
+
+\item {} 
+\begin{DUlineblock}{0em}
+\item[] Export using \sphinxstylestrong{Bodymovin} \(\rightarrow\) produces a \sphinxcode{\sphinxupquote{.json}} animation file
+\end{DUlineblock}
+
+\item {} 
+\sphinxAtStartPar
+Developer embeds it using:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nx}{lottie}\PYG{p}{.}\PYG{n+nx}{loadAnimation}\PYG{p}{(}\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n+nx}{container}\PYG{o}{:}\PYG{+w}{ }\PYG{n+nb}{document}\PYG{p}{.}\PYG{n+nx}{getElementById}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}anim\PYGZsq{}}\PYG{p}{)}\PYG{p}{,}
+\PYG{+w}{  }\PYG{n+nx}{renderer}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}svg\PYGZsq{}}\PYG{p}{,}
+\PYG{+w}{  }\PYG{n+nx}{loop}\PYG{o}{:}\PYG{+w}{ }\PYG{k+kc}{true}\PYG{p}{,}
+\PYG{+w}{  }\PYG{n+nx}{autoplay}\PYG{o}{:}\PYG{+w}{ }\PYG{k+kc}{true}\PYG{p}{,}
+\PYG{+w}{  }\PYG{n+nx}{path}\PYG{o}{:}\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}animation.json\PYGZsq{}}
+\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+\end{enumerate}
+
+
+\bigskip\hrule\bigskip
+
+
+
+\section{2. \sphinxstylestrong{CSS + JavaScript animations}}
+\label{\detokenize{web-design:css-javascript-animations}}
+\sphinxAtStartPar
+Some UI elements (hover effects, fades, slides) are done with CSS
+transitions or libraries like: \sphinxhyphen{} GSAP (GreenSock) \sphinxhyphen{} Framer Motion \sphinxhyphen{}
+Tailwind CSS animations
+
+\begin{DUlineblock}{0em}
+\item[] These handle: \sphinxhyphen{} Smooth fades
+\item[] \sphinxhyphen{} Sliding text
+\item[] \sphinxhyphen{} Element transitions
+\end{DUlineblock}
+
+\sphinxAtStartPar
+Example:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{p}{.}\PYG{n+nc}{fade\PYGZhy{}in}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{animation}\PYG{p}{:}\PYG{+w}{ }\PYG{n}{fade}\PYG{+w}{ }\PYG{l+m+mf}{1.2}\PYG{k+kt}{s}\PYG{+w}{ }\PYG{k+kc}{ease\PYGZhy{}in\PYGZhy{}out}\PYG{+w}{ }\PYG{k+kc}{forwards}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{p}{@}\PYG{k}{keyframes}\PYG{+w}{ }\PYG{n+nt}{fade}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n+nt}{from}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{k}{opacity}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{n+nt}{to}\PYG{+w}{   }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{k}{opacity}\PYG{p}{:}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+
+\bigskip\hrule\bigskip
+
+
+
+\section{3. \sphinxstylestrong{WebM/MP4 looping videos (sometimes used)}}
+\label{\detokenize{web-design:webm-mp4-looping-videos-sometimes-used}}
+\begin{DUlineblock}{0em}
+\item[] Some hero sections on modern SaaS sites use \sphinxstylestrong{silent looping videos}
+instead of GIFs because: \sphinxhyphen{} Much smaller file size
+\item[] \sphinxhyphen{} Full color
+\item[] \sphinxhyphen{} High frame rate
+\end{DUlineblock}
+
+\sphinxAtStartPar
+But ragflow.io seems to rely more on vector animations than video.
+
+
+\bigskip\hrule\bigskip
+
+
+
+\chapter{How to confirm (if you want to check yourself)}
+\label{\detokenize{web-design:how-to-confirm-if-you-want-to-check-yourself}}
+\sphinxAtStartPar
+If you open \sphinxstylestrong{Developer Tools \(\rightarrow\) Network \(\rightarrow\) filter “.json”}, you’ll often
+see files like:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{hero}\PYG{o}{\PYGZhy{}}\PYG{n}{animation}\PYG{o}{.}\PYG{n}{json}
+\PYG{n}{workflow}\PYG{o}{\PYGZhy{}}\PYG{n}{animation}\PYG{o}{.}\PYG{n}{json}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+These are Lottie files.
+
+
+\bigskip\hrule\bigskip
+
+
+
+\chapter{Want to create similar animations?}
+\label{\detokenize{web-design:want-to-create-similar-animations}}
+\sphinxAtStartPar
+You can build them using:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Adobe After Effects + Bodymovin (most common)
+
+\item {} 
+\sphinxAtStartPar
+Figma + Lottie plugins
+
+\item {} 
+\sphinxAtStartPar
+Rive (interactive vector animations)
+
+\end{itemize}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{lottie\sphinxhyphen{}web}} (JS)
+
+\item {} 
+\sphinxAtStartPar
+React: \sphinxcode{\sphinxupquote{lottie\sphinxhyphen{}react}}
+
+\item {} 
+\sphinxAtStartPar
+Vue: \sphinxcode{\sphinxupquote{vue\sphinxhyphen{}lottie}}
+
+\item {} 
+\sphinxAtStartPar
+Svelte: \sphinxcode{\sphinxupquote{svelte\sphinxhyphen{}lottie}}
+
+\end{itemize}
+
+
+\bigskip\hrule\bigskip
+
+
+\sphinxAtStartPar
+If you want, I can walk you through \sphinxstylestrong{how to make your own Lottie
+animation}, or even help you design one step‑by‑step.
 
 \sphinxstepscope
 

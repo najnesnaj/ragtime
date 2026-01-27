@@ -338,8 +338,8 @@ INPUT /usr/share/texmf/tex/latex/tex-gyre/ts1qtm.fd
 INPUT /usr/share/texmf/tex/latex/tex-gyre/ts1qtm.fd
 INPUT /usr/share/texmf/tex/latex/tex-gyre/ts1qtm.fd
 INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ts1-qtmr.tfm
-OUTPUT ragflow.toc
 INPUT /usr/share/texmf/fonts/enc/dvips/tex-gyre/q-ts1.enc
+OUTPUT ragflow.toc
 INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ts1-qtmb.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ec-qtmri.tfm
 INPUT ./system-architecture.png

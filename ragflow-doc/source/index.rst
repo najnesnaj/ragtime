@@ -28,10 +28,12 @@ Welcome to Ragflow's documentation!
    upgrade
    upload-document
    graphrag
+   agentic-example
    chat  
    infinity
    minerU
    agent-context-engine
+   web-design
    searxng
    homelab
 

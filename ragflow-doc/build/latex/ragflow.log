@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.12.22)  26 JAN 2026 15:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.12.22)  27 JAN 2026 15:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -875,15 +875,14 @@ LaTeX Font Info:    Trying to load font information for TS1+qtm on input line 9
 
 (/usr/share/texmf/tex/latex/tex-gyre/ts1qtm.fd
 File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
-))
+) [3{/usr/share/texmf/fonts/enc/dvips/tex-gyre/q-ts1.enc}])
 \tf@toc=\write6
 \openout6 = `ragflow.toc'.
 
- [3{/usr/share/texmf/fonts/enc/dvips/tex-gyre/q-ts1.enc}] [4
-
-]
+ [4]
 Chapter 1.
 [1
+
 
 ] [2]
 Chapter 2.
@@ -896,7 +895,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 448--450
 []|\T1/qtm/b/n/10 celery-worker \T1/qtm/m/n/10 (of-ten named
  []
 
-<system-architecture.png, id=749, 2320.67pt x 1523.6925pt>
+<system-architecture.png, id=812, 2320.67pt x 1523.6925pt>
 File: system-architecture.png Graphic file (type png)
 <use system-architecture.png>
 Package pdftex.def Info: system-architecture.png  used on input line 473.
@@ -908,7 +907,7 @@ Package pdftex.def Info: system-architecture.png  used on input line 473.
 ]
 Chapter 4.
 [9]
-<tree-rag.png, id=779, 963.6pt x 526.96875pt>
+<tree-rag.png, id=843, 963.6pt x 526.96875pt>
 File: tree-rag.png Graphic file (type png)
 <use tree-rag.png>
 Package pdftex.def Info: tree-rag.png  used on input line 671.
@@ -917,7 +916,7 @@ Package pdftex.def Info: tree-rag.png  used on input line 671.
 
 ]
 Chapter 5.
-<rerank.png, id=798, 1059.96pt x 467.49657pt>
+<rerank.png, id=862, 1059.96pt x 467.49657pt>
 File: rerank.png Graphic file (type png)
 <use rerank.png>
 Package pdftex.def Info: rerank.png  used on input line 792.
@@ -948,7 +947,7 @@ Chapter 9.
 Package hyperref Info: bookmark level for unknown literalblock defaults to 0 on
  input line 1272.
 [23] [24]
-<ragflow-vllm-def.png, id=873, 374.14781pt x 400.49625pt>
+<ragflow-vllm-def.png, id=937, 374.14781pt x 400.49625pt>
 File: ragflow-vllm-def.png Graphic file (type png)
 <use ragflow-vllm-def.png>
 Package pdftex.def Info: ragflow-vllm-def.png  used on input line 1356.
@@ -1189,58 +1188,62 @@ Underfull \hbox (badness 10000) in paragraph at lines 3238--3241
 
 ]
 Chapter 20.
-<chat.png, id=1109, 1102.87032pt x 607.51968pt>
-File: chat.png Graphic file (type png)
-<use chat.png>
-Package pdftex.def Info: chat.png  used on input line 3265.
-(pdftex.def)             Requested size: 469.74864pt x 258.77182pt.
-[59 <./chat.png>] [60
+[59] [60] [61] [62
 
 ]
 Chapter 21.
-[61] [62
+<chat.png, id=1193, 1102.87032pt x 607.51968pt>
+File: chat.png Graphic file (type png)
+<use chat.png>
+Package pdftex.def Info: chat.png  used on input line 3534.
+(pdftex.def)             Requested size: 469.74864pt x 258.77182pt.
+[63 <./chat.png>] [64
 
 ]
 Chapter 22.
-[63]
-Underfull \hbox (badness 10000) in paragraph at lines 3470--3478
-[]\T1/qtm/m/n/10 adapt the .env set-tings : # En-able Mineru # Un-com-ment-ing 
-these lines will au-to-mat-i-cally add
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 3470--3478
-\T1/qtm/m/n/10 MinerU to the model provider when-ever pos-si-ble. # More de-tai
-ls see [][]$https : / / rag^^]ow . io / docs / faq #
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 3470--3478
-\T1/qtm/m/n/10 how-[]to-[]use-[]mineru-[]to-[]parse-[]pdf-[]documents$[][]. MIN
-ERU_APISERVER=http://host.docker.internal:8003
- []
-
-[64]
-Chapter 23.
-[65
-
-] [66]
-Chapter 24.
-[67
+[65] [66
 
 ]
-Underfull \hbox (badness 7099) in paragraph at lines 3744--3747
+Chapter 23.
+[67]
+Underfull \hbox (badness 10000) in paragraph at lines 3739--3745
+[]\T1/qtm/m/n/10 adapt the .env set-tings : # En-able Mineru MINERU_APISERVER=h
+ttp://host.docker.internal:8003
+ []
+
+[68]
+Chapter 24.
+[69
+
+] [70]
+Chapter 25.
+[71
+
+] [72]
+Chapter 26.
+[73
+
+] [74
+
+]
+Chapter 27.
+[75] [76
+
+]
+Chapter 28.
+[77]
+Underfull \hbox (badness 7099) in paragraph at lines 4199--4202
 []\T1/qtm/m/n/10 Cre-ate a cus-tom tool that calls your lo-cal SearXNG API (\T1
 /txtt/m/n/10 http://searxng:8080/search?
  []
 
-[68] [69] [70
+[78] [79] [80
 
 ]
-Chapter 25.
-[71] [72]
-Chapter 26.
-(./ragflow.ind) [73
+Chapter 29.
+[81] [82]
+Chapter 30.
+(./ragflow.ind) [83
 
 ] (./ragflow.aux)
  ***********
@@ -1248,13 +1251,13 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `ragflow.out' has not changed.
-(rerunfilecheck)             Checksum: 46A230E35EA5CDA24529D3E4335BECFC;29509.
+(rerunfilecheck)             Checksum: B15589EF64DDD8923D53871A879D0908;32674.
  ) 
 Here is how much of TeX's memory you used:
- 20662 strings out of 474222
- 368265 string characters out of 5748732
+ 20721 strings out of 474222
+ 369390 string characters out of 5748732
  1996975 words of memory out of 5000000
- 42191 multiletter control sequences out of 15000+600000
+ 42220 multiletter control sequences out of 15000+600000
  621522 words of font info for 95 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
  72i,12n,83p,3147b,801s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1273,10 +1276,10 @@ ic/tex-gyre/qtmri.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts
 e/texlive/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/txfonts/tcxtt.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/urw/times/utmr8a.pfb>
-Output written on ragflow.pdf (79 pages, 863108 bytes).
+Output written on ragflow.pdf (89 pages, 879275 bytes).
 PDF statistics:
- 1320 PDF objects out of 1440 (max. 8388607)
- 1184 compressed objects within 12 object streams
- 297 named destinations out of 1000 (max. 500000)
- 1158 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1436 PDF objects out of 1440 (max. 8388607)
+ 1289 compressed objects within 13 object streams
+ 327 named destinations out of 1000 (max. 500000)
+ 1262 words of extra memory for PDF output out of 10000 (max. 10000000)
 
